@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Termos">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="TERMO DE RESPONSABILIDADE DE USO DO APLICATIVO PARA FUNCIONÁRIOS E ADOTANTES
+\n\n1.  Aceitação\n\nEste é um contrato firmado entre você, de agora em diante denominado como usuário, e o PET'S DONATION.
+Este “Termo de Uso de Aplicativo” rege o uso de todos os aplicativos disponibilizados gratuitamente pelo PET'S DONATION e que sejam para dispositivos móveis (Android). Se você não concordar com estes termos, não use este aplicativo.
+Você reconhece que analisou e aceitou as condições de uso. Leia-as atentamente, pois o uso deste aplicativo significa que você aceitou
+todos os termos e concorda em cumpri-los. Se você, usuário, for menor de idade ou declarado incapaz em
+quaisquer aspectos, precisará da permissão de seus pais ou responsáveis que também deverão concordar com estes mesmos termos e condições, pois somente eles poderão realizar a adoção.
+\n\n2. Definições\n\nNestes Termos e Condições de Uso, os seguintes termos em maiúsculo terão os seguintes significados, exceto onde o contexto exigir:\n\n
+    “Conta” significa uma conta criada por um Usuário no Aplicativo Móvel como parte do Registro.\n\n
+    “PET'S DONATION” significa doação de animais, mais especificamente cachorros e gatos.\n\n
+    “Criar uma conta” significa criar uma Conta no Aplicativo Móvel, ou seja, o ato de criar uma Conta.\n\n
+    “Usuários” significa usuários do Aplicativo Móvel, incluindo você e o funcionário.\n\n
+    “Entrar” significa logar com todas as informações.\n\n
+    “Salvar login” significa salvar as informações ao sair do aplicativo.\n\n3.  Mudança de Termos de Uso
+\n\nO PET'S DONATION tem o direito de ajustar estes termos de uso, se um requisito é dado por um maior desenvolvimento da plataforma, em caso de alterações legais ou no caso de um ajuste da gama de produtos e ofertas. Os Termos de Uso alterados serão atualizados nessa página. Os Termos de Uso podem ser contestados dentro de duas semanas a partir da entrada em vigor.">
+        </TextView>
+    </LinearLayout>
+
+
+</ScrollView>

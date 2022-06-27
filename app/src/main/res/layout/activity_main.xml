@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="145dp"
+        android:layout_height="133dp"
+        android:layout_gravity= "center"
+        app:srcCompat="@drawable/adocao"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        />
+
+    <EditText android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CPF"
+        android:maxLines="1"
+        android:drawableLeft="@drawable/docm"
+        android:textColorHint="@color/colorHint"
+        android:inputType="number"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/laranja">
+
+        <EditText
+        android:id="@+id/senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:background="@color/white"
+        android:textColorHint="@color/colorHint"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/salvar"
+        android:layout_marginTop="10dp"
+        android:buttonTint="@color/laranja"
+        android:gravity="left"
+        android:text="Salvar Login"
+        android:textSize="18sp"
+        android:visibility="visible"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnLogar"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_customize"
+            android:text="entrar"
+            android:textColor="#FFFFFF" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/progressBar1"
+        />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSegundaTela"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_customize"
+        android:text="Criar uma conta"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textoSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Esqueci minha senha"
+        android:visibility="visible"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:id="@+id/termo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Termos de Uso"
+        android:visibility="visible"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>
