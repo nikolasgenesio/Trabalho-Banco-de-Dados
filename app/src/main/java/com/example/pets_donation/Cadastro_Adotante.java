@@ -40,11 +40,18 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
     private String sexo, tipoTelefone;
     private SimpleMaskFormatter telefoneCelular, telefoneFixo;
     private MaskTextWatcher telefone1;
+
+    //Adotante
+    private AdotanteDAO adotanteDAO;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_adotante);
         getSupportActionBar().setTitle("CADASTRO - ADOTANTE");
+
+        adotanteDAO = new AdotanteDAO(this);
 
         //Inicializando as variaveis
         nome = findViewById(R.id.nome);
@@ -169,6 +176,24 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         bairro.setText("");
         rua.setText("");
         numero.setText("");
+    }
+
+    public void limparDados()
+    {
+        nome.setText("");
+        nascimento.setText("");
+        telefone.setText("");
+        email.setText("");
+        rendaMensal.setText("");
+
+        estado.setText("");
+        cidade.setText("");
+        bairro.setText("");
+        rua.setText("");
+        numero.setText("");
+        cpf.setText("");
+        senha.setText("");
+        confirmasenha.setText("");
     }
 
     public void onRadioButtonClicked(View view) {
@@ -392,12 +417,42 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
             return;
         }
 
+        /*
         Toast.makeText(getApplicationContext(), "Nome: " +nome1 + "\nNascimento: " + nascimento1
                 + "\nSexo: " + sexo + "\ntipo: "+ tipoTelefone +"\nTelefone: "+telefone1
                 + "\nEmail: " + email1 + "\nRenda: " + rendaMensal1
                 + "\nCEP: " + cep1 + "\nEstado: " + estado1 + "\nCidade: " + cidade1
                 + "\nBairro: " + bairro1 + "\nRua: " + rua1 + "\nNumero: " + numero1
                 + "\nCPF: " + cpf1 + "\nSenha: " + senha1, Toast.LENGTH_SHORT).show();
+         */
+        Adotante adotante = new Adotante();
+
+        //dados pessoais
+        adotante.setNome(nome1);
+        adotante.setDataNascimento(nascimento1);
+        adotante.setSexo(sexo);
+        adotante.setTipoTelefone(tipoTelefone);
+        adotante.setTelefone(telefone1);
+        adotante.setEmail(email1);
+
+        //renda mensal
+        double rendaMensalDouble = Double.parseDouble(rendaMensal1);
+        adotante.setRendaMensal(rendaMensalDouble);
+
+        //endereco
+        adotante.setCep(cep1);
+        adotante.setEstado(estado1);
+        adotante.setCidade(cidade1);
+        adotante.setBairro(bairro1);
+        adotante.setRua(rua1);
+        adotante.setNumero(numero1);
+        adotante.setCpf(cpf1);
+        adotante.setSenha(senha1);
+
+        adotanteDAO.inserir(adotante);
+        Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
+        limparDados();
+
     }
 
     /**

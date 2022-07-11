@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         termo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Termos.class);
+                Intent intent = new Intent(MainActivity.this, Listar_Adotantes.class);
                 startActivity(intent);
             }
         });
