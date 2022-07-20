@@ -8,11 +8,49 @@
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/drawable/borda_button.xml" value="0.1945" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/drawable/button_customize.xml" value="0.1945" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1945" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_adotante_duvidas.xml" value="0.17045454545454544" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_adotante_gerencia_dados.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_abrigo.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_adotante.xml" value="0.2324159021406728" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_animal.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_funcionario.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_duvidas.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_duvidas2.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_abrigos.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_adotantes.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_animal.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_funcionarios.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_abrigos.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_adotantes.xml" value="0.16983695652173914" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_animais.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_funcionarios.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_tela_adotante.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_tela_funcionario.xml" value="0.25" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_termos.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/app_bar_tela_adotante.xml" value="0.15" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/content_tela_adotante.xml" value="0.12636899747262004" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_abrigos_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_adocao_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_informacoes_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_inicio_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_perfil_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_status_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_adocao_.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_cadastro_.xml" value="0.15" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_gerenciar_.xml" value="0.15" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_inicio_.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_perfil_.xml" value="0.23696682464454977" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_animal.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_cadastro.xml" value="0.25" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/nav_header_tela_adotante.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/menu/bottom_navigation_funcionario.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/menu/list_view_cadastro.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/menu/menu_list_gerencia.xml" value="0.18" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/menu/tela__adotante.xml" value="0.22" />
       </map>
     </option>
   </component>

@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".GerenciaFuncionarios_Dados">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Dados Pessoas"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            android:textColorHint="@color/black"
+            />
+
+        <EditText android:id="@+id/nascimento"
+            android:layout_width="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorHint"
+            android:maxLines="1"
+            android:hint="Data de Nascimento"
+            android:drawableLeft="@drawable/data_nascimento"            android:layout_marginTop="10dp"
+            android:inputType="date"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/sexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/colorHint"
+                android:text="Sexo:"
+                />
+
+            <RadioGroup
+                android:id="@+id/radioGroupSexo"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/laranja"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonMasculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Masculino" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonFeminino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Feminino" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tipoTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/colorHint"
+                android:text="Telefone:"
+                />
+
+            <RadioGroup
+                android:id="@+id/radioGroupTelefone"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/laranja"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonTelefoneCelular"
+                    android:onClick = "onRadioButtonClicked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Celular" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonTelefoneFixo"
+                    android:onClick = "onRadioButtonClicked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Fixo" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <EditText android:id="@+id/telefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorHint"
+            android:maxLines="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Telefone"
+            android:drawableLeft="@drawable/telefone"
+            android:layout_marginTop="10dp"
+            android:inputType="number"
+            />
+
+        <EditText android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorHint"
+            android:maxLines="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="E-mail"
+            android:drawableLeft="@drawable/email"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            />
+
+        <EditText android:id="@+id/salario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorHint"
+            android:maxLines="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Salário"
+            android:drawableLeft="@drawable/renda"
+            android:layout_marginTop="10dp"
+            android:inputType="number"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorHint"
+            android:textSize="20dp"
+            android:text="Endereço"
+            android:layout_gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cep"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/cep"
+                android:hint="CEP"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColorHint="@color/colorHint" />
+
+            <Button
+                android:id="@+id/btnPesquisa"
+                android:layout_width="45dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/pesquisa" />
+        </LinearLayout>
+
+        <EditText android:id="@+id/estado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Estado"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            android:drawableLeft="@drawable/estado"
+            android:textColorHint="@color/colorHint"
+            />
+
+        <EditText android:id="@+id/cidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cidade"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/cidade"
+            android:maxLines="1"
+            android:textColorHint="@color/colorHint"
+            android:inputType="text"/>
+
+
+        <EditText android:id="@+id/bairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorHint"
+            android:maxLines="1"
+            android:hint="Bairro"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/bairro"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            />
+
+        <EditText android:id="@+id/rua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorHint"
+            android:maxLines="1"
+            android:hint="Rua"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/rua"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            />
+
+        <EditText android:id="@+id/numero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColorHint="@color/colorHint"
+            android:hint="Número"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:inputType="number"
+            android:drawableLeft="@drawable/numero"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorHint"
+            android:textSize="20dp"
+            android:text="Login"
+            android:layout_gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/cpf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/docm"
+            android:hint="CPF"
+            android:inputType="number"
+            android:maxLines="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColorHint="@color/colorHint" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/laranja">
+
+            <EditText
+                android:id="@+id/senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:drawableLeft="@drawable/senha"
+                android:background="@color/white"
+                android:textColorHint="@color/colorHint"
+                android:maxLines="1"
+                android:layout_marginTop="10dp"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/laranja">
+
+            <EditText
+                android:id="@+id/confirmarsenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirmar Senha"
+                android:drawableLeft="@drawable/senha"
+                android:background="@color/white"
+                android:textColorHint="@color/colorHint"
+                android:maxLines="1"
+                android:layout_marginTop="10dp"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+
+            <Button
+                android:id="@+id/btnDeleta"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/button_customize"
+                android:text="Deletar"
+                android:textColor="#FFFFFF" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btnCancela"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_customize"
+                android:text="Cancelar"
+                android:textColor="#FFFFFF" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btnAltera"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/button_customize"
+                android:text="Alterar"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

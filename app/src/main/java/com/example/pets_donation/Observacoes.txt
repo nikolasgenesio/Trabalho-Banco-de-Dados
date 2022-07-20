@@ -1,0 +1,60 @@
+Observações
+
+----------------------------------------------------
+
+Aplicativo já abre com um funcionário
+CPF: 126.745.986-20
+Senha: barrafunda
+
+----------------------------------------------------
+
+SQLite presente nas seguintes pastas:
+
+Lib
+Models
+
+----------------------------------------------------
+
+Tratar exclusão do abrigo (verificar melhor método)
+
+ERRO: chave estrangeira em animal
+
+----------------------------------------------------
+
+Verificar como vamos fazer o processo de adoção
+
+----------------------------------------------------
+
+Modificar telas vazias:
+
+Tela inicial de adotante e funcionário, etc.
+
+----------------------------------------------------
+
+Inserir foto:
+
+Clicar no ícone da foto
+
+----------------------------------------------------
+
+RFs:
+
+Verificar se está correto:
+
+RF1: Permitir que o adotante se cadastre no sistema;
+RF7: Manter cadastro dos animais no sistema;
+RF8: Manter cadastro dos funcionários de acesso permitido ao sistema;
+RF12: Permitir login do usuário e funcionário no sistema.
+
+Fazer (processo de adoção):
+
+RF2: Permitir que o adotante busque pelos diversos animais disponíveis em abrigos.
+RF3: Permitir que o adotante e funcionários veja todos os dados do animal e do abrigo, incluindo fotos, idade, informações sobre a vacinação, gênero e porte físico;
+RF4: É possível que o adotante selecione um animal da lista;
+RF5: Permitir que o adotante responda o questionário para a adoção;
+RF6: Permitir que o adotante realize o pedido de adoção;
+RF9: Permitir que o adotante e o funcionário verifiquem o pedido de adoção.
+RF10: Permitir que o funcionário gere relatórios de animais;
+RF11: Permitir que o funcionário registre a adoção;
+
+----------------------------------------------------

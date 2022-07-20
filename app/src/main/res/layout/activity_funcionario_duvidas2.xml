@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Funcionario_Duvidas">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Duvidas">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="O que significa o nome Pet's Donation?
+        \n\nR: Adoção de animais de estimação, em especial, cachorros e gatos.
+\n\nPara que servem os termos de uso?
+\n\n
+- Para saber que informações vamos coletar sobre você;\n
+- O que podemos fazer com esses dados, com quem compartilhamos e para quem fornecemos;\n
+- Quais os seus direitos e deveres e da empresa;\n
+- Como armazenamos seus dados e quais as garantias que você tem sobre esse registro.\n
+\nQual a inspiração e objetivo do aplicativo?
+\n\nR: A inspiração é fazer um sistema para que as pessoas sejam
+mais conscientes que há animais de rua esperando
+para serem adotados. Com isso, o objetivo principal
+é auxiliar e facilitar o sistema de adoção de
+animais de estimação através de um aplicativo para
+sistema operacional Android com os dados dos animais.
+\n\nQuem pode realizar uma adoção?
+\n\nR: Qualquer pessoa, plenamente capaz, maior de 18 anos, mediante assinatura do contrato de adoção.
+\n\nPor que adotar?
+\n\n
+- Nesse exato momento, existem milhares de doguinhos e gatinhos esperando um humano para chamar de seu.
+- E não há recompensa maior do que vê-los se tornando aquela coisinha alegre e saudável depois de uma boa dose de cuidado e carinho.
+- Pensando bem, a pergunta é outra: se você pode mudar o destino de um animal de rua, por que não faria isso?
+\n\nO que é preciso para adotar um pet?
+\n\nR: É necessário o preenchimento do formulário de adoção
+e aguardar a resposta na aba de Status da Adoção no aplicativo para retirada do pet.
+\n\nApós o preenchimento do formulário, quanto tempo devo aguardar?
+\n\nR: A ONG parceiro tem o prazo de 48 horas para entrar em contato com o possível adotante.
+\n\nOs animais que vão para adoção são castrados?
+\n\nR: Sim. Os animais que participam do processo de adoção são castrados, vacinados de acordo com a idade, vermifugados, microchipados e recebem medicamentos para controle de pulgas e carrapatos, de acordo com a legislação vigente."
+            android:textColor="@color/colorHint"
+            android:textSize="20dp" />
+    </LinearLayout>
+</ScrollView>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pets_donation.Lib.Conexao_Banco;
+import com.example.pets_donation.Models.FuncionarioDAO;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     private ProgressBar progressBar;
     private CheckBox checkBox;
     SharedPreferences.Editor editor;
+    private Conexao_Banco banco;
+    private FuncionarioDAO funcionarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,17 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        banco = new Conexao_Banco(this);
+        //inserindo funcionario
+
+        if (!(banco.checkSenhaFuncionario("126.745.986-20", "barrafunda"))) {
+            funcionarioDAO = new FuncionarioDAO(this);
+            Boolean inserirFuncionario = funcionarioDAO.inserirFuncionarioADM();
+            if (inserirFuncionario)
+                Log.i("TESTE FUNCIONARIO", "FUNCIONARIO INSERIDO");
+            else
+                Log.i("TESTE FUNCIONARIO", "FUNCIONARIO NAO INSERIDO");
+        }
         //Inicializando as variaveis
         cpf = findViewById(R.id.login);
         senha = findViewById(R.id.senha);
@@ -46,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         botaoSegundaTela = findViewById(R.id.btnSegundaTela);
         progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         checkBox = (CheckBox) findViewById(R.id.salvar);
+
+        //cpf.setText("126.745.986-20");
+        //senha.setText("barrafunda");
 
         //Criando a máscara para o campo de CPF
         SimpleMaskFormatter cpf1 = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
@@ -69,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         termo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Listar_Adotantes.class);
+                Intent intent = new Intent(MainActivity.this, Termos.class);
                 startActivity(intent);
             }
         });
@@ -87,15 +106,11 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         esqueciSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Cadastro_Abrigo.class);
+                Intent intent = new Intent(MainActivity.this, Listar_Funcionarios.class);
                 startActivity(intent);
             }
         });
-
-
-
     }
-
 
     /**
      * Funcao para verificar se as informacoes de login estao corretas
@@ -129,17 +144,36 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             return;
         }
 
-        if(checkBox.isChecked()){
+        /*
+        if (checkBox.isChecked()) {
             editor.putBoolean("savelogin", true);
             editor.putString("username", username);
             editor.putString("password", password);
             editor.commit();
-        }else{
+        } else {
             editor.putBoolean("savelogin", false);
             editor.clear();
             editor.commit();
         }
-    }
+         */
 
+        if (banco.checkSenhaAdotante(username, password)) {
+            Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, Tela_Adotante.class);
+            Adotante adotante = banco.obterAdotante(username, password);
+            Log.i("Tarefa 1 - status Main", "NOME: " + adotante.getNome());
+            intent.putExtra("adotante", adotante);
+            startActivity(intent);
+        } else if (banco.checkSenhaFuncionario(username, password)) {
+            Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+            Intent intent1 = new Intent(MainActivity.this, Tela_Funcionario.class);
+            Funcionario funcionario = banco.obterFuncionario(username, password);
+            Log.i("Tarefa 1 - status Main", "NOME: " + funcionario.getNome());
+            intent1.putExtra("funcionario", funcionario);
+            startActivity(intent1);
+        } else {
+            Toast.makeText(MainActivity.this, "CPF e/ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
 

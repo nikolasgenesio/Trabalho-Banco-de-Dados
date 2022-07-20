@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/tela_inicial">
+
+    <fragment
+        android:id="@+id/tela_inicial"
+        android:name="com.example.pets_donation.ui.fragments.AdotanteInicio_Fragment"
+        android:label="Tela Inicial"
+        tools:layout="@layout/fragment_adotante_inicio_" />
+
+    <fragment
+        android:id="@+id/perfil"
+        android:name="com.example.pets_donation.ui.fragments.AdotantePerfil_Fragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_adotante_perfil_" />
+
+    <fragment
+        android:id="@+id/adocao"
+        android:name="com.example.pets_donation.ui.fragments.AdotanteAdocao_Fragment"
+        android:label="Adocao"
+        tools:layout="@layout/fragment_adotante_adocao_" />
+
+    <fragment
+        android:id="@+id/statusAdocao"
+        android:name="com.example.pets_donation.ui.fragments.AdotanteStatus_Fragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_adotante_status_" />
+
+    <fragment
+        android:id="@+id/abrigos"
+        android:name="com.example.pets_donation.ui.fragments.AdotanteAbrigos_Fragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_adotante_abrigos_" />
+
+    <fragment
+        android:id="@+id/informacoes"
+        android:name="com.example.pets_donation.ui.fragments.AdotanteInformacoes_Fragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_adotante_informacoes_" />
+</navigation>

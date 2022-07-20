@@ -1,15 +1,13 @@
 package com.example.pets_donation;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +15,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.pets_donation.Lib.Conexao_Banco;
+import com.example.pets_donation.Models.AdotanteDAO;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
@@ -24,8 +24,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -43,7 +41,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
     //Adotante
     private AdotanteDAO adotanteDAO;
-
+    private Conexao_Banco banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +50,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         getSupportActionBar().setTitle("CADASTRO - ADOTANTE");
 
         adotanteDAO = new AdotanteDAO(this);
+        banco = new Conexao_Banco(this);
 
         //Inicializando as variaveis
         nome = findViewById(R.id.nome);
@@ -113,17 +112,13 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
                     String cep1 = cep.getText().toString();
-                    if(cep1.length() != 9)
-                    {
+                    if (cep1.length() != 9) {
                         Toast.makeText(getApplicationContext(), "CEP INVÁLIDO", Toast.LENGTH_SHORT).show();
                         limparEndereco();
-                    }
-                    else
-                    {
+                    } else {
                         new DownloadCEPTask().execute(cep1);
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Sem conexão com a internet", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -169,8 +164,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
     }
 
-    public void limparEndereco()
-    {
+    public void limparEndereco() {
         estado.setText("");
         cidade.setText("");
         bairro.setText("");
@@ -178,8 +172,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         numero.setText("");
     }
 
-    public void limparDados()
-    {
+    public void limparDados() {
         nome.setText("");
         nascimento.setText("");
         telefone.setText("");
@@ -204,8 +197,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
             //Celular selecionado
             case R.id.radioButtonTelefoneCelular:
-                if (checked)
-                {
+                if (checked) {
                     telefone.removeTextChangedListener(telefone1);
                     telefone.setText("");
                     //Criando a máscara para o campo de telefone celular - mascara personalizada
@@ -219,8 +211,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
             //Fixo selecionado
             case R.id.radioButtonTelefoneFixo:
-                if (checked)
-                {
+                if (checked) {
                     telefone.removeTextChangedListener(telefone1);
                     telefone.setText("");
                     //Criando a máscara para o campo de telefone fixo - mascara personalizada
@@ -238,8 +229,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
     /**
      * Funcao para verificar se as informacoes estao corretas e adicionar, caso positivo
      */
-    public void adicionar_Adotante()
-    {
+    public void adicionar_Adotante() {
         String nome1 = nome.getText().toString();
         if (nome1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou seu nome", Toast.LENGTH_SHORT).show();
@@ -268,8 +258,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         int ano = Integer.parseInt(nascimento1.substring(6, 10));
         int idade = Integer.parseInt(calculaIdade(ano, mes, dia));
 
-        if(idade < 18)
-        {
+        if (idade < 18) {
             Toast.makeText(getApplicationContext(), "Você não possui idade suficiente para adotar!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -283,8 +272,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
             sexo = "Feminino";
         }
 
-        if (!(masculino.isChecked() || feminino.isChecked()))
-        {
+        if (!(masculino.isChecked() || feminino.isChecked())) {
             Toast.makeText(getApplicationContext(), "Por favor, selecione um sexo", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -307,8 +295,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
             return;
         }
 
-        if(telefone1.length()!= 13 && telefone1.length()!= 14)
-        {
+        if (telefone1.length() != 13 && telefone1.length() != 14) {
             Toast.makeText(getApplicationContext(), "Telefone inválido", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -319,15 +306,13 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
             return;
         }
 
-        if(!isEmailValid(email1))
-        {
+        if (!isEmailValid(email1)) {
             Toast.makeText(getApplicationContext(), "Email inválido", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String rendaMensal1 = rendaMensal.getText().toString();
-        if(rendaMensal1.matches(""))
-        {
+        if (rendaMensal1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou sua renda mensal", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -425,38 +410,49 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
                 + "\nBairro: " + bairro1 + "\nRua: " + rua1 + "\nNumero: " + numero1
                 + "\nCPF: " + cpf1 + "\nSenha: " + senha1, Toast.LENGTH_SHORT).show();
          */
-        Adotante adotante = new Adotante();
 
-        //dados pessoais
-        adotante.setNome(nome1);
-        adotante.setDataNascimento(nascimento1);
-        adotante.setSexo(sexo);
-        adotante.setTipoTelefone(tipoTelefone);
-        adotante.setTelefone(telefone1);
-        adotante.setEmail(email1);
+        Boolean verificarAdotante = banco.checkSenhaAdotante(nome1, senha1);
+        if (verificarAdotante) {
+            Toast.makeText(getApplicationContext(), "Adotante Existente!", Toast.LENGTH_SHORT).show();
+        } else {
+            Adotante adotante = new Adotante();
 
-        //renda mensal
-        double rendaMensalDouble = Double.parseDouble(rendaMensal1);
-        adotante.setRendaMensal(rendaMensalDouble);
+            //dados pessoais
+            adotante.setNome(nome1);
+            adotante.setDataNascimento(nascimento1);
+            adotante.setSexo(sexo);
+            adotante.setTipoTelefone(tipoTelefone);
+            adotante.setTelefone(telefone1);
+            adotante.setEmail(email1);
 
-        //endereco
-        adotante.setCep(cep1);
-        adotante.setEstado(estado1);
-        adotante.setCidade(cidade1);
-        adotante.setBairro(bairro1);
-        adotante.setRua(rua1);
-        adotante.setNumero(numero1);
-        adotante.setCpf(cpf1);
-        adotante.setSenha(senha1);
+            //renda mensal
+            double rendaMensalDouble = Double.parseDouble(rendaMensal1);
+            adotante.setRendaMensal(rendaMensalDouble);
 
-        adotanteDAO.inserir(adotante);
-        Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
-        limparDados();
+            //endereco
+            adotante.setCep(cep1);
+            adotante.setEstado(estado1);
+            adotante.setCidade(cidade1);
+            adotante.setBairro(bairro1);
+            adotante.setRua(rua1);
+            adotante.setNumero(numero1);
+            adotante.setCpf(cpf1);
+            adotante.setSenha(senha1);
 
+            Boolean inserir = adotanteDAO.inserir(adotante);
+            if (inserir) {
+                Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
+                limparDados();
+                Intent intent = new Intent(Cadastro_Adotante.this, MainActivity.class);
+                startActivity(intent);
+            } else
+                Toast.makeText(getApplicationContext(), "ERRO NO CADASTRO!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
      * Funcao para calcular se o email eh valido
+     *
      * @param email email a ser verificado
      * @return true se for valido; falso se nao for valido
      */
@@ -466,12 +462,13 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
     /**
      * Funcao para calcular a idade do usuario
+     *
      * @param ano ano de nascimento
      * @param mes mes de nascimento
      * @param dia dia do nascimento
      * @return idade
      */
-    private String calculaIdade(int ano, int mes, int dia){
+    private String calculaIdade(int ano, int mes, int dia) {
 
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
@@ -480,7 +477,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
 
@@ -502,7 +499,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
     private class DownloadCEPTask extends AsyncTask<String, Void, BuscaCep> {
         @Override
-        protected BuscaCep doInBackground(String ... ceps) {
+        protected BuscaCep doInBackground(String... ceps) {
             BuscaCep vCep = null;
 
             try {
@@ -519,9 +516,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
                 cidade.setText(result.getLocalidade());
                 rua.setText(result.getLogradouro());
                 estado.setText(result.getUf());
-            }
-            else
-            {
+            } else {
                 Toast.makeText(getApplicationContext(), "CEP INVÁLIDO", Toast.LENGTH_SHORT).show();
                 limparEndereco();
             }

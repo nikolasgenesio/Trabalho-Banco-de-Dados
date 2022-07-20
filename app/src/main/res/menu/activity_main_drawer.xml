@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/tela_inicial"
+            android:icon="@drawable/inicio_vector"
+            android:title="Tela Inicial" />
+
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/perfil_vector"
+            android:title="Perfil" />
+
+        <item android:title="Pedido de Adoção">
+            <menu>
+                <item
+                    android:id="@+id/adocao"
+                    android:icon="@drawable/pets_vector"
+                    android:title="Adoção" />
+                <item
+                    android:id="@+id/statusAdocao"
+                    android:icon="@drawable/feedback_vector"
+                    android:title="Status da Adoção" />
+
+                <item
+                    android:id="@+id/abrigos"
+                    android:icon="@drawable/local_vector"
+                    android:title="Abrigos" />
+
+                <item
+                    android:id="@+id/informacoes"
+                    android:icon="@drawable/info_vector"
+                    android:title="Informações Úteis" />
+            </menu>
+        </item>
+
+        <item android:title="Saída">
+            <menu>
+                <item
+                    android:id="@+id/sair"
+                    android:icon="@drawable/sair_vector"
+                    android:title="Sair" />
+            </menu>
+        </item>
+    </group>
+</menu>

@@ -1,5 +1,7 @@
 package com.example.pets_donation;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class Adotante implements Serializable {
@@ -7,6 +9,9 @@ public class Adotante implements Serializable {
     //dados pessoais
     private String nome, dataNascimento, sexo, tipoTelefone, telefone, email;
     private Double rendaMensal;
+
+    //foto
+    private transient Bitmap foto;
 
     //endereco
     private String cep, estado, cidade, bairro, rua, numero;
@@ -68,6 +73,14 @@ public class Adotante implements Serializable {
 
     public void setRendaMensal(Double rendaMensal) {
         this.rendaMensal = rendaMensal;
+    }
+
+    public Bitmap getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Bitmap foto) {
+        this.foto = foto;
     }
 
     public String getCep() {
@@ -136,6 +149,6 @@ public class Adotante implements Serializable {
 
     @Override
     public String toString() {
-        return "nome = " + nome + "\ncpf = " + cpf;
+        return nome;
     }
 }

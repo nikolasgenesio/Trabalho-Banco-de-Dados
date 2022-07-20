@@ -14,6 +14,47 @@
         android:theme="@style/Theme.PETS_DONATION"
         tools:targetApi="31">
         <activity
+            android:name=".FuncionarioGerencia_Animal"
+            android:exported="false" />
+        <activity
+            android:name=".GerenciaFuncionarios_Dados"
+            android:exported="false" />
+        <activity
+            android:name=".GerenciaAdotantes_Dados"
+            android:exported="false" />
+        <activity
+            android:name=".FuncionarioGerencia_Abrigos"
+            android:exported="false" />
+        <activity
+            android:name=".Listar_Animais"
+            android:exported="false" />
+        <activity
+            android:name=".Cadastro_Animal"
+            android:exported="false" />
+        <activity
+            android:name=".Listar_Abrigos"
+            android:exported="false" />
+        <activity
+            android:name=".Cadastro_Funcionario"
+            android:exported="false" />
+        <activity
+            android:name=".Funcionario_Duvidas"
+            android:exported="false" />
+        <activity
+            android:name=".Tela_Funcionario"
+            android:exported="false" />
+        <activity
+            android:name=".Listar_Funcionarios"
+            android:exported="false" />
+        <activity
+            android:name=".Adotante_Duvidas"
+            android:exported="false" />
+        <activity
+            android:name=".Tela_Adotante"
+            android:exported="false"
+            android:label="@string/title_activity_tela_adotante"
+            android:theme="@style/Theme.PETS_DONATION.NoActionBar" />
+        <activity
             android:name=".Listar_Adotantes"
             android:exported="false" />
         <activity
@@ -25,6 +66,7 @@
         <activity
             android:name=".Termos"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -34,9 +76,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+    </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

@@ -3,6 +3,7 @@ package com.example.pets_donation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.pets_donation.Lib.Conexao_Banco;
+import com.example.pets_donation.Models.AbrigoDAO;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
@@ -26,11 +29,23 @@ public class Cadastro_Abrigo extends AppCompatActivity {
     private SimpleMaskFormatter telefoneCelular, telefoneFixo;
     private MaskTextWatcher telefone1;
 
+
+    private AbrigoDAO abrigoDAO;
+    private Conexao_Banco banco;
+
+    private Funcionario funcionario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_abrigo);
         getSupportActionBar().setTitle("CADASTRO - ABRIGO");
+
+
+        abrigoDAO = new AbrigoDAO(this);
+        banco = new Conexao_Banco(this);
+        this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
+
 
         //Inicializando as variaveis
         nome = findViewById(R.id.nome);
@@ -69,17 +84,13 @@ public class Cadastro_Abrigo extends AppCompatActivity {
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
                     String cep1 = cep.getText().toString();
-                    if(cep1.length() != 9)
-                    {
+                    if (cep1.length() != 9) {
                         Toast.makeText(getApplicationContext(), "CEP INVÁLIDO", Toast.LENGTH_SHORT).show();
                         limparEndereco();
-                    }
-                    else
-                    {
+                    } else {
                         new DownloadCEPTask().execute(cep1);
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Sem conexão com a internet", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -117,8 +128,17 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         });
     }
 
-    public void limparEndereco()
-    {
+    public void limparDados() {
+        nome.setText("");
+        telefone.setText("");
+        estado.setText("");
+        cidade.setText("");
+        bairro.setText("");
+        rua.setText("");
+        numero.setText("");
+    }
+
+    public void limparEndereco() {
         estado.setText("");
         cidade.setText("");
         bairro.setText("");
@@ -134,8 +154,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
 
             //Celular selecionado
             case R.id.radioButtonTelefoneCelular:
-                if (checked)
-                {
+                if (checked) {
                     telefone.removeTextChangedListener(telefone1);
                     telefone.setText("");
                     //Criando a máscara para o campo de telefone celular - mascara personalizada
@@ -149,8 +168,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
 
             //Fixo selecionado
             case R.id.radioButtonTelefoneFixo:
-                if (checked)
-                {
+                if (checked) {
                     telefone.removeTextChangedListener(telefone1);
                     telefone.setText("");
                     //Criando a máscara para o campo de telefone fixo - mascara personalizada
@@ -165,8 +183,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         }
     }
 
-    public void adicionar_Abrigo()
-    {
+    public void adicionar_Abrigo() {
         String nome1 = nome.getText().toString();
         if (nome1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou seu nome", Toast.LENGTH_SHORT).show();
@@ -191,8 +208,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
             return;
         }
 
-        if(telefone1.length()!= 13 && telefone1.length()!= 14)
-        {
+        if (telefone1.length() != 13 && telefone1.length() != 14) {
             Toast.makeText(getApplicationContext(), "Telefone inválido", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -233,15 +249,39 @@ public class Cadastro_Abrigo extends AppCompatActivity {
             return;
         }
 
+        Abrigo abrigo = new Abrigo();
+
+        abrigo.setNome(nome1);
+        abrigo.setTipoTelefone(tipoTelefone);
+        abrigo.setTelefone(telefone1);
+
+        //endereco
+        abrigo.setCep(cep1);
+        abrigo.setEstado(estado1);
+        abrigo.setCidade(cidade1);
+        abrigo.setBairro(bairro1);
+        abrigo.setRua(rua1);
+        abrigo.setNumero(numero1);
+
+        long id = abrigoDAO.inserir(abrigo);
+        Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
+        limparDados();
+        Intent intent = new Intent(Cadastro_Abrigo.this, Tela_Funcionario.class);
+        intent.putExtra("funcionario", funcionario);
+        startActivity(intent);
+        /*
         Toast.makeText(getApplicationContext(), "Nome: " +nome1 + "\ntipo: "+ tipoTelefone
                 + "\nTelefone: "+telefone1 + "\nCEP: " + cep1 + "\nEstado: " + estado1
                 + "\nCidade: " + cidade1 + "\nBairro: " + bairro1 + "\nRua: " + rua1
                 + "\nNumero: " + numero1, Toast.LENGTH_SHORT).show();
+         */
+
+
     }
 
     private class DownloadCEPTask extends AsyncTask<String, Void, BuscaCep> {
         @Override
-        protected BuscaCep doInBackground(String ... ceps) {
+        protected BuscaCep doInBackground(String... ceps) {
             BuscaCep vCep = null;
 
             try {
@@ -258,9 +298,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
                 cidade.setText(result.getLocalidade());
                 rua.setText(result.getLogradouro());
                 estado.setText(result.getUf());
-            }
-            else
-            {
+            } else {
                 Toast.makeText(getApplicationContext(), "CEP INVÁLIDO", Toast.LENGTH_SHORT).show();
                 limparEndereco();
             }
