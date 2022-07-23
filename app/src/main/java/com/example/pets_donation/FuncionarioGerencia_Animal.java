@@ -179,7 +179,7 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Você não digitou a idade", Toast.LENGTH_SHORT).show();
             return;
         }
-        String cor1 = idade.getText().toString();
+        String cor1 = cor.getText().toString();
         if (idade1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou a idade", Toast.LENGTH_SHORT).show();
             return;

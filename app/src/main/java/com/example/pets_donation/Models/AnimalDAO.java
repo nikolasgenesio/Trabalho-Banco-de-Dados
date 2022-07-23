@@ -38,7 +38,9 @@ public class AnimalDAO {
         values.put("RACA", animal.getRaca());
         values.put("GENERO", animal.getGenero());
         values.put("PORTE_FISICO", animal.getPortFisico());
-        values.put("VACINACAO", animal.getPortFisico());
+
+        String listString = String.join(", ", animal.getVacinacao());
+        values.put("VACINACAO", listString);
 
         byteArrayOutputStream = new ByteArrayOutputStream();
         animal.getFoto().compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -46,6 +48,7 @@ public class AnimalDAO {
 
         values.put("FOTO", imageInBytes);
         values.put("ID_ABRIGO", animal.getIDAbrigo());
+        values.put("CPF_FUNCIONARIO", animal.getCPF_Funcionario());
         long inserir = banco.insert("animal", null, values);
         if (inserir == -1)
             return false;
@@ -56,7 +59,7 @@ public class AnimalDAO {
     public List<Animal> obterTodosAnimais() {
         List<Animal> animalList = new ArrayList<>();
         Cursor cursor = banco.query("animal", new String[]{"ID, NOME, TIPO, IDADE," +
-                        "COR, RACA, GENERO, PORTE_FISICO, VACINACAO, FOTO, ID_ABRIGO"}, null, null,
+                        "COR, RACA, GENERO, PORTE_FISICO, VACINACAO, FOTO, ID_ABRIGO, CPF_FUNCIONARIO"}, null, null,
                 null, null, null);
 
         //deslocar nas linhas da tabela
@@ -76,6 +79,7 @@ public class AnimalDAO {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
             animal.setFoto(bitmap);
             animal.setIDAbrigo(cursor.getInt(10));
+            animal.setCPF_Funcionario(cursor.getString(11));
             animalList.add(animal);
         }
         return animalList;
@@ -91,7 +95,8 @@ public class AnimalDAO {
         values.put("RACA", animal.getRaca());
         values.put("GENERO", animal.getGenero());
         values.put("PORTE_FISICO", animal.getPortFisico());
-        values.put("VACINACAO", animal.getPortFisico());
+        String listString = String.join(", ", animal.getVacinacao());
+        values.put("VACINACAO", listString);
         values.put("ID_ABRIGO", animal.getIDAbrigo());
 
         Bitmap imagem = animal.getFoto();

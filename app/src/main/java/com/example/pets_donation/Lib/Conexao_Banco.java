@@ -15,6 +15,8 @@ import com.example.pets_donation.Animal;
 import com.example.pets_donation.Funcionario;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 
@@ -22,7 +24,7 @@ public class Conexao_Banco extends SQLiteOpenHelper {
 
     //declarando as variaveis
     private static final String name = "pets_donation.db";
-    private static final int version = 5;
+    private static final int version = 6;
 
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] imageInBytes;
@@ -60,8 +62,9 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         db.execSQL("create table animal(ID integer primary key autoincrement, " +
                 "NOME varchar(100), TIPO varchar(100), IDADE varchar(3), COR varchar(100)," +
                 "RACA varchar(100), GENERO varchar(100), PORTE_FISICO varchar(100), VACINACAO varchar(100)," +
-                "FOTO BLOB, ID_ABRIGO integer," +
-                "FOREIGN KEY (ID_ABRIGO) REFERENCES abrigo (ID))");
+                "FOTO BLOB, ID_ABRIGO integer, CPF_FUNCIONARIO," +
+                "FOREIGN KEY (ID_ABRIGO) REFERENCES abrigo (ID)," +
+                "FOREIGN KEY (CPF_FUNCIONARIO) REFERENCES funcionario(CPF))");
     }
 
     @Override
@@ -175,6 +178,32 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         return funcionario;
     }
 
+    public Animal obterAnimal(int ID)
+    {
+        SQLiteDatabase MYDB = this.getWritableDatabase();
+        Cursor cursor = MYDB.rawQuery("Select * from animal where ID = ?", new String[]{String.valueOf(ID)});
+        Animal animal = new Animal();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            animal.setID(cursor.getInt(0));
+            animal.setNome(cursor.getString(1));
+            animal.setTipo(cursor.getString(2));
+            animal.setIdade(cursor.getString(3));
+            animal.setCor(cursor.getString(4));
+            animal.setRaca(cursor.getString(5));
+            animal.setGenero(cursor.getString(6));
+            animal.setPortFisico(cursor.getString(7));
+            List<String> vacinacoes = Arrays.asList(cursor.getString(8).split("\\s*,\\s*"));
+            animal.setVacinacao(vacinacoes);
+            byte[] imageByte = cursor.getBlob(9);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+            animal.setFoto(bitmap);
+            animal.setIDAbrigo(cursor.getInt(10));
+            animal.setCPF_Funcionario(cursor.getString(11));
+        }
+        return animal;
+    }
+
     public Abrigo obterAbrigo(String NOME) {
         SQLiteDatabase MYDB = this.getWritableDatabase();
         Cursor cursor = MYDB.rawQuery("Select * from abrigo where NOME = ?", new String[]{NOME});
@@ -285,6 +314,17 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         String nome = "";
         SQLiteDatabase MYDB = this.getWritableDatabase();
         Cursor cursor = MYDB.rawQuery("Select NOME from abrigo where ID = ?", new String[]{String.valueOf(ID)});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            nome = cursor.getString(0);
+        }
+        return nome;
+    }
+
+    public String retornaEnderecoAbrigo(int ID) {
+        String nome = "";
+        SQLiteDatabase MYDB = this.getWritableDatabase();
+        Cursor cursor = MYDB.rawQuery("Select CIDADE from abrigo where ID = ?", new String[]{String.valueOf(ID)});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             nome = cursor.getString(0);

@@ -11,6 +11,7 @@ public class Animal implements Serializable {
     private String nome, tipo, idade, cor, raca, genero, portFisico;
     private transient Bitmap foto;
     private List<String> vacinacao;
+    private String CPF_Funcionario;
 
     public String getNome() {
         return nome;
@@ -98,6 +99,14 @@ public class Animal implements Serializable {
 
     public void setVacinacao(List<String> vacinacao) {
         this.vacinacao = vacinacao;
+    }
+
+    public String getCPF_Funcionario() {
+        return CPF_Funcionario;
+    }
+
+    public void setCPF_Funcionario(String CPF_Funcionario) {
+        this.CPF_Funcionario = CPF_Funcionario;
     }
 
     @Override

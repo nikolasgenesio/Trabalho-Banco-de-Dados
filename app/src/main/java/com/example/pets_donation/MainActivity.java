@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         checkBox = (CheckBox) findViewById(R.id.salvar);
 
         //cpf.setText("126.745.986-20");
+        //cpf.setText("125.789.652-36");
         //senha.setText("barrafunda");
 
         //Criando a máscara para o campo de CPF

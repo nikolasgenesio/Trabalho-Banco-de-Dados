@@ -170,7 +170,7 @@ public class Cadastro_Animal extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Você não digitou a idade", Toast.LENGTH_SHORT).show();
             return;
         }
-        String cor1 = idade.getText().toString();
+        String cor1 = cor.getText().toString();
         if (idade1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou a idade", Toast.LENGTH_SHORT).show();
             return;
@@ -234,6 +234,7 @@ public class Cadastro_Animal extends AppCompatActivity {
 
         String Nomeabrigo = spinner.getSelectedItem().toString();
         animal.setIDAbrigo(banco.retornaIDAbrigo(Nomeabrigo));
+        animal.setCPF_Funcionario(funcionario.getCpf());
 
         Boolean inserir = animalDAO.inserir(animal);
 
