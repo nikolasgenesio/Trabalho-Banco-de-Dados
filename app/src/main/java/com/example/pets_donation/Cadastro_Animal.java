@@ -93,7 +93,7 @@ public class Cadastro_Animal extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String Nomeabrigo = spinner.getSelectedItem().toString();
-                Abrigo abrigo = banco.obterAbrigo(Nomeabrigo);
+                Abrigo abrigo = banco.obterNomeAbrigo(Nomeabrigo);
                 Toast.makeText(getApplicationContext(), "Nome: " + abrigo.getNome() +
                         "\nEstado: " + abrigo.getEstado() +
                         "\nCidade: " + abrigo.getCidade() +

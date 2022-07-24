@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.pets_donation.Adocoes;
 import com.example.pets_donation.Animal;
 import com.example.pets_donation.Lib.Conexao_Banco;
 

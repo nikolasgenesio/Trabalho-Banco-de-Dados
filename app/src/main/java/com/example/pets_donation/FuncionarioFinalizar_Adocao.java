@@ -2,11 +2,16 @@ package com.example.pets_donation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.example.pets_donation.Lib.Conexao_Banco;
+import com.example.pets_donation.Models.ProcessoAdocaoDAO;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
@@ -16,6 +21,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
     private Adotante adotante;
     private Animal animal;
     private ProcessoAdocao processoAdocao;
+    private Funcionario funcionario;
 
     //variaveis adotante
 
@@ -39,6 +45,10 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
     //auxiliares
     private String morada, imovel, veterinario;
 
+    private Button btnDeletar, btnCancelar, btnConfirmar;
+    private ProcessoAdocaoDAO processoAdocaoDAO;
+    private Conexao_Banco banco;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +59,10 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         this.adotante = (Adotante) getIntent().getSerializableExtra("adotante");
         this.animal = (Animal) getIntent().getSerializableExtra("animal");
         this.processoAdocao = (ProcessoAdocao) getIntent().getSerializableExtra("adocao");
+        this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
+
+        banco = new Conexao_Banco(this);
+        processoAdocaoDAO = new ProcessoAdocaoDAO(this);
 
         //adotante
         nome = findViewById(R.id.nome);
@@ -141,7 +155,32 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         simVet.setEnabled(false);
         naoVet.setEnabled(false);
 
+        btnDeletar = findViewById(R.id.btnDeleta);
+        btnCancelar = findViewById(R.id.btnCancela);
+        btnConfirmar = findViewById(R.id.btnAltera);
+
         preencheInformacoes();
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmar_Adocao();
+            }
+        });
+
+        btnDeletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletar_Adocao();
+            }
+        });
     }
 
     public void preencheInformacoes() {
@@ -211,6 +250,50 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
             simVet.setChecked(true);
         } else if (processoAdocao.getVeterinario().equals("Não")) {
             naoVet.setChecked(true);
+        }
+    }
+
+    public void confirmar_Adocao() {
+        processoAdocao.setStatus("Finalizado! Buscar animal!");
+        boolean alterar = processoAdocaoDAO.alterarStatus(processoAdocao);
+        boolean inserir = processoAdocaoDAO.inserirAdocaoDeferida(processoAdocao, funcionario);
+        if (alterar && inserir) {
+            Toast.makeText(getApplicationContext(), "Adoção Confirmada", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), Tela_Funcionario.class);
+            intent.putExtra("funcionario", funcionario);
+            startActivity(intent);
+            finish();
+        } else {
+            if(!alterar)
+            {
+                Toast.makeText(getApplicationContext(), "Adoção não confirmada", Toast.LENGTH_SHORT).show();
+            }
+            else if(!inserir)
+            {
+                Toast.makeText(getApplicationContext(), "Inserção não confirmada", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void deletar_Adocao() {
+        processoAdocao.setStatus("Indeferido!");
+        boolean alterar = processoAdocaoDAO.alterarStatus(processoAdocao);
+        boolean inserir = processoAdocaoDAO.inserirAdocaoIndeferida(processoAdocao, funcionario);
+        if (alterar && inserir) {
+            Toast.makeText(getApplicationContext(), "Adoção Inderida!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), Tela_Funcionario.class);
+            intent.putExtra("funcionario", funcionario);
+            startActivity(intent);
+            finish();
+        } else {
+            if(!alterar)
+            {
+                Toast.makeText(getApplicationContext(), "Adoção não indeferida", Toast.LENGTH_SHORT).show();
+            }
+            else if(!inserir)
+            {
+                Toast.makeText(getApplicationContext(), "Inserção não confirmada", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

@@ -44,7 +44,7 @@ public class FuncionarioAdocao_Fragment extends Fragment {
         listView = view.findViewById(R.id.lista_adocoes);
         processoAdocaoDAO = new ProcessoAdocaoDAO(getActivity());
         processoAdocaoList = processoAdocaoDAO.retornaStatusAdocaoFuncionario();
-        adocaoFuncionario = new AdocaoFuncionario(getActivity(), R.layout.list_view_adocoes, processoAdocaoList);
+        adocaoFuncionario = new AdocaoFuncionario(getActivity(), R.layout.list_view_adocoes, processoAdocaoList, funcionario);
         listView.setAdapter(adocaoFuncionario);
     }
 }

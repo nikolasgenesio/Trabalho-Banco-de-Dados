@@ -23,7 +23,9 @@ import com.example.pets_donation.Funcionario_ListCadastros;
 import com.example.pets_donation.Listar_Abrigos;
 import com.example.pets_donation.Listar_Adotantes;
 import com.example.pets_donation.Listar_Animais;
+import com.example.pets_donation.Listar_AnimaisAdocoes;
 import com.example.pets_donation.Listar_Funcionarios;
+import com.example.pets_donation.Listar_ProcessosAdocoes;
 import com.example.pets_donation.R;
 
 public class FuncionarioGerenciar_Fragment extends Fragment {
@@ -37,16 +39,20 @@ public class FuncionarioGerenciar_Fragment extends Fragment {
             "Adotante",
             "Animal",
             "Funcionário",
+            "Relatório de adoções",
+            "Relatório de animais",
     };
 
     String[] subtitle = {
             "Editar informações de abrigos", "Editar informações de adotantes",
             "Editar informações de animais", "Editar informações de funcionários",
+            "Gerar relatório dos processos de adoções", "Gerar relatório dos processos dos animais",
     };
 
     Integer[] imgid = {
             R.drawable.editar_abrigo_vector, R.drawable.adotante_vector,
             R.drawable.pets_vector, R.drawable.gerenciar_vector,
+            R.drawable.processo_adocao_vector, R.drawable.relatorio_animal_vector
     };
 
     @Override
@@ -89,8 +95,22 @@ public class FuncionarioGerenciar_Fragment extends Fragment {
                         startActivity(intent);
                         break;
                     }
-                    default: {
+                    case 3: {
                         Intent intent = new Intent(getActivity(), Listar_Funcionarios.class);
+                        intent.putExtra("funcionario", funcionario);
+                        startActivity(intent);
+                        break;
+                    }
+
+                    case 4: {
+                        Intent intent = new Intent(getActivity(), Listar_ProcessosAdocoes.class);
+                        intent.putExtra("funcionario", funcionario);
+                        startActivity(intent);
+                        break;
+                    }
+
+                    default: {
+                        Intent intent = new Intent(getActivity(), Listar_AnimaisAdocoes.class);
                         intent.putExtra("funcionario", funcionario);
                         startActivity(intent);
                         break;

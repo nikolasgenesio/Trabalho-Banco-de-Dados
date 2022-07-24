@@ -22,11 +22,13 @@ public class AdocaoFuncionario extends BaseAdapter {
     private List<ProcessoAdocao> processoAdocaoList;
     private Adotante adotante;
     private Conexao_Banco banco;
+    private Funcionario funcionario;
 
-    public AdocaoFuncionario(Context context, int layout, List<ProcessoAdocao> processoAdocaoList) {
+    public AdocaoFuncionario(Context context, int layout, List<ProcessoAdocao> processoAdocaoList, Funcionario funcionario) {
         this.context = context;
         this.layout = layout;
         this.processoAdocaoList = processoAdocaoList;
+        this.funcionario = funcionario;
     }
 
 
@@ -88,6 +90,7 @@ public class AdocaoFuncionario extends BaseAdapter {
                 intent.putExtra("adocao", processoAdocao);
                 intent.putExtra("adotante", adotante);
                 intent.putExtra("animal", animal);
+                intent.putExtra("funcionario", funcionario);
                 context.startActivity(intent);
             }
         });

@@ -25,7 +25,7 @@ public class Conexao_Banco extends SQLiteOpenHelper {
 
     //declarando as variaveis
     private static final String name = "pets_donation.db";
-    private static final int version = 7;
+    private static final int version = 8;
 
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] imageInBytes;
@@ -77,6 +77,18 @@ public class Conexao_Banco extends SQLiteOpenHelper {
                 "CPF_ADOTANTE varchar(14), ID_ANIMAL integer, " +
                 "FOREIGN KEY (CPF_ADOTANTE) REFERENCES adotante (CPF)," +
                 "FOREIGN KEY (ID_ANIMAL) REFERENCES animal (ID))");
+
+        db.execSQL("create table adocaoDeferida(ID integer primary key autoincrement, " +
+                "DATA varchar(10), CPF_ADOTANTE varchar(14), ID_ANIMAL integer, CPF_FUNCIONARIO varchar(14)," +
+                "FOREIGN KEY (CPF_ADOTANTE) REFERENCES adotante (CPF)," +
+                "FOREIGN KEY (CPF_FUNCIONARIO) REFERENCES funcionario (CPF)," +
+                "FOREIGN KEY (ID_ANIMAL) REFERENCES animal (ID))");
+
+        db.execSQL("create table adocaoIndeferida(ID integer primary key autoincrement, " +
+                "DATA varchar(10), CPF_ADOTANTE varchar(14), ID_ANIMAL integer, CPF_FUNCIONARIO varchar(14)," +
+                "FOREIGN KEY (CPF_ADOTANTE) REFERENCES adotante (CPF)," +
+                "FOREIGN KEY (CPF_FUNCIONARIO) REFERENCES funcionario (CPF)," +
+                "FOREIGN KEY (ID_ANIMAL) REFERENCES animal (ID))");
     }
 
     @Override
@@ -94,6 +106,8 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists abrigo");
         db.execSQL("drop Table if exists animal");
         db.execSQL("drop Table if exists processoAdocao");
+        db.execSQL("drop Table if exists adocaoIndeferida");
+        db.execSQL("drop Table if exists adocaoDeferida");
         onCreate(db);
     }
 
@@ -216,9 +230,29 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         return animal;
     }
 
-    public Abrigo obterAbrigo(String NOME) {
+    public Abrigo obterNomeAbrigo(String NOME) {
         SQLiteDatabase MYDB = this.getWritableDatabase();
         Cursor cursor = MYDB.rawQuery("Select * from abrigo where NOME = ?", new String[]{NOME});
+        Abrigo abrigo = new Abrigo();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            abrigo.setID(cursor.getInt(0));
+            abrigo.setNome(cursor.getString(1));
+            abrigo.setTipoTelefone(cursor.getString(2));
+            abrigo.setTelefone(cursor.getString(3));
+            abrigo.setCep(cursor.getString(4));
+            abrigo.setEstado(cursor.getString(5));
+            abrigo.setCidade(cursor.getString(6));
+            abrigo.setBairro(cursor.getString(7));
+            abrigo.setRua(cursor.getString(8));
+            abrigo.setNumero(cursor.getString(9));
+        }
+        return abrigo;
+    }
+
+    public Abrigo obterAbrigo(int ID) {
+        SQLiteDatabase MYDB = this.getWritableDatabase();
+        Cursor cursor = MYDB.rawQuery("Select * from abrigo where ID = ?", new String[]{String.valueOf(ID)});
         Abrigo abrigo = new Abrigo();
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

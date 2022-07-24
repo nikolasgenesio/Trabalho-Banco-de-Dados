@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pets_donation.Lib.Conexao_Banco;
 
@@ -74,21 +75,36 @@ public class AnimalAdocaoListAdapter extends BaseAdapter {
 
         Animal animal = banco.obterAnimal(processoAdocao.getIDAnimal());
         viewHolder.textNome.setText(animal.getNome());
-        viewHolder.textInfo.setText("Status: " + processoAdocao.getStatus());
-
         viewHolder.imageView.setImageBitmap(animal.getFoto());
 
         viewHolder.imageView.setFocusableInTouchMode(false);
 
-        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("LISTA", "Nome: " + animal.getNome());
-                Intent intent = new Intent(context, ProcessoAdocao_Visualizar.class);
-                intent.putExtra("adocao", processoAdocao);
-                context.startActivity(intent);
-            }
-        });
+        if (processoAdocao.getStatus().equals("Finalizado! Buscar animal!")) {
+            Abrigo abrigo = banco.obterAbrigo(animal.getIDAbrigo());
+            viewHolder.textInfo.setText("Status: " + processoAdocao.getStatus() +
+                    "\nAbrigo: " + abrigo.getNome() +
+                    "\nRua: " + abrigo.getRua() + ", " + abrigo.getNumero() +
+                    "\nBairro: " + abrigo.getBairro() +
+                    "\nCidade: " + abrigo.getCidade() +
+                    "\nCEP: " + abrigo.getCep() + " | " + abrigo.getEstado());
+            viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Adoção já Confirmada!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            viewHolder.textInfo.setText("Status: " + processoAdocao.getStatus());
+            viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("LISTA", "Nome: " + animal.getNome());
+                    Intent intent = new Intent(context, ProcessoAdocao_Visualizar.class);
+                    intent.putExtra("adocao", processoAdocao);
+                    context.startActivity(intent);
+                }
+            });
+        }
         return row;
     }
 
