@@ -1,5 +1,6 @@
 package com.example.pets_donation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -10,31 +11,33 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.pets_donation.Lib.Conexao_Banco;
+
 import java.util.List;
 
-public class AnimalListAdapter extends BaseAdapter {
+public class AdocaoFuncionario extends BaseAdapter {
 
     private Context context;
     private int layout;
-    private List<Animal> animals;
-    private Funcionario funcionario;
+    private List<ProcessoAdocao> processoAdocaoList;
+    private Adotante adotante;
+    private Conexao_Banco banco;
 
-    public AnimalListAdapter(Context context, int layout, List<Animal> animals, Funcionario funcionario) {
+    public AdocaoFuncionario(Context context, int layout, List<ProcessoAdocao> processoAdocaoList) {
         this.context = context;
         this.layout = layout;
-        this.animals = animals;
-        this.funcionario = funcionario;
+        this.processoAdocaoList = processoAdocaoList;
     }
+
 
     @Override
     public int getCount() {
-        return animals.size();
+        return processoAdocaoList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return animals.get(position);
+        return processoAdocaoList.get(position);
     }
 
     @Override
@@ -47,11 +50,12 @@ public class AnimalListAdapter extends BaseAdapter {
         TextView textNome, textInfo;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        banco = new Conexao_Banco(context);
         View row = convertView;
-        ViewHolder viewHolder = new ViewHolder();
+        AdocaoFuncionario.ViewHolder viewHolder = new AdocaoFuncionario.ViewHolder();
 
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,13 +67,15 @@ public class AnimalListAdapter extends BaseAdapter {
             viewHolder.imageView = (ImageView) row.findViewById(R.id.icon);
             row.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) row.getTag();
+            viewHolder = (AdocaoFuncionario.ViewHolder) row.getTag();
         }
 
-        Animal animal = animals.get(position);
+        ProcessoAdocao processoAdocao = processoAdocaoList.get(position);
 
-        viewHolder.textNome.setText(animal.getNome());
-        viewHolder.textInfo.setText(animal.getTipo());
+        Adotante adotante = banco.obterAdotanteAdocao(processoAdocao.getCPFAdotante());
+        Animal animal = banco.obterAnimal(processoAdocao.getIDAnimal());
+        viewHolder.textNome.setText("Adotante: " + adotante.getNome());
+        viewHolder.textInfo.setText("");
 
         viewHolder.imageView.setImageBitmap(animal.getFoto());
 
@@ -78,22 +84,14 @@ public class AnimalListAdapter extends BaseAdapter {
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LISTA", "Nome: " + animal.getNome());
-                Intent intent = new Intent(context, FuncionarioGerencia_Animal.class);
-                intent.putExtra("funcionario", funcionario);
+                Intent intent = new Intent(context, FuncionarioFinalizar_Adocao.class);
+                intent.putExtra("adocao", processoAdocao);
+                intent.putExtra("adotante", adotante);
                 intent.putExtra("animal", animal);
                 context.startActivity(intent);
             }
         });
         return row;
-    }
-
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    public boolean isEnabled(int position) {
-        return false;
     }
 
 }

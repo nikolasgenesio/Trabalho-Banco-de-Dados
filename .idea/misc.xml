@@ -13,10 +13,11 @@
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_adotante_visualiza_animal.xml" value="0.25125628140703515" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_abrigo.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_adotante.xml" value="0.2324159021406728" />
-        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_animal.xml" value="0.5" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_animal.xml" value="0.14836795252225518" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_funcionario.xml" value="0.18" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_duvidas.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_duvidas2.xml" value="0.1" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_finalizar_adocao.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_abrigos.xml" value="0.22" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_adotantes.xml" value="0.22" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_gerencia_animal.xml" value="0.22" />
@@ -26,6 +27,8 @@
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_animais.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_funcionarios.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_processo_adocao_visualizar.xml" value="0.10309973045822103" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_questionario_adotante.xml" value="0.14470918009810793" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_tela_adotante.xml" value="0.18" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_tela_funcionario.xml" value="0.25" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_termos.xml" value="0.1" />
@@ -46,7 +49,8 @@
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_perfil_.xml" value="0.23696682464454977" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
-        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_animal.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_adocoes.xml" value="0.22" />
+        <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_animal.xml" value="0.25" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_cadastro.xml" value="0.25" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/listview_horizontal.xml" value="0.21" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/layout/nav_header_tela_adotante.xml" value="0.18" />

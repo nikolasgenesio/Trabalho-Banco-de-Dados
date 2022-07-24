@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProcessoAdocao_Visualizar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Questionário de Adoção"
+            android:layout_gravity="center"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorHint"
+            android:text="1. Mora em casa ou apartamento?"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+            <RadioGroup
+                android:id="@+id/radioGroupCasa"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/laranja"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioButtonApartamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Apartamento" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonCasa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Casa" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="2. Você tem certeza que é permitido animais no imóvel??"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroupImovel"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/laranja"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioButtonSimImovel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Sim, já verifiquei e tenho certeza!" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonNaoImovel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Não" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="3. Quantas pessoas moram no imóvel??"
+            />
+
+        <EditText
+            android:id="@+id/qtdePessoas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pessoas"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:inputType="number"
+            android:textColorHint="@color/black"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="4. Existem outros animais em casa? Quais?"
+            />
+
+        <EditText
+            android:id="@+id/qtdeAnimais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Animais"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="5. Onde ficará o animal?"
+            />
+
+        <EditText
+            android:id="@+id/localAnimais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Local"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="6. Como o animal vai permanecer (preso parte do dia ou o dia todo, solto...):"
+            />
+
+        <EditText
+            android:id="@+id/permanecerAnimais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Permanência"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="7. Se você tem outros animais atualmente, haverá espaço para prevenir uma briga territorial? Terá paciência para fazer a adaptação deles? Como será a adaptação?"
+            />
+
+        <EditText
+            android:id="@+id/animaisAtual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adaptação"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="8. Já teve algum animal que faleceu? Por que motivo?"
+            />
+
+        <EditText
+            android:id="@+id/animalFalecido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Motivo"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="9. Quem vai sustentar o animal adotado?"
+            />
+
+        <EditText
+            android:id="@+id/sustentarAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sustento"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="10. Qual será sua atitude se o animal fazer barulho à noite ou quando não há ninguém em casa (tendo reclamações dos vizinhos)?"
+            />
+
+        <EditText
+            android:id="@+id/vizinhosAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Atitude"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="11. Está disposto a limpar xixi e cocô, levá-lo para passear, dar comida nos horários certos, tratá-lo quando doente e dar atenção e carinho?"
+            />
+
+        <EditText
+            android:id="@+id/passeioAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Disposição"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="12. Poderá arcar com os custos de ração de qualidade, vermifugação, vacinação, castração e assistência veterinária? Qual seria sua atitude se ele adoecesse ou sofresse algum acidente?"
+            />
+
+        <EditText
+            android:id="@+id/custosAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Custos"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="13. Alguém da sua família apresenta sinais de alergia a pêlos de animais? Se, após a adoção, você descobrisse que alguém na sua casa tem alergia, o que faria?"
+            />
+
+        <EditText
+            android:id="@+id/alergiaAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alergia"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="14. Todos os moradores da casa respeitam animais e aceitaram a adoção sem problemas e restrições? Qual seria sua atitude se alguém da residência não se adaptasse ao bichinho?"
+            />
+
+        <EditText
+            android:id="@+id/respeitoAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adaptação"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="15. Se tiver criança em casa, se responsabilizará a ensiná-la que o animal não é um brinquedo, que sente dor e deve ser respeitado, evitando que ambos se machuquem?"
+            />
+
+        <EditText
+            android:id="@+id/criancaAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Responsabilidade"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="16. Em média, quantas horas seu animal ficará sozinho em casa? Caso seja necessário ficar mais de 6h sozinho, está disposto a enriquecer o ambiente com brinquedos, passear antes de sair e ao chegar e/ou contratar uma petsitter?"
+            />
+
+        <EditText
+            android:id="@+id/horasAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Horário"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="17. Em caso de viagens longas com quem ficará o animal?"
+            />
+
+        <EditText
+            android:id="@+id/viajarAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Viagem"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="18. O que fará se o animal fugir ou se perder?"
+            />
+
+        <EditText
+            android:id="@+id/fugirAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fugir"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="19. O que fará se não puder mais criar o animal?"
+            />
+
+        <EditText
+            android:id="@+id/criarAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Criação"
+            android:drawableLeft="@drawable/nome"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:lines="2"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorHint"
+            android:text="20. Em caso de emergência, tem como levar o animal imediatamento a um veterinário?"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroupVet"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/laranja"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioButtonSimVet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Sim" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonNaoVet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/laranja"
+                    android:checked="false"
+                    android:text="Não" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+
+            <Button
+                android:id="@+id/btnDeleta"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/button_customize"
+                android:text="Deletar"
+                android:textColor="#FFFFFF" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btnCancela"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_customize"
+                android:text="Cancelar"
+                android:textColor="#FFFFFF" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btnAltera"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/button_customize"
+                android:text="Alterar"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

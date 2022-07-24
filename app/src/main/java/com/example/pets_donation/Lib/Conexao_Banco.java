@@ -13,6 +13,7 @@ import com.example.pets_donation.Abrigo;
 import com.example.pets_donation.Adotante;
 import com.example.pets_donation.Animal;
 import com.example.pets_donation.Funcionario;
+import com.example.pets_donation.ProcessoAdocao;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class Conexao_Banco extends SQLiteOpenHelper {
 
     //declarando as variaveis
     private static final String name = "pets_donation.db";
-    private static final int version = 6;
+    private static final int version = 7;
 
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] imageInBytes;
@@ -62,9 +63,20 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         db.execSQL("create table animal(ID integer primary key autoincrement, " +
                 "NOME varchar(100), TIPO varchar(100), IDADE varchar(3), COR varchar(100)," +
                 "RACA varchar(100), GENERO varchar(100), PORTE_FISICO varchar(100), VACINACAO varchar(100)," +
-                "FOTO BLOB, ID_ABRIGO integer, CPF_FUNCIONARIO," +
+                "FOTO BLOB, ID_ABRIGO integer, CPF_FUNCIONARIO varchar(14)," +
                 "FOREIGN KEY (ID_ABRIGO) REFERENCES abrigo (ID)," +
                 "FOREIGN KEY (CPF_FUNCIONARIO) REFERENCES funcionario(CPF))");
+
+        db.execSQL("create table processoAdocao(ID integer primary key autoincrement, " +
+                "MORADA varchar(11), IMOVEL varchar(100), QTDE_PESSOAS varchar(3), QTDE_ANIMAIS varchar(100)," +
+                "LOCAL varchar(100), PERMANENCIA varchar(100), ATUAL varchar(100), FALECIDO varchar(100)," +
+                "SUSTENTO varchar(100), VIZINHOS varchar(100), PASSEIO varchar(100)," +
+                "CUSTOS varchar(100), ALERGIA varchar(100), RESPEITO varchar(100)," +
+                "CRIANCA varchar(100), HORAS varchar(100), VIAGEM varchar(100)," +
+                "FUGIR varchar(100), CRIAR varchar(100), VETERINARIO varchar(100), STATUS varchar(100)," +
+                "CPF_ADOTANTE varchar(14), ID_ANIMAL integer, " +
+                "FOREIGN KEY (CPF_ADOTANTE) REFERENCES adotante (CPF)," +
+                "FOREIGN KEY (ID_ANIMAL) REFERENCES animal (ID))");
     }
 
     @Override
@@ -81,6 +93,7 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists funcionario");
         db.execSQL("drop Table if exists abrigo");
         db.execSQL("drop Table if exists animal");
+        db.execSQL("drop Table if exists processoAdocao");
         onCreate(db);
     }
 
@@ -178,8 +191,7 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         return funcionario;
     }
 
-    public Animal obterAnimal(int ID)
-    {
+    public Animal obterAnimal(int ID) {
         SQLiteDatabase MYDB = this.getWritableDatabase();
         Cursor cursor = MYDB.rawQuery("Select * from animal where ID = ?", new String[]{String.valueOf(ID)});
         Animal animal = new Animal();
@@ -330,5 +342,38 @@ public class Conexao_Banco extends SQLiteOpenHelper {
             nome = cursor.getString(0);
         }
         return nome;
+    }
+
+
+    public Adotante obterAdotanteAdocao(String CPF) {
+        SQLiteDatabase MYDB = this.getWritableDatabase();
+        Cursor cursor = MYDB.rawQuery("Select * from adotante where CPF = ?", new String[]{CPF});
+        Adotante adotante = new Adotante();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            adotante.setNome(cursor.getString(0));
+            adotante.setDataNascimento(cursor.getString(1));
+            adotante.setSexo(cursor.getString(2));
+            adotante.setTipoTelefone(cursor.getString(3));
+            adotante.setTelefone(cursor.getString(4));
+            adotante.setEmail(cursor.getString(5));
+            String rendaMensal1 = cursor.getString(6);
+            adotante.setRendaMensal(Double.parseDouble(rendaMensal1));
+            adotante.setCep(cursor.getString(7));
+            adotante.setEstado(cursor.getString(8));
+            adotante.setCidade(cursor.getString(9));
+            adotante.setBairro(cursor.getString(10));
+            adotante.setRua(cursor.getString(11));
+            adotante.setNumero(cursor.getString(12));
+            adotante.setCpf(cursor.getString(13));
+            adotante.setSenha(cursor.getString(14));
+            byte[] imageByte = cursor.getBlob(15);
+            if (imageByte != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+                adotante.setFoto(bitmap);
+            }
+            Log.i("Tarefa 1 - status", "NOME: " + adotante.getNome());
+        }
+        return adotante;
     }
 }

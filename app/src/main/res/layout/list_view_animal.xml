@@ -16,8 +16,8 @@
     <ImageView
         android:id="@+id/icon"
         android:focusable="false"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:padding="10dp" />
 
     <LinearLayout android:layout_width="wrap_content"

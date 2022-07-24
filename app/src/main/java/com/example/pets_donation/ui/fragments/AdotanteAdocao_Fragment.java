@@ -6,8 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
@@ -17,14 +15,8 @@ import android.view.ViewGroup;
 
 import com.example.pets_donation.Adocao.VPAdapter;
 import com.example.pets_donation.Adotante;
-import com.example.pets_donation.Animal;
-import com.example.pets_donation.Models.AnimalDAO;
 import com.example.pets_donation.R;
-import com.example.pets_donation.RecyclerViewAdapter;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdotanteAdocao_Fragment extends Fragment {
 

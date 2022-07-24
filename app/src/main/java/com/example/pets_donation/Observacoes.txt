@@ -45,14 +45,14 @@ RF1: Permitir que o adotante se cadastre no sistema;
 RF2: Permitir que o adotante busque pelos diversos animais disponíveis em abrigos.
 RF3: Permitir que o adotante e funcionários veja todos os dados do animal e do abrigo, incluindo fotos, idade, informações sobre a vacinação, gênero e porte físico;
 RF4: É possível que o adotante selecione um animal da lista;
+RF5: Permitir que o adotante responda o questionário para a adoção;
+RF6: Permitir que o adotante realize o pedido de adoção;
 RF7: Manter cadastro dos animais no sistema;
 RF8: Manter cadastro dos funcionários de acesso permitido ao sistema;
 RF12: Permitir login do usuário e funcionário no sistema.
 
 Fazer (processo de adoção):
 
-RF5: Permitir que o adotante responda o questionário para a adoção;
-RF6: Permitir que o adotante realize o pedido de adoção;
 RF9: Permitir que o adotante e o funcionário verifiquem o pedido de adoção.
 RF10: Permitir que o funcionário gere relatórios de animais;
 RF11: Permitir que o funcionário registre a adoção;

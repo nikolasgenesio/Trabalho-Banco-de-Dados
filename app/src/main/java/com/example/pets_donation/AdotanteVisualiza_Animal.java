@@ -3,12 +3,13 @@ package com.example.pets_donation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -84,23 +85,38 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
 
         imageViewAnimal = findViewById(R.id.imageViewAnimal);
 
-
         btnConfirmar = findViewById(R.id.btnConfirma);
         btnCancelar = findViewById(R.id.btnCancela);
 
         preencheInformacoes();
 
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdotanteVisualiza_Animal.this, QuestionarioAdotante.class);
+                intent.putExtra("adotante", adotante);
+                intent.putExtra("animal", animal);
+                startActivity(intent);
+            }
+        });
     }
 
     public void preencheInformacoes() {
         nome.setText("Nome: " + animal.getNome());
         idade.setText("Idade: " + animal.getIdade());
-        cor.setText("Cor: " +animal.getCor());
-        raca.setText("Raça: " +animal.getRaca());
-        porteFisico.setText("Porte Físico: " +animal.getPortFisico());
+        cor.setText("Cor: " + animal.getCor());
+        raca.setText("Raça: " + animal.getRaca());
+        porteFisico.setText("Porte Físico: " + animal.getPortFisico());
 
         String str = String.join(", ", animal.getVacinacao());
-        vacinacao.setText("Vacinação: " +str);
+        vacinacao.setText("Vacinação: " + str);
 
         if (animal.getTipo().equals("Cachorro")) {
             cachorro.setChecked(true);

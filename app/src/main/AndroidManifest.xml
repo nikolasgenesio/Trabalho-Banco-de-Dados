@@ -14,6 +14,15 @@
         android:theme="@style/Theme.PETS_DONATION"
         tools:targetApi="31">
         <activity
+            android:name=".FuncionarioFinalizar_Adocao"
+            android:exported="false" />
+        <activity
+            android:name=".ProcessoAdocao_Visualizar"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionarioAdotante"
+            android:exported="false" />
+        <activity
             android:name=".AdotanteVisualiza_Animal"
             android:exported="false" />
         <activity
@@ -83,16 +92,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
     </application>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

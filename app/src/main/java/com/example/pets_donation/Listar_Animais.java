@@ -35,13 +35,11 @@ public class Listar_Animais extends AppCompatActivity {
         animalList = animalDAO.obterTodosAnimais();
         animalListFiltrados.addAll(animalList);
 
-        animalListAdapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList);
-
-        AnimalListAdapter adapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList);
+        animalListAdapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList, funcionario);
 
         //exibir lista
         ArrayAdapter<Animal> animalArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, animalList);
-        listView.setAdapter(animalArrayAdapter);
+        listView.setAdapter(animalListAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

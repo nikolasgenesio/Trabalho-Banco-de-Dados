@@ -129,10 +129,12 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             Toast.makeText(MainActivity.this, "Você não digitou sua senha", Toast.LENGTH_SHORT).show();
             return;
         }
+
         if (password.length() < 8) {
             Toast.makeText(MainActivity.this, "Senha: mínimo 8 digitos", Toast.LENGTH_SHORT).show();
             return;
         }
+
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (username.equals("000.000.000-00") ||
                 username.equals("111.111.111-11") ||
