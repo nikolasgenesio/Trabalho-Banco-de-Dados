@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.pets_donation.AdocaoFuncionario;
 import com.example.pets_donation.AnimalAdocaoListAdapter;
@@ -29,12 +30,13 @@ public class FuncionarioAdocao_Fragment extends Fragment {
     private ProcessoAdocaoDAO processoAdocaoDAO;
     private List<ProcessoAdocao> processoAdocaoList;
     private AdocaoFuncionario adocaoFuncionario;
+    private TextView textView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Adoção");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ADOÇÃO");
         this.funcionario = (Funcionario) getActivity().getIntent().getSerializableExtra("funcionario");
         Log.i("Funcionario Adocao", "NOME: " + funcionario.getNome());
         return inflater.inflate(R.layout.fragment_funcionario_adocao_, container, false);
@@ -45,6 +47,16 @@ public class FuncionarioAdocao_Fragment extends Fragment {
         processoAdocaoDAO = new ProcessoAdocaoDAO(getActivity());
         processoAdocaoList = processoAdocaoDAO.retornaStatusAdocaoFuncionario();
         adocaoFuncionario = new AdocaoFuncionario(getActivity(), R.layout.list_view_adocoes, processoAdocaoList, funcionario);
-        listView.setAdapter(adocaoFuncionario);
+        if(adocaoFuncionario.getCount() != 0)
+        {
+            listView.setAdapter(adocaoFuncionario);
+        }
+        else
+        {
+            textView = view.findViewById(R.id.aviso);
+            textView.setVisibility(View.VISIBLE);
+            textView.setText("Sem adoções pendentes no momento!");
+        }
+
     }
 }

@@ -12,19 +12,40 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textAnimaisAdotados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Animais Adotados"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="25dp" />
 
         <ListView
-            android:id="@+id/lista_animais"
-            android:layout_marginTop="30dp"
+            android:id="@+id/lista_animaisAdotados"
+            android:layout_below="@+id/textAnimaisAdotados"
             android:layout_width="fill_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/textAnimaisNaoAdotados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Animais Não Adotados"
+            android:layout_below="@+id/lista_animaisAdotados"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+        <ListView
+            android:id="@+id/lista_animaisNaoAdotados"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/textAnimaisNaoAdotados"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </ScrollView>

@@ -21,7 +21,6 @@ public class AnimalAdocaoListAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private List<ProcessoAdocao> processoAdocaoList;
-    private Adotante adotante;
     private Conexao_Banco banco;
 
     public AnimalAdocaoListAdapter(Context context, int layout, List<ProcessoAdocao> processoAdocaoList) {

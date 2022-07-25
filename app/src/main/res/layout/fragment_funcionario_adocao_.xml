@@ -6,6 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.FuncionarioAdocao_Fragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/aviso"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
     <ListView
         android:id="@+id/lista_adocoes"
         android:layout_width="match_parent"
@@ -18,5 +34,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    </RelativeLayout>>
 </FrameLayout>

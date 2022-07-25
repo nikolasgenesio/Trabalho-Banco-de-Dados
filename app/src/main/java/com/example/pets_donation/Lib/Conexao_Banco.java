@@ -410,4 +410,38 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         }
         return adotante;
     }
+
+    public Funcionario obterFuncionarioAdocao(String CPF) {
+        SQLiteDatabase MYDB = this.getWritableDatabase();
+        Cursor cursor = MYDB.rawQuery("Select * from funcionario where CPF = ?", new String[]{CPF});
+        Funcionario funcionario = new Funcionario();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            funcionario.setNome(cursor.getString(0));
+            funcionario.setDataNascimento(cursor.getString(1));
+            funcionario.setSexo(cursor.getString(2));
+            funcionario.setTipoTelefone(cursor.getString(3));
+            funcionario.setTelefone(cursor.getString(4));
+            funcionario.setEmail(cursor.getString(5));
+            String salario1 = cursor.getString(6);
+            funcionario.setSalario(Double.parseDouble(salario1));
+            funcionario.setCep(cursor.getString(7));
+            funcionario.setEstado(cursor.getString(8));
+            funcionario.setCidade(cursor.getString(9));
+            funcionario.setBairro(cursor.getString(10));
+            funcionario.setRua(cursor.getString(11));
+            funcionario.setNumero(cursor.getString(12));
+            funcionario.setCpf(cursor.getString(13));
+            funcionario.setSenha(cursor.getString(14));
+
+            byte[] imageByte = cursor.getBlob(15);
+            if (imageByte != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+                funcionario.setFoto(bitmap);
+            }
+
+            Log.i("Tarefa 1 - status", "NOME: " + funcionario.getNome());
+        }
+        return funcionario;
+    }
 }

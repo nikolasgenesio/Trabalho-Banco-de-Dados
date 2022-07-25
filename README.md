@@ -15,7 +15,7 @@ Nome
 ## Requisitos Funcionais
 
 RF1:    Permitir que o adotante se cadastre no sistema;<br>
-RF2:    Permitir que o adotante busque pelos diversos animais disponíveis em abrigos.
+RF2:    Permitir que o adotante busque pelos diversos animais disponíveis em abrigos;<br>
 RF3:  Permitir que o adotante e funcionários veja todos os dados do animal e do abrigo, incluindo fotos, idade, informações sobre a vacinação, gênero e porte físico;<br>
 RF4:   É possível que o adotante selecione um animal da lista;<br>
 RF5:   Permitir que o adotante responda o questionário para a adoção;<br>
