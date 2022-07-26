@@ -4,25 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.pets_donation.Models.ProcessoAdocaoDAO;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.List;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.pdf.PdfDocument;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 public class Listar_ProcessosAdocoes extends AppCompatActivity {
@@ -44,8 +37,31 @@ public class Listar_ProcessosAdocoes extends AppCompatActivity {
         listView = findViewById(R.id.lista_adocoes);
         processoAdocaoDAO = new ProcessoAdocaoDAO(this);
         processoAdocaoList = processoAdocaoDAO.retornaRelatorioAdocao();
+
         adocaoFuncionario = new AdocaoFuncionario(this, R.layout.list_view_adocoes, processoAdocaoList, funcionario);
+
         listView.setAdapter(adocaoFuncionario);
+        getListViewSize(listView);
+    }
+
+    public void getListViewSize(ListView myListView) {
+        ListAdapter myListAdapter = myListView.getAdapter();
+        if (myListAdapter == null) {
+            //do nothing return null
+            return;
+        }
+        //set listAdapter in loop for getting final size
+        int totalHeight = 0;
+        for (int size = 0; size < myListAdapter.getCount(); size++) {
+            View listItem = myListAdapter.getView(size, null, myListView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        //setting listview item in adapter
+        ViewGroup.LayoutParams params = myListView.getLayoutParams();
+        params.height = totalHeight + (myListView.getDividerHeight() * (myListAdapter.getCount() - 1));
+        myListView.setLayoutParams(params);
+        // print height of adapter on log
     }
 
 

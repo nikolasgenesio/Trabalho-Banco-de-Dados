@@ -13,9 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.pets_donation.Adotante;
 import com.example.pets_donation.Animal;
+import com.example.pets_donation.Lib.Conexao_Banco;
 import com.example.pets_donation.Models.AnimalDAO;
 import com.example.pets_donation.R;
 import com.example.pets_donation.RecyclerViewAdapter;
@@ -29,8 +31,9 @@ public class fragment2Adocao extends Fragment {
     private RecyclerView recyclerView;
     private List<Animal> animalList;
     private List<Animal> animalListFiltrados = new ArrayList<>();
-    ;
     private AnimalDAO animalDAO;
+    private Conexao_Banco banco;
+    private TextView textView;
 
     @SuppressLint("LongLogTag")
     @Override
@@ -46,15 +49,23 @@ public class fragment2Adocao extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.recyclerView);
-        animalDAO = new AnimalDAO(getActivity());
-        animalList = animalDAO.obterTodosAnimais();
+        textView = view.findViewById(R.id.msgGatos);
+        //animalDAO = new AnimalDAO(getActivity());
+        //animalList = animalDAO.obterTodosAnimais();
+
+        banco = new Conexao_Banco(getActivity());
+        animalList = banco.animaisAdocao();
 
         for (Animal animal : animalList) {
             if (animal.getTipo().equals("Gato")) {
                 animalListFiltrados.add(animal);
             }
         }
-        initRecyclerView();
+
+        if (animalListFiltrados != null && animalListFiltrados.isEmpty())
+            textView.setVisibility(View.VISIBLE);
+        else
+            initRecyclerView();
     }
 
     private void initRecyclerView() {

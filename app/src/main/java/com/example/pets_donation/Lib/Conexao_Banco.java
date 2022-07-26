@@ -16,6 +16,7 @@ import com.example.pets_donation.Funcionario;
 import com.example.pets_donation.ProcessoAdocao;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -443,5 +444,36 @@ public class Conexao_Banco extends SQLiteOpenHelper {
             Log.i("Tarefa 1 - status", "NOME: " + funcionario.getNome());
         }
         return funcionario;
+    }
+
+    public List<Animal> animaisAdocao() {
+        List<Animal> animalList = new ArrayList<>();
+        SQLiteDatabase MYDB = this.getWritableDatabase();
+        Cursor cursor = MYDB.rawQuery("SELECT * FROM animal LEFT JOIN adocaoDeferida " +
+                        "ON animal.ID = adocaoDeferida.ID_ANIMAL WHERE adocaoDeferida.ID_ANIMAL IS NULL",
+                new String[]{});
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Animal animal = new Animal();
+            animal.setID(cursor.getInt(0));
+            animal.setNome(cursor.getString(1));
+            Log.i("Tarefa 1 - status", "ENTROU " + animal.getNome());
+            animal.setTipo(cursor.getString(2));
+            animal.setIdade(cursor.getString(3));
+            animal.setCor(cursor.getString(4));
+            animal.setRaca(cursor.getString(5));
+            animal.setGenero(cursor.getString(6));
+            animal.setPortFisico(cursor.getString(7));
+            List<String> vacinacoes = Arrays.asList(cursor.getString(8).split("\\s*,\\s*"));
+            animal.setVacinacao(vacinacoes);
+            byte[] imageByte = cursor.getBlob(9);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+            animal.setFoto(bitmap);
+            animal.setIDAbrigo(cursor.getInt(10));
+            animal.setCPF_Funcionario(cursor.getString(11));
+            animalList.add(animal);
+        }
+        return animalList;
     }
 }

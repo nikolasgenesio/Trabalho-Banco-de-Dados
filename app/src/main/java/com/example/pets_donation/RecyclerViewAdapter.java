@@ -68,7 +68,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "OIOI", Toast.LENGTH_SHORT).show();
                 Log.i("Tarefa 1 - status Adocao", "NOME: " + animal.getNome());
                 Intent intent = new Intent(context, AdotanteVisualiza_Animal.class);
                 intent.putExtra("adotante", adotante);

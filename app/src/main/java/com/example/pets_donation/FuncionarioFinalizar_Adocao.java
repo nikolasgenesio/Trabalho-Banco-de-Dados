@@ -1,9 +1,12 @@
 package com.example.pets_donation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -264,37 +267,67 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            if(!alterar)
-            {
+            if (!alterar) {
                 Toast.makeText(getApplicationContext(), "Adoção não confirmada", Toast.LENGTH_SHORT).show();
-            }
-            else if(!inserir)
-            {
+            } else if (!inserir) {
                 Toast.makeText(getApplicationContext(), "Inserção não confirmada", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     public void deletar_Adocao() {
-        processoAdocao.setStatus("Indeferido!");
-        boolean alterar = processoAdocaoDAO.alterarStatus(processoAdocao);
-        boolean inserir = processoAdocaoDAO.inserirAdocaoIndeferida(processoAdocao, funcionario);
-        if (alterar && inserir) {
-            Toast.makeText(getApplicationContext(), "Adoção Inderida!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Tela_Funcionario.class);
-            intent.putExtra("funcionario", funcionario);
-            startActivity(intent);
-            finish();
-        } else {
-            if(!alterar)
-            {
-                Toast.makeText(getApplicationContext(), "Adoção não indeferida", Toast.LENGTH_SHORT).show();
-            }
-            else if(!inserir)
-            {
-                Toast.makeText(getApplicationContext(), "Inserção não confirmada", Toast.LENGTH_SHORT).show();
-            }
-        }
+
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.dialog_adocao_indeferida, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText motivoAdocao = (EditText) promptsView
+                .findViewById(R.id.motivo);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Confirmar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // get user input and set it to result
+                                // edit text
+                                processoAdocao.setStatus("Indeferido! Motivo: " + motivoAdocao.getText());
+                                boolean alterar = processoAdocaoDAO.alterarStatus(processoAdocao);
+                                boolean inserir = processoAdocaoDAO.inserirAdocaoIndeferida(processoAdocao, funcionario);
+                                if (alterar && inserir) {
+                                    Toast.makeText(getApplicationContext(), "Adoção Inderida!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), Tela_Funcionario.class);
+                                    intent.putExtra("funcionario", funcionario);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    if (!alterar) {
+                                        Toast.makeText(getApplicationContext(), "Adoção não indeferida", Toast.LENGTH_SHORT).show();
+                                    } else if (!inserir) {
+                                        Toast.makeText(getApplicationContext(), "Inserção não confirmada", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 
 }

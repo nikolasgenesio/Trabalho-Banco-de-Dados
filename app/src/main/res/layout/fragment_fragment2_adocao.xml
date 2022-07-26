@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".Adocao.fragment2Adocao">
 
+    <TextView
+        android:id="@+id/msgGatos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Não há gatos disponíveis para a adoção!"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

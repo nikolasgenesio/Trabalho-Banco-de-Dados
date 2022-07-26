@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import com.example.pets_donation.Adocoes;
 import com.example.pets_donation.Animal;
 import com.example.pets_donation.Lib.Conexao_Banco;
+import com.example.pets_donation.ProcessoAdocao;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -121,5 +122,4 @@ public class AnimalDAO {
         else
             return true;
     }
-
 }

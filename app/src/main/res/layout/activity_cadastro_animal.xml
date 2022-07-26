@@ -102,7 +102,7 @@
             android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/nome"
             android:hint="Idade"
-            android:inputType="number"
+            android:inputType="text"
             android:maxLines="1"
             android:textColorHint="@color/black" />
 

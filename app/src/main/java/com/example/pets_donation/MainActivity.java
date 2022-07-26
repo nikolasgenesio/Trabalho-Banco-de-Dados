@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         checkBox = (CheckBox) findViewById(R.id.salvar);
 
-        //cpf.setText("126.745.986-20");
+        cpf.setText("126.745.986-20");
         //cpf.setText("125.789.652-36");
-        //senha.setText("barrafunda");
+        senha.setText("barrafunda");
 
         //Criando a máscara para o campo de CPF
         SimpleMaskFormatter cpf1 = new SimpleMaskFormatter("NNN.NNN.NNN-NN");

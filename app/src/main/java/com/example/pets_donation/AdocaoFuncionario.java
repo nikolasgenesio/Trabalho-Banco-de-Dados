@@ -20,7 +20,6 @@ public class AdocaoFuncionario extends BaseAdapter {
     private Context context;
     private int layout;
     private List<ProcessoAdocao> processoAdocaoList;
-    private Adotante adotante;
     private Conexao_Banco banco;
     private Funcionario funcionario;
 
@@ -29,6 +28,7 @@ public class AdocaoFuncionario extends BaseAdapter {
         this.layout = layout;
         this.processoAdocaoList = processoAdocaoList;
         this.funcionario = funcionario;
+        banco = new Conexao_Banco(context);
     }
 
 
@@ -55,9 +55,9 @@ public class AdocaoFuncionario extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        banco = new Conexao_Banco(context);
+
         View row = convertView;
-        AdocaoFuncionario.ViewHolder viewHolder = new AdocaoFuncionario.ViewHolder();
+        ViewHolder viewHolder = new ViewHolder();
 
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,15 +69,16 @@ public class AdocaoFuncionario extends BaseAdapter {
             viewHolder.imageView = (ImageView) row.findViewById(R.id.icon);
             row.setTag(viewHolder);
         } else {
-            viewHolder = (AdocaoFuncionario.ViewHolder) row.getTag();
+            viewHolder = (ViewHolder) row.getTag();
         }
 
         ProcessoAdocao processoAdocao = processoAdocaoList.get(position);
 
         Adotante adotante = banco.obterAdotanteAdocao(processoAdocao.getCPFAdotante());
         Animal animal = banco.obterAnimal(processoAdocao.getIDAnimal());
+
         viewHolder.textNome.setText("Adotante: " + adotante.getNome());
-        viewHolder.textInfo.setText("");
+        viewHolder.textInfo.setText("Status: " + processoAdocao.getStatus());
 
         viewHolder.imageView.setImageBitmap(animal.getFoto());
 

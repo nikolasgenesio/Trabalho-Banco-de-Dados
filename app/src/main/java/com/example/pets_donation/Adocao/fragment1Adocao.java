@@ -13,9 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.pets_donation.Adotante;
 import com.example.pets_donation.Animal;
+import com.example.pets_donation.Lib.Conexao_Banco;
 import com.example.pets_donation.Models.AnimalDAO;
 import com.example.pets_donation.R;
 import com.example.pets_donation.RecyclerViewAdapter;
@@ -30,7 +32,8 @@ public class fragment1Adocao extends Fragment {
     private List<Animal> animalList;
     private AnimalDAO animalDAO;
     private List<Animal> animalListFiltrados = new ArrayList<>();
-
+    private Conexao_Banco banco;
+    private TextView textView;
 
     @SuppressLint("LongLogTag")
     @Override
@@ -44,25 +47,35 @@ public class fragment1Adocao extends Fragment {
 
         return inflater.inflate(R.layout.fragment_fragment1_adocao, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.recyclerView);
-        animalDAO = new AnimalDAO(getActivity());
-        animalList = animalDAO.obterTodosAnimais();
+        textView = view.findViewById(R.id.msgCachorros);
+        //animalDAO = new AnimalDAO(getActivity());
+        //animalList = animalDAO.obterTodosAnimais();
+
+        banco = new Conexao_Banco(getActivity());
+        animalList = banco.animaisAdocao();
 
         for (Animal animal : animalList) {
             if (animal.getTipo().equals("Cachorro")) {
                 animalListFiltrados.add(animal);
             }
         }
-        initRecyclerView();
+
+        if (animalListFiltrados != null && animalListFiltrados.isEmpty())
+            textView.setVisibility(View.VISIBLE);
+        else
+            initRecyclerView();
+
     }
 
-    private void initRecyclerView()
-    {
+    private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), animalListFiltrados, adotante);
+
         recyclerView.setAdapter(adapter);
     }
 }
