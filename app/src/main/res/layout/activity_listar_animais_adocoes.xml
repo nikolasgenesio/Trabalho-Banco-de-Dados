@@ -7,9 +7,10 @@
     android:orientation="vertical"
     tools:context=".Listar_AnimaisAdocoes">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textAnimaisAdotados"
@@ -47,5 +48,5 @@
             android:layout_below="@+id/textAnimaisNaoAdotados"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-    </RelativeLayout>
+    </LinearLayout>
 </ScrollView>

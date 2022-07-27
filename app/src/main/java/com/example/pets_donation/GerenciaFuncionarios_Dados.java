@@ -51,6 +51,7 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
 
         funcionarioDAO = new FuncionarioDAO(this);
         banco = new Conexao_Banco(this);
+        getSupportActionBar().setTitle("Dados Pessoais");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
 

@@ -18,6 +18,8 @@ import com.example.pets_donation.Models.ProcessoAdocaoDAO;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import java.util.List;
+
 public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
 
     //atores
@@ -261,6 +263,14 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         boolean alterar = processoAdocaoDAO.alterarStatus(processoAdocao);
         boolean inserir = processoAdocaoDAO.inserirAdocaoDeferida(processoAdocao, funcionario);
         if (alterar && inserir) {
+
+            List<ProcessoAdocao> exclusao = processoAdocaoDAO.automatizaSistemaAdocoes(processoAdocao.getIDAnimal());
+            for(ProcessoAdocao processoAdocao1 : exclusao)
+            {
+                processoAdocao1.setStatus("Indeferido! Motivo: animal adotado!");
+                alterar = processoAdocaoDAO.alterarStatus(processoAdocao1);
+            }
+
             Toast.makeText(getApplicationContext(), "Adoção Confirmada", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), Tela_Funcionario.class);
             intent.putExtra("funcionario", funcionario);

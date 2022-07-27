@@ -31,7 +31,7 @@ public class Listar_ProcessosAdocoes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_processos_adocoes);
 
-        getSupportActionBar().setTitle("RELATÓRIO - ANIMAL");
+        getSupportActionBar().setTitle("Relatório - Processos");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
         listView = findViewById(R.id.lista_adocoes);

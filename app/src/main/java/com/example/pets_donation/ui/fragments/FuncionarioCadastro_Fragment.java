@@ -54,7 +54,7 @@ public class FuncionarioCadastro_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("CADASTROS");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cadastros");
 
         this.funcionario = (Funcionario) getActivity().getIntent().getSerializableExtra("funcionario");
         Log.i("Funcionario Cadastro", "NOME: " + funcionario.getNome());

@@ -1,5 +1,6 @@
 package com.example.pets_donation.Models;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.example.pets_donation.Animal;
 import com.example.pets_donation.Funcionario;
 import com.example.pets_donation.Lib.Conexao_Banco;
 import com.example.pets_donation.ProcessoAdocao;
@@ -264,4 +266,47 @@ public class ProcessoAdocaoDAO {
         else
             return true;
     }
+
+
+    public List<ProcessoAdocao> automatizaSistemaAdocoes(int ID) {
+        List<ProcessoAdocao> adocaoList = new ArrayList<>();
+        Cursor cursor = banco.query("processoAdocao", new String[]{"ID, MORADA, IMOVEL, QTDE_PESSOAS," +
+                        "QTDE_ANIMAIS, LOCAL, PERMANENCIA, ATUAL, FALECIDO, SUSTENTO, VIZINHOS," +
+                        "PASSEIO, CUSTOS, ALERGIA, RESPEITO, CRIANCA, HORAS, VIAGEM, FUGIR, CRIAR," +
+                        "VETERINARIO, STATUS, CPF_ADOTANTE, ID_ANIMAL"}, "ID_ANIMAL like " + "'" + ID + "'", null,
+                null, null, null);
+        //deslocar nas linhas da tabela
+        while (cursor.moveToNext()) {
+            if (cursor.getString(21).equals("Em Andamento")) {
+                ProcessoAdocao adocao = new ProcessoAdocao();
+                adocao.setID(cursor.getInt(0));
+                adocao.setMorada(cursor.getString(1));
+                adocao.setImovel(cursor.getString(2));
+                adocao.setQtdePessoas(cursor.getString(3));
+                adocao.setQtdeAnimais(cursor.getString(4));
+                adocao.setLocalAnimais(cursor.getString(5));
+                adocao.setPermanecerAnimais(cursor.getString(6));
+                adocao.setAnimaisAtual(cursor.getString(7));
+                adocao.setAnimalFalecido(cursor.getString(8));
+                adocao.setSustentarAnimal(cursor.getString(9));
+                adocao.setVizinhosAnimal(cursor.getString(10));
+                adocao.setPasseioAnimal(cursor.getString(11));
+                adocao.setCustosAnimal(cursor.getString(12));
+                adocao.setAlergiaAnimal(cursor.getString(13));
+                adocao.setRespeitoAnimal(cursor.getString(14));
+                adocao.setCriancaAnimal(cursor.getString(15));
+                adocao.setHorasAnimal(cursor.getString(16));
+                adocao.setViajarAnimal(cursor.getString(17));
+                adocao.setFugirAnimal(cursor.getString(18));
+                adocao.setCriarAnimal(cursor.getString(19));
+                adocao.setVeterinario(cursor.getString(20));
+                adocao.setStatus(cursor.getString(21));
+                adocao.setCPFAdotante(cursor.getString(22));
+                adocao.setIDAnimal(cursor.getInt(23));
+                adocaoList.add(adocao);
+            }
+        }
+        return adocaoList;
+    }
+
 }

@@ -61,7 +61,7 @@ public class FuncionarioGerenciar_Fragment extends Fragment {
         // Inflate the layout for this fragment
         this.funcionario = (Funcionario) getActivity().getIntent().getSerializableExtra("funcionario");
         Log.i("Funcionario Gerenciar", "NOME: " + funcionario.getNome());
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("GERENCIA");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Gerenciar");
         return inflater.inflate(R.layout.fragment_funcionario_gerenciar_, container, false);
     }
 

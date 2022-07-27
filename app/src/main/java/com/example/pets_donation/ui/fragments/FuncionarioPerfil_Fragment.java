@@ -76,7 +76,7 @@ public class FuncionarioPerfil_Fragment extends Fragment {
         // Inflate the layout for this fragment
         this.funcionario = (Funcionario) getActivity().getIntent().getSerializableExtra("funcionario");
         banco = new Conexao_Banco(getActivity());
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("PERFIL");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Perfil");
         return inflater.inflate(R.layout.fragment_funcionario_perfil_, container, false);
     }
 

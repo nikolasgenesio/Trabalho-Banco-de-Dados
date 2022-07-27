@@ -52,6 +52,7 @@ public class GerenciaAdotantes_Dados extends AppCompatActivity {
         adotanteDAO = new AdotanteDAO(this);
         banco = new Conexao_Banco(this);
 
+        getSupportActionBar().setTitle("Dados Pessoais");
         this.adotante = (Adotante) getIntent().getSerializableExtra("adotante");
 
         //Inicializando as variaveis

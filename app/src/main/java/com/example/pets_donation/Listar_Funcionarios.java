@@ -28,6 +28,7 @@ public class Listar_Funcionarios extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_funcionarios);
 
+        getSupportActionBar().setTitle("Funcionários");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
         listView = findViewById(R.id.lista_adotantes);

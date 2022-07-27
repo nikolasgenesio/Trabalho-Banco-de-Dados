@@ -36,7 +36,7 @@ public class FuncionarioAdocao_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ADOÇÃO");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Adoção");
         this.funcionario = (Funcionario) getActivity().getIntent().getSerializableExtra("funcionario");
         Log.i("Funcionario Adocao", "NOME: " + funcionario.getNome());
         return inflater.inflate(R.layout.fragment_funcionario_adocao_, container, false);

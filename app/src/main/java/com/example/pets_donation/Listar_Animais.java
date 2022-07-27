@@ -28,6 +28,7 @@ public class Listar_Animais extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_animais);
 
+        getSupportActionBar().setTitle("Animais");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
         listView = findViewById(R.id.lista_animais);

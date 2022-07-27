@@ -20,7 +20,7 @@ public class FuncionarioInicio_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("INÍCIO");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Tela Inicial");
         this.funcionario = (Funcionario) getActivity().getIntent().getSerializableExtra("funcionario");
         Log.i("Funcionario Inicio", "NOME: " + funcionario.getNome());
         return inflater.inflate(R.layout.fragment_funcionario_inicio_, container, false);

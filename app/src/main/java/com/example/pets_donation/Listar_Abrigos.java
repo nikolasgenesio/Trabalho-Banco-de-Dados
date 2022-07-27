@@ -32,6 +32,7 @@ public class Listar_Abrigos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_abrigos);
 
+        getSupportActionBar().setTitle("Abrigos");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
         listView = findViewById(R.id.lista_abrigos);
@@ -60,16 +61,6 @@ public class Listar_Abrigos extends AppCompatActivity {
         //registerForContextMenu(listView);
     }
 
-    /*
-    public boolean onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-        MenuInflater inflater = new MenuInflater(this);
-        inflater.inflate(R.menu.menu_list_gerencia, menu);
-
-        return super.onCreateContextMenu(menu, v, menuInfo);
-
-    }
-     */
 
     public void excluir(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();

@@ -28,6 +28,7 @@ public class Listar_Adotantes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_adotantes);
 
+        getSupportActionBar().setTitle("Adotantes");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
         listView = findViewById(R.id.lista_adotantes);

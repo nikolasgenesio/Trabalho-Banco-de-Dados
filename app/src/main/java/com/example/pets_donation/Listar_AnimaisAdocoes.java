@@ -3,7 +3,10 @@ package com.example.pets_donation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.pets_donation.Lib.Conexao_Banco;
@@ -32,6 +35,8 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_animais_adocoes);
 
+        getSupportActionBar().setTitle("Relatório - Animais");
+
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
         banco = new Conexao_Banco(this);
 
@@ -47,8 +52,31 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         //exibir lista
         //ArrayAdapter<Adocoes> adocoesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adocoesList);
         listView1.setAdapter(adocaoDeferidaAdapter);
+        getListViewSize(listView1);
 
         animalListAdapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList, funcionario);
         listView2.setAdapter(animalListAdapter);
+        getListViewSize(listView2);
     }
+
+    public void getListViewSize(ListView myListView) {
+        ListAdapter myListAdapter = myListView.getAdapter();
+        if (myListAdapter == null) {
+            //do nothing return null
+            return;
+        }
+        //set listAdapter in loop for getting final size
+        int totalHeight = 0;
+        for (int size = 0; size < myListAdapter.getCount(); size++) {
+            View listItem = myListAdapter.getView(size, null, myListView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        //setting listview item in adapter
+        ViewGroup.LayoutParams params = myListView.getLayoutParams();
+        params.height = totalHeight + (myListView.getDividerHeight() * (myListAdapter.getCount() - 1));
+        myListView.setLayoutParams(params);
+        // print height of adapter on log
+    }
+
 }

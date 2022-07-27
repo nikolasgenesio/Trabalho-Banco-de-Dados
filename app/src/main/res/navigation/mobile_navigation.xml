@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/adocao"
         android:name="com.example.pets_donation.ui.fragments.AdotanteAdocao_Fragment"
-        android:label="Adocao"
+        android:label="Adoção"
         tools:layout="@layout/fragment_adotante_adocao_" />
 
     <fragment
@@ -32,12 +32,12 @@
     <fragment
         android:id="@+id/abrigos"
         android:name="com.example.pets_donation.ui.fragments.AdotanteAbrigos_Fragment"
-        android:label="Status"
+        android:label="Abrigos"
         tools:layout="@layout/fragment_adotante_abrigos_" />
 
     <fragment
         android:id="@+id/informacoes"
         android:name="com.example.pets_donation.ui.fragments.AdotanteInformacoes_Fragment"
-        android:label="Status"
+        android:label="Informações"
         tools:layout="@layout/fragment_adotante_informacoes_" />
 </navigation>
