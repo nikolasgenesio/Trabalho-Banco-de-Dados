@@ -1,6 +1,7 @@
 package com.example.pets_donation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -93,6 +94,7 @@ public class AdocaoFuncionario extends BaseAdapter {
                 intent.putExtra("animal", animal);
                 intent.putExtra("funcionario", funcionario);
                 context.startActivity(intent);
+                ((Activity) context).finish();
             }
         });
         return row;

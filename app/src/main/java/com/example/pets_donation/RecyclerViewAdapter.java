@@ -1,6 +1,7 @@
 package com.example.pets_donation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -73,6 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("adotante", adotante);
                 intent.putExtra("animal", animal);
                 context.startActivity(intent);
+                ((Activity) context).finish();
             }
         });
     }

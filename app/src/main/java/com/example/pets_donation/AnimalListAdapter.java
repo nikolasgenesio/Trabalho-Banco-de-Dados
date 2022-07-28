@@ -1,5 +1,6 @@
 package com.example.pets_donation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -83,6 +84,7 @@ public class AnimalListAdapter extends BaseAdapter {
                 intent.putExtra("funcionario", funcionario);
                 intent.putExtra("animal", animal);
                 context.startActivity(intent);
+                ((Activity) context).finish();
             }
         });
         return row;

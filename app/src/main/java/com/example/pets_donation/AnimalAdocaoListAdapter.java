@@ -1,6 +1,7 @@
 package com.example.pets_donation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -101,6 +102,7 @@ public class AnimalAdocaoListAdapter extends BaseAdapter {
                     Intent intent = new Intent(context, ProcessoAdocao_Visualizar.class);
                     intent.putExtra("adocao", processoAdocao);
                     context.startActivity(intent);
+                    ((Activity) context).finish();
                 }
             });
         }

@@ -26,7 +26,7 @@ public class Conexao_Banco extends SQLiteOpenHelper {
 
     //declarando as variaveis
     private static final String name = "pets_donation.db";
-    private static final int version = 8;
+    private static final int version = 9;
 
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] imageInBytes;
@@ -450,11 +450,12 @@ public class Conexao_Banco extends SQLiteOpenHelper {
         List<Animal> animalList = new ArrayList<>();
         SQLiteDatabase MYDB = this.getWritableDatabase();
         Cursor cursor = MYDB.rawQuery("SELECT * FROM animal LEFT JOIN adocaoDeferida " +
-                        "ON animal.ID = adocaoDeferida.ID_ANIMAL WHERE adocaoDeferida.ID_ANIMAL IS NULL",
+                        "ON adocaoDeferida.ID_ANIMAL = animal.ID  WHERE adocaoDeferida.ID_ANIMAL IS NULL",
                 new String[]{});
 
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
+        while (cursor.moveToNext()) {
+        //if (cursor.getCount() > 0) {
+            //cursor.moveToFirst();
             Animal animal = new Animal();
             animal.setID(cursor.getInt(0));
             animal.setNome(cursor.getString(1));

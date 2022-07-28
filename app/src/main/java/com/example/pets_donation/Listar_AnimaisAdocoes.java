@@ -51,22 +51,28 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         listView1 = findViewById(R.id.lista_animaisAdotados);
         listView2 = findViewById(R.id.lista_animaisNaoAdotados);
         adocoesDAO = new AdocoesDAO(this);
+
+
         adocoesList = adocoesDAO.obterTodosAnimaisAdotados();
         adocoesListFiltrados.addAll(adocoesList);
-        animalList = banco.animaisAdocao();
 
         if (adocoesList != null && adocoesList.isEmpty()) {
             txtMsg.setVisibility(View.VISIBLE);
         } else {
             txtAdotados.setVisibility(View.VISIBLE);
-            txtNaoAdotados.setVisibility(View.VISIBLE);
             adocaoDeferidaAdapter = new AdocaoDeferidaAdapter(this, R.layout.list_view_animal, adocoesList, funcionario);
-
             //exibir lista
             //ArrayAdapter<Adocoes> adocoesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adocoesList);
             listView1.setAdapter(adocaoDeferidaAdapter);
             getListViewSize(listView1);
+        }
 
+        animalList = banco.animaisAdocao();
+        if (animalList != null && animalList.isEmpty()) {
+            txtMsg.setVisibility(View.VISIBLE);
+        } else {
+            txtMsg.setVisibility(View.INVISIBLE);
+            txtNaoAdotados.setVisibility(View.VISIBLE);
             animalListAdapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList, funcionario);
             listView2.setAdapter(animalListAdapter);
             getListViewSize(listView2);
