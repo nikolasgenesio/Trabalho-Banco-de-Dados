@@ -103,11 +103,15 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             }
         });
 
+        content1 = new SpannableString("Esqueci minha senha");
+        content1.setSpan(new UnderlineSpan(), 0, content1.length(), 0);
+        esqueciSenha.setText(content1);
+
         //teste
         esqueciSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Listar_Funcionarios.class);
+                Intent intent = new Intent(MainActivity.this, Termos.class);
                 startActivity(intent);
             }
         });

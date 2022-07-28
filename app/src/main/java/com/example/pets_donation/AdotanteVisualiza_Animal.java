@@ -51,7 +51,7 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adotante_visualiza_animal);
 
-        getSupportActionBar().setTitle("ANIMAL SELECIONADO");
+        getSupportActionBar().setTitle("Animal Selecionado");
 
         animalDAO = new AnimalDAO(this);
         banco = new Conexao_Banco(this);

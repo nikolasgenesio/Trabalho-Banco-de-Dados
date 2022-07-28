@@ -49,13 +49,9 @@ RF5: Permitir que o adotante responda o questionário para a adoção;
 RF6: Permitir que o adotante realize o pedido de adoção;
 RF7: Manter cadastro dos animais no sistema;
 RF8: Manter cadastro dos funcionários de acesso permitido ao sistema;
-RF9: Permitir que o adotante e o funcionário verifiquem o pedido de adoção.
+RF9: Permitir que o adotante e o funcionário verifiquem o pedido de adoção;
+RF10: Permitir que o funcionário gere relatórios de animais;
 RF11: Permitir que o funcionário registre a adoção;
 RF12: Permitir login do usuário e funcionário no sistema.
-
-Fazer (processo de adoção):
-
-RF10: Permitir que o funcionário gere relatórios de animais;
-
 
 ----------------------------------------------------

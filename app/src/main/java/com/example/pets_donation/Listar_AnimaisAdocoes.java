@@ -3,11 +3,13 @@ package com.example.pets_donation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.pets_donation.Lib.Conexao_Banco;
 import com.example.pets_donation.Models.AdocoesDAO;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class Listar_AnimaisAdocoes extends AppCompatActivity {
 
+    private TextView txtMsg, txtAdotados, txtNaoAdotados;
     private ListView listView1, listView2;
     private AdocoesDAO adocoesDAO;
     private Funcionario funcionario;
@@ -35,11 +38,16 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_animais_adocoes);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Relatório - Animais");
 
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
         banco = new Conexao_Banco(this);
 
+        txtMsg = findViewById(R.id.msgAdocoes);
+        txtAdotados = findViewById(R.id.textAnimaisAdotados);
+        txtNaoAdotados = findViewById(R.id.textAnimaisNaoAdotados);
         listView1 = findViewById(R.id.lista_animaisAdotados);
         listView2 = findViewById(R.id.lista_animaisNaoAdotados);
         adocoesDAO = new AdocoesDAO(this);
@@ -47,16 +55,22 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         adocoesListFiltrados.addAll(adocoesList);
         animalList = banco.animaisAdocao();
 
-        adocaoDeferidaAdapter = new AdocaoDeferidaAdapter(this, R.layout.list_view_animal, adocoesList, funcionario);
+        if (adocoesList != null && adocoesList.isEmpty()) {
+            txtMsg.setVisibility(View.VISIBLE);
+        } else {
+            txtAdotados.setVisibility(View.VISIBLE);
+            txtNaoAdotados.setVisibility(View.VISIBLE);
+            adocaoDeferidaAdapter = new AdocaoDeferidaAdapter(this, R.layout.list_view_animal, adocoesList, funcionario);
 
-        //exibir lista
-        //ArrayAdapter<Adocoes> adocoesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adocoesList);
-        listView1.setAdapter(adocaoDeferidaAdapter);
-        getListViewSize(listView1);
+            //exibir lista
+            //ArrayAdapter<Adocoes> adocoesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adocoesList);
+            listView1.setAdapter(adocaoDeferidaAdapter);
+            getListViewSize(listView1);
 
-        animalListAdapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList, funcionario);
-        listView2.setAdapter(animalListAdapter);
-        getListViewSize(listView2);
+            animalListAdapter = new AnimalListAdapter(this, R.layout.list_view_animal, animalList, funcionario);
+            listView2.setAdapter(animalListAdapter);
+            getListViewSize(listView2);
+        }
     }
 
     public void getListViewSize(ListView myListView) {
@@ -77,6 +91,18 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         params.height = totalHeight + (myListView.getDividerHeight() * (myListAdapter.getCount() - 1));
         myListView.setLayoutParams(params);
         // print height of adapter on log
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
 }

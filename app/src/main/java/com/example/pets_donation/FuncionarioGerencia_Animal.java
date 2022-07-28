@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,7 +58,9 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcionario_gerencia_animal);
 
-        getSupportActionBar().setTitle("CADASTRO - ANIMAL");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+        getSupportActionBar().setTitle("Editar Animal");
 
         animalDAO = new AnimalDAO(this);
         banco = new Conexao_Banco(this);
@@ -312,4 +315,15 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 }

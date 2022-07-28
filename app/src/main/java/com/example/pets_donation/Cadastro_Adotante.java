@@ -47,7 +47,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_adotante);
-        getSupportActionBar().setTitle("CADASTRO - ADOTANTE");
+        getSupportActionBar().setTitle("Cadastro - Adotante");
 
         adotanteDAO = new AdotanteDAO(this);
         banco = new Conexao_Banco(this);

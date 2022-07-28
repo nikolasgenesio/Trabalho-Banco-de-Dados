@@ -43,7 +43,7 @@ public class QuestionarioAdotante extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionario_adotante);
-        getSupportActionBar().setTitle("QUESTIONÁRIO");
+        getSupportActionBar().setTitle("Questionário");
         this.adotante = (Adotante) getIntent().getSerializableExtra("adotante");
         this.animal = (Animal) getIntent().getSerializableExtra("animal");
         banco = new Conexao_Banco(this);

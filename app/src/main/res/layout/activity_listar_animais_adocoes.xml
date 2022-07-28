@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Animais Adotados"
+            android:visibility="invisible"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="invisible"
             android:text="Animais Não Adotados"
             android:layout_below="@+id/lista_animaisAdotados"
             android:layout_marginTop="10dp"
@@ -48,5 +50,18 @@
             android:layout_below="@+id/textAnimaisNaoAdotados"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/msgAdocoes"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="Não há animais (adotados e não adotados)!"
+            android:textColor="@color/black"
+            android:visibility="invisible"
+            android:textSize="30dp" />
     </LinearLayout>
 </ScrollView>

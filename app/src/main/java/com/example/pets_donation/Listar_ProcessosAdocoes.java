@@ -16,10 +16,12 @@ import com.example.pets_donation.Models.ProcessoAdocaoDAO;
 
 import java.util.List;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Listar_ProcessosAdocoes extends AppCompatActivity {
 
+    private TextView textView;
     private Funcionario funcionario;
     private ListView listView;
     private ProcessoAdocaoDAO processoAdocaoDAO;
@@ -31,17 +33,24 @@ public class Listar_ProcessosAdocoes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_processos_adocoes);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Relatório - Processos");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
+        textView = findViewById(R.id.msgProcessos);
         listView = findViewById(R.id.lista_adocoes);
         processoAdocaoDAO = new ProcessoAdocaoDAO(this);
         processoAdocaoList = processoAdocaoDAO.retornaRelatorioAdocao();
 
-        adocaoFuncionario = new AdocaoFuncionario(this, R.layout.list_view_adocoes, processoAdocaoList, funcionario);
+        if (processoAdocaoList != null && processoAdocaoList.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            adocaoFuncionario = new AdocaoFuncionario(this, R.layout.list_view_adocoes, processoAdocaoList, funcionario);
 
-        listView.setAdapter(adocaoFuncionario);
-        getListViewSize(listView);
+            listView.setAdapter(adocaoFuncionario);
+            getListViewSize(listView);
+        }
     }
 
     public void getListViewSize(ListView myListView) {
@@ -80,5 +89,17 @@ public class Listar_ProcessosAdocoes extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

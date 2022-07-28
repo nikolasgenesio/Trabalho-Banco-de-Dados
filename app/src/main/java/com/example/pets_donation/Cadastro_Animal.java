@@ -56,7 +56,7 @@ public class Cadastro_Animal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_animal);
-        getSupportActionBar().setTitle("CADASTRO - ANIMAL");
+        getSupportActionBar().setTitle("Cadastro - Animal");
 
         animalDAO = new AnimalDAO(this);
         banco = new Conexao_Banco(this);

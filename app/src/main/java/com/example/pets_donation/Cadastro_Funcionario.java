@@ -50,7 +50,7 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_funcionario);
-        getSupportActionBar().setTitle("CADASTRO - FUNCIONÁRIO");
+        getSupportActionBar().setTitle("Cadastro - Funcionário");
 
         funcionarioDAO = new FuncionarioDAO(this);
         banco = new Conexao_Banco(this);

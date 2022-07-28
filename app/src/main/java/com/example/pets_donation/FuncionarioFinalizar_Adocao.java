@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,7 +60,9 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcionario_finalizar_adocao);
 
-        getSupportActionBar().setTitle("INFORMAÇÕES");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+        getSupportActionBar().setTitle("Informações");
 
         this.adotante = (Adotante) getIntent().getSerializableExtra("adotante");
         this.animal = (Animal) getIntent().getSerializableExtra("animal");
@@ -265,8 +268,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         if (alterar && inserir) {
 
             List<ProcessoAdocao> exclusao = processoAdocaoDAO.automatizaSistemaAdocoes(processoAdocao.getIDAnimal());
-            for(ProcessoAdocao processoAdocao1 : exclusao)
-            {
+            for (ProcessoAdocao processoAdocao1 : exclusao) {
                 processoAdocao1.setStatus("Indeferido! Motivo: animal adotado!");
                 alterar = processoAdocaoDAO.alterarStatus(processoAdocao1);
             }
@@ -338,6 +340,18 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
 
         // show it
         alertDialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
 }

@@ -39,7 +39,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_abrigo);
-        getSupportActionBar().setTitle("CADASTRO - ABRIGO");
+        getSupportActionBar().setTitle("Cadastro - Abrigo");
 
 
         abrigoDAO = new AbrigoDAO(this);

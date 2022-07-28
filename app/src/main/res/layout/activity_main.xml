@@ -12,10 +12,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="145dp"
+        android:layout_width="300dp"
         android:layout_height="133dp"
         android:layout_gravity= "center"
-        app:srcCompat="@drawable/adocao"
+        app:srcCompat="@drawable/logo"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         />

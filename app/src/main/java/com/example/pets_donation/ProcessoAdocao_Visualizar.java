@@ -36,7 +36,7 @@ public class ProcessoAdocao_Visualizar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_processo_adocao_visualizar);
-        getSupportActionBar().setTitle("QUESTIONÁRIO");
+        getSupportActionBar().setTitle("Questionário");
 
         this.processoAdocao = (ProcessoAdocao) getIntent().getSerializableExtra("adocao");
         banco = new Conexao_Banco(this);
