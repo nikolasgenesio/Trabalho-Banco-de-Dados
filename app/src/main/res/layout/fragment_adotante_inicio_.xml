@@ -1,16 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.AdotanteInicio_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:text="Tela Inicial" />
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="O que você está esperando?"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="22dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
+            android:text="Animal de estimação não precisa ser de raça ou comprado para ser fiel e amar o dono.
+ \nA adoção de animal é um gesto de amor e acima de tudo, um exercício de cidadania!
+\nAcesse o menu ao lado para escolher o seu animal de estimação adorável. Salve uma vida. Adote um animal de estimação!"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Seu novo melhor amigo!"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity= "center"
+            android:src="@drawable/gato_cachorro"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            />
+    </LinearLayout>
 
 </FrameLayout>
