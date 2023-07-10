@@ -21,6 +21,7 @@ import java.util.List;
 
 public class Listar_Funcionarios extends AppCompatActivity {
 
+    //declaracao das variaveis
     private TextView textView;
     private ListView listView;
     private FuncionarioDAO funcionarioDAO;
@@ -38,6 +39,7 @@ public class Listar_Funcionarios extends AppCompatActivity {
         getSupportActionBar().setTitle("Funcionários");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
+        //inicializando as variaveis
         textView = findViewById(R.id.msgFuncionarios);
         listView = findViewById(R.id.lista_adotantes);
         funcionarioDAO = new FuncionarioDAO(this);
@@ -75,6 +77,10 @@ public class Listar_Funcionarios extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para adaptar lista
+     * @param myListView Lista de funcionarios
+     */
     public void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {

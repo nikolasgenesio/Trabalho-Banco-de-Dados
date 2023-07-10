@@ -18,12 +18,20 @@ import java.util.List;
 
 public class AdocaoDeferidaAdapter extends BaseAdapter {
 
+    //declaracao das variaveis
     private Context context;
     private int layout;
     private List<Adocoes> adocoesList;
     private Conexao_Banco banco;
     private Funcionario funcionario;
 
+    /**
+     * Construtor
+     * @param context context
+     * @param layout layout da lista
+     * @param adocoesList lista de adocoes
+     * @param funcionario funcionario
+     */
     public AdocaoDeferidaAdapter(Context context, int layout, List<Adocoes> adocoesList, Funcionario funcionario) {
         this.context = context;
         this.layout = layout;
@@ -32,26 +40,50 @@ public class AdocaoDeferidaAdapter extends BaseAdapter {
     }
 
 
+    /**
+     * Funcao para retornar o tamanho da lista
+     * @return tamanho da lista
+     */
     @Override
     public int getCount() {
         return adocoesList.size();
     }
 
+    /**
+     * Funcao para retornar o objeto na posicao da lista
+     * @param position posicao
+     * @return objeto na posicao
+     */
     @Override
     public Object getItem(int position) {
         return adocoesList.get(position);
     }
 
+    /**
+     * Funcao para retonar posicao do objeto
+     * @param position posicao
+     * @return posicao do objeto
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * Classe para a lista adaptada
+     */
     private class ViewHolder {
         ImageView imageView;
         TextView textNome, textInfo;
     }
 
+    /**
+     * Funcao para exibir a lista adaptada
+     * @param position posicao
+     * @param convertView auxiliar
+     * @param parent auxiliar
+     * @return lista adaptada
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

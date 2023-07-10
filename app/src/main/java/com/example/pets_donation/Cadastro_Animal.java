@@ -30,9 +30,10 @@ import java.util.List;
 
 public class Cadastro_Animal extends AppCompatActivity {
 
+    //declaracao das variaveis
     private RadioButton cachorro, gato;
     private RadioButton macho, femea;
-    private EditText nome, idade, cor, raca, porteFisico, vacinacao;
+    private EditText nome, idade, cor, raca, porteFisico;
     private String tipo, genero;
     private Spinner spinner;
     private Button btnLimpar, btnCancelar, btnAvancar;
@@ -58,6 +59,7 @@ public class Cadastro_Animal extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_animal);
         getSupportActionBar().setTitle("Cadastro - Animal");
 
+        //iniciando variaveis
         animalDAO = new AnimalDAO(this);
         banco = new Conexao_Banco(this);
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
@@ -69,7 +71,6 @@ public class Cadastro_Animal extends AppCompatActivity {
         cor = findViewById(R.id.cor);
         raca = findViewById(R.id.raca);
         porteFisico = findViewById(R.id.porte);
-        vacinacao = findViewById(R.id.vacinacao);
 
         cachorro = (RadioButton) findViewById(R.id.radioButtonCachorro);
         gato = (RadioButton) findViewById(R.id.radioButtonGato);
@@ -135,7 +136,6 @@ public class Cadastro_Animal extends AppCompatActivity {
                 cor.setText("");
                 raca.setText("");
                 porteFisico.setText("");
-                vacinacao.setText("");
             }
         });
 
@@ -148,15 +148,20 @@ public class Cadastro_Animal extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funcao para limpar dados
+     */
     public void limparDados() {
         nome.setText("");
         idade.setText("");
         cor.setText("");
         raca.setText("");
         porteFisico.setText("");
-        vacinacao.setText("");
     }
 
+    /**
+     * Funcao para adicionar animal
+     */
     public void adicionar_Animal() {
 
         String nome1 = nome.getText().toString();
@@ -185,12 +190,6 @@ public class Cadastro_Animal extends AppCompatActivity {
         String porteFisico1 = porteFisico.getText().toString();
         if (porteFisico1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou o porte físico", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String vacinacao1 = vacinacao.getText().toString();
-        if (vacinacao1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou a vacinação", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -225,16 +224,13 @@ public class Cadastro_Animal extends AppCompatActivity {
         animal.setCor(cor1);
         animal.setRaca(raca1);
         animal.setGenero(genero);
-        animal.setPortFisico(porteFisico1);
+        animal.setPorteFisico(porteFisico1);
 
-        List<String> vacinacoes = Arrays.asList(vacinacao1.split("\\s*,\\s*"));
-
-        animal.setVacinacao(vacinacoes);
         animal.setFoto(imageToStore);
 
         String Nomeabrigo = spinner.getSelectedItem().toString();
-        animal.setIDAbrigo(banco.retornaIDAbrigo(Nomeabrigo));
-        animal.setCPF_Funcionario(funcionario.getCpf());
+        animal.setId_abrigo(banco.retornaIDAbrigo(Nomeabrigo));
+        animal.setCPF_Secretario(funcionario.getCpf());
 
         Boolean inserir = animalDAO.inserir(animal);
 
@@ -248,6 +244,9 @@ public class Cadastro_Animal extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ERRO NO CADASTRO!", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Funcao para abrir galeria e selecionar imagem
+     */
     private void imagePickDialog() {
         String[] options = {"Abrir a galeria"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -280,6 +279,9 @@ public class Cadastro_Animal extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para selecionar imagem
+     */
     private void chooseImage() {
         try {
             Intent intent = new Intent();

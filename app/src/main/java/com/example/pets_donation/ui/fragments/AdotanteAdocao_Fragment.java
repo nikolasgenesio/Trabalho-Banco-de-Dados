@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class AdotanteAdocao_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Adotante adotante;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
@@ -44,6 +45,7 @@ public class AdotanteAdocao_Fragment extends Fragment {
         viewPager2 = view.findViewById(R.id.viewPager);
         vpAdapter = new VPAdapter(this);
 
+        //adaptacao do TabLayout
         viewPager2.setAdapter(vpAdapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

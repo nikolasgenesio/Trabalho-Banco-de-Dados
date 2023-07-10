@@ -22,24 +22,46 @@ public class AbrigoDAO {
         banco = conexaoBanco.getWritableDatabase();
     }
 
-    public long inserir(Abrigo abrigo) {
-        ContentValues values = new ContentValues();
-        values.put("NOME", abrigo.getNome());
-        values.put("TIPO_TELEFONE", abrigo.getTipoTelefone());
-        values.put("TELEFONE", abrigo.getTelefone());
+    /**
+     * Funcao para inserir abrigo no banco
+     * @param abrigo abrigo
+     * @return insercao do abrigo
+     */
+    public Boolean inserir(Abrigo abrigo) {
+        ContentValues values, telefone;
+        values = new ContentValues();
+        values.put("nome", abrigo.getNome());
         values.put("CEP", abrigo.getCep());
-        values.put("ESTADO", abrigo.getEstado());
-        values.put("CIDADE", abrigo.getCidade());
-        values.put("BAIRRO", abrigo.getBairro());
-        values.put("RUA", abrigo.getRua());
-        values.put("NUMERO", abrigo.getNumero());
-        return banco.insert("abrigo", null, values);
+        values.put("rua", abrigo.getRua());
+        values.put("numero", abrigo.getNumero());
+        values.put("bairro", abrigo.getBairro());
+        values.put("cidade", abrigo.getCidade());
+        values.put("UF", abrigo.getEstado());
+        values.put("CPF_Secretario", abrigo.getCPF_Secretario());
+        long insert = banco.insert("abrigo", null, values);
+        if(insert == -1)
+        {
+            return false;
+        }
+        else
+        {
+            telefone = new ContentValues();
+            telefone.put("id_abrigo", conexaoBanco.retornaIDAbrigo(abrigo.getNome()));
+            telefone.put("tipoTel", abrigo.getTipoTelefone());
+            telefone.put("numero", abrigo.getTelefone());
+            insert = banco.insert("linhas_telefonicas", null, telefone);
+            return insert != -1;
+        }
     }
 
+    /**
+     * Funcao para obter todos os abrigos
+     * @return lista de abrigos
+     */
     public List<Abrigo> obterTodosAbrigos() {
         List<Abrigo> abrigoList = new ArrayList<>();
-        Cursor cursor = banco.query("abrigo", new String[]{"ID, NOME, TIPO_TELEFONE, TELEFONE," +
-                        "CEP, ESTADO, CIDADE, BAIRRO, RUA, NUMERO"}, null, null,
+        Cursor cursor = banco.query("abrigo", new String[]{"id_abrigo, nome, CEP, rua," +
+                        "numero, bairro, cidade, UF, CPF_Secretario"}, null, null,
                 null, null, null);
 
         //deslocar nas linhas da tabela
@@ -47,47 +69,16 @@ public class AbrigoDAO {
             Abrigo abrigo = new Abrigo();
             abrigo.setID(cursor.getInt(0));
             abrigo.setNome(cursor.getString(1));
-            abrigo.setTipoTelefone(cursor.getString(2));
-            abrigo.setTelefone(cursor.getString(3));
-            abrigo.setCep(cursor.getString(4));
-            abrigo.setEstado(cursor.getString(5));
+            abrigo.setCep(cursor.getString(2));
+            abrigo.setRua(cursor.getString(3));
+            abrigo.setNumero(cursor.getString(4));
+            abrigo.setBairro(cursor.getString(5));
             abrigo.setCidade(cursor.getString(6));
-            abrigo.setBairro(cursor.getString(7));
-            abrigo.setRua(cursor.getString(8));
-            abrigo.setNumero(cursor.getString(9));
+            abrigo.setEstado(cursor.getString(7));
+            abrigo.setCPF_Secretario(cursor.getString(8));
             abrigoList.add(abrigo);
         }
         return abrigoList;
     }
 
-
-    public boolean excluir(Abrigo abrigo) {
-
-        long deletar = banco.delete("abrigo", "ID = ?", new String[]{abrigo.getID().toString()});
-        if (deletar == -1)
-            return false;
-        else
-            return true;
-    }
-
-    public boolean alterar(Abrigo abrigo) {
-        ContentValues values = new ContentValues();
-
-        Log.i("Abrigoo", "NOME2: " + abrigo.getNome());
-
-        values.put("NOME", abrigo.getNome());
-        values.put("TIPO_TELEFONE", abrigo.getTipoTelefone());
-        values.put("TELEFONE", abrigo.getTelefone());
-        values.put("CEP", abrigo.getCep());
-        values.put("ESTADO", abrigo.getEstado());
-        values.put("CIDADE", abrigo.getCidade());
-        values.put("BAIRRO", abrigo.getBairro());
-        values.put("RUA", abrigo.getRua());
-        values.put("NUMERO", abrigo.getNumero());
-        long inserir = banco.update("abrigo", values, "ID = ?", new String[]{abrigo.getID().toString()});
-        if (inserir == -1)
-            return false;
-        else
-            return true;
-    }
 }

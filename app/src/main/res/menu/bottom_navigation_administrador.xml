@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_Inicio"
+        android:icon="@drawable/inicio_vectorr"
+        android:title="Início" />
+
+    <item
+        android:id="@+id/nav_Gerenciar"
+        android:icon="@drawable/gerenciar_vector"
+        android:title="Gerenciar" />
+
+    <item
+        android:id="@+id/nav_Perfil"
+        android:icon="@drawable/perfil_vector"
+        android:title="Perfil" />
+
+</menu>

@@ -22,6 +22,7 @@ import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 public class FuncionarioGerencia_Abrigos extends AppCompatActivity {
 
+    //declaracao das variaveis
     private EditText nome, telefone;
     private EditText cep, estado, cidade, rua, numero, bairro;
     private Button btnAlterar, btnCancelar, btnDeletar, btnPesquisar;
@@ -80,7 +81,7 @@ public class FuncionarioGerencia_Abrigos extends AppCompatActivity {
 
         preencheInformacoes();
 
-
+        //botao de pesquisa
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,21 +109,26 @@ public class FuncionarioGerencia_Abrigos extends AppCompatActivity {
             }
         });
 
+        //botao para alterar
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alterar_Abrigo();
+                //alterar_Abrigo();
             }
         });
 
+        //botao para deletar
         btnDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletar_Abrigo();
+                //deletar_Abrigo();
             }
         });
     }
 
+    /**
+     * Funcao para limpar o endereco
+     */
     public void limparEndereco() {
         estado.setText("");
         cidade.setText("");
@@ -168,14 +174,18 @@ public class FuncionarioGerencia_Abrigos extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para preencher as informacoes
+     */
     public void preencheInformacoes() {
         nome.setText(abrigo.getNome());
-
         telefone.setText(abrigo.getTelefone());
 
-        if (abrigo.getTipoTelefone().equals("Fixo")) {
+        Linhas_Telefonicas linhas_telefonicas = banco.retornaLinha(abrigo.getID());
+
+        if (linhas_telefonicas.getTipo_Telefone().equals("Fixo")) {
             fixo.setChecked(true);
-        } else if (abrigo.getTipoTelefone().equals("Celular")) {
+        } else if (linhas_telefonicas.getTipo_Telefone().equals("Celular")) {
             celular.setChecked(true);
         }
 
@@ -185,110 +195,7 @@ public class FuncionarioGerencia_Abrigos extends AppCompatActivity {
         rua.setText(abrigo.getRua());
         numero.setText(abrigo.getNumero());
         bairro.setText(abrigo.getBairro());
-    }
-
-    public void alterar_Abrigo() {
-        String nome1 = nome.getText().toString();
-        if (nome1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu nome", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!(fixo.isChecked() || celular.isChecked())) {
-            Toast.makeText(getApplicationContext(), "Por favor, selecione um tipo de telefone", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (fixo.isChecked()) {
-            tipoTelefone = "Fixo";
-        }
-        if (celular.isChecked()) {
-            tipoTelefone = "Celular";
-        }
-
-        String telefone1 = telefone.getText().toString();
-        if (telefone1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu telefone", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (telefone1.length() != 13 && telefone1.length() != 14) {
-            Toast.makeText(getApplicationContext(), "Telefone inválido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String cep1 = cep.getText().toString();
-        if (cep1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu CEP", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String estado1 = estado.getText().toString();
-        if (estado1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu estado", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String cidade1 = cidade.getText().toString();
-        if (cidade1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua cidade", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String bairro1 = bairro.getText().toString();
-        if (bairro1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu bairro", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String rua1 = rua.getText().toString();
-        if (rua1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua rua", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String numero1 = numero.getText().toString();
-        if (numero1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu número", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        abrigo.setNome(nome1);
-        abrigo.setTipoTelefone(tipoTelefone);
-        abrigo.setTelefone(telefone1);
-
-        //endereco
-        abrigo.setCep(cep1);
-        abrigo.setEstado(estado1);
-        abrigo.setCidade(cidade1);
-        abrigo.setBairro(bairro1);
-        abrigo.setRua(rua1);
-        abrigo.setNumero(numero1);
-
-        boolean alterar = abrigoDAO.alterar(abrigo);
-        if (alterar) {
-            Toast.makeText(getApplicationContext(), "Abrigo alterado", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Listar_Abrigos.class);
-            intent.putExtra("funcionario", funcionario);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "Abrigo não alterado", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public void deletar_Abrigo() {
-        boolean deletar = abrigoDAO.excluir(abrigo);
-        if (deletar) {
-            Toast.makeText(getApplicationContext(), "Abrigo excluído", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Listar_Abrigos.class);
-            intent.putExtra("funcionario", funcionario);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "Abrigo não excluído", Toast.LENGTH_SHORT).show();
-        }
+        telefone.setText(linhas_telefonicas.getNumero());
     }
 
     private class DownloadCEPTask extends AsyncTask<String, Void, BuscaCep> {

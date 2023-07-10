@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_adotante.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_animal.xml" value="0.25" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_cadastro_funcionario.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_funcionario_finalizar_adocao.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_listar_processos_adocoes.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_questionario_adotante.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_tela_administrador.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/activity_tela_funcionario.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_adotante_adocao_.xml" value="0.3215940685820204" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_aministrador_gerenciar_.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_aministrador_inicio_.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_aministrador_perfil_.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_fragment2_adocao.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_adocao_.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_cadastro_.xml" value="0.15" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_gerenciar_.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_inicio_.xml" value="0.21510416666666668" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/fragment_funcionario_perfil_.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/list_view_cadastro.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/layout/slide_layout.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/menu/bottom_navigation_administrador.xml" value="0.1" />
+        <entry key="..\:/Users/genesio/Desktop/Final/PETS_DONATION/app/src/main/res/menu/bottom_navigation_funcionario.xml" value="0.25" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/drawable-v24/borda_button.xml" value="0.1945" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1945" />
         <entry key="..\:/Users/loja/Desktop/Final/PETS_DONATION/app/src/main/res/drawable/borda_button.xml" value="0.1945" />

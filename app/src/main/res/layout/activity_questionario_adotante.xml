@@ -25,6 +25,7 @@
 
 
         <TextView
+            android:id="@+id/pergunta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -69,6 +70,7 @@
 
 
         <TextView
+            android:id="@+id/pergunta2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -76,7 +78,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/colorHint"
-            android:text="2. Você tem certeza que é permitido animais no imóvel??"
+            android:text="2. Você tem certeza que é permitido animais no imóvel?"
             />
 
         <LinearLayout
@@ -114,6 +116,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/pergunta3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -121,7 +124,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/colorHint"
-            android:text="3. Quantas pessoas moram no imóvel??"
+            android:text="3. Quantas pessoas moram no imóvel?"
             />
 
         <EditText
@@ -139,6 +142,7 @@
 
 
         <TextView
+            android:id="@+id/pergunta4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -163,6 +167,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -187,6 +192,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -211,6 +217,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -235,6 +242,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -260,6 +268,7 @@
 
 
         <TextView
+            android:id="@+id/pergunta9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -284,6 +293,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -309,6 +319,7 @@
 
 
         <TextView
+            android:id="@+id/pergunta11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -334,6 +345,7 @@
 
 
         <TextView
+            android:id="@+id/pergunta12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -358,6 +370,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -382,6 +395,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -406,6 +420,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -430,6 +445,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -454,6 +470,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -478,6 +495,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -502,6 +520,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -526,6 +545,7 @@
             />
 
         <TextView
+            android:id="@+id/pergunta20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"

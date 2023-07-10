@@ -39,6 +39,7 @@ import java.util.List;
 
 public class FuncionarioPerfil_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Funcionario funcionario;
     private ListView listView;
     private CircleImageView circleImageView;
@@ -87,13 +88,13 @@ public class FuncionarioPerfil_Fragment extends Fragment {
         textView = view.findViewById(R.id.textNomePerfil);
         textView.setText(funcionario.getNome());
 
-
+        //selecao
         values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "Nova Imagem");
         values.put(MediaStore.Images.Media.DESCRIPTION, "Sua camera");
         imageUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
-
+        //verifica se ja existe imagem
         Bitmap imagem = banco.retornaFotoFuncionario(funcionario.getCpf(), funcionario.getSenha());
         if (imagem != null) {
             Log.i("Funcionario FOTO", "NOME2: " + funcionario.getNome());
@@ -114,9 +115,11 @@ public class FuncionarioPerfil_Fragment extends Fragment {
 
         Funcionario_ListCadastros adapter = new Funcionario_ListCadastros(getActivity(), maintitle, subtitle, imgid);
 
+        //exibir lista adaptada
         //ArrayAdapter arrayAdapter = new ArrayAdapter(view.getContext(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
+        //abrir novas tela de acordo com a selecao
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -168,6 +171,9 @@ public class FuncionarioPerfil_Fragment extends Fragment {
         });
     }
 
+    /**
+     * Funcao para abrir a galeria e selecionar imagem
+     */
     private void imagePickDialog() {
         String[] options = {"Abrir a galeria"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -194,13 +200,16 @@ public class FuncionarioPerfil_Fragment extends Fragment {
                 imagePath = data.getData();
                 imageToStore = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imagePath);
                 circleImageView.setImageBitmap(imageToStore);
-                banco.alterarFotoFuncionario(funcionario.getCpf(), funcionario.getSenha(), imageToStore);
+                banco.alterarFotoFuncionario(funcionario.getCpf(), imageToStore);
             }
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * Funcao para escolher imagem
+     */
     private void chooseImage() {
         try {
             Intent intent = new Intent();

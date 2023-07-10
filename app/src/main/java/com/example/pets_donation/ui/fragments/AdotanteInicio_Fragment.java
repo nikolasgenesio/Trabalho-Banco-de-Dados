@@ -15,6 +15,7 @@ import com.example.pets_donation.R;
 
 public class AdotanteInicio_Fragment extends Fragment {
 
+    //declaracao da variavel
     private Adotante adotante;
     @SuppressLint("LongLogTag")
     @Override

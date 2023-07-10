@@ -67,6 +67,10 @@ public class Listar_Adotantes extends AppCompatActivity {
     }
 
 
+    /**
+     * Funcao para adaptar lista
+     * @param myListView Lista de adotantes
+     */
     public void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {

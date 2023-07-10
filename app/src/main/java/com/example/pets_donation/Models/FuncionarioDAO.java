@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.example.pets_donation.Funcionario;
 import com.example.pets_donation.Lib.Conexao_Banco;
@@ -24,56 +25,107 @@ public class FuncionarioDAO {
         banco = conexaoBanco.getWritableDatabase();
     }
 
+    /**
+     * Funcao para inserir o 1° funcionario no banco
+     * @return verdadeiro se inseriu e falso, caso contrario
+     */
     public Boolean inserirFuncionarioADM() {
-        ContentValues values = new ContentValues();
-        values.put("NOME", "João");
-        values.put("DATA_DE_NASCIMENTO", "13/05/2000");
-        values.put("SEXO", "Masculino");
-        values.put("TIPO_TELEFONE", "Fixo");
-        values.put("TELEFONE", "(35)8536-7412");
-        values.put("EMAIL", "joaopets@gmail.com");
-        values.put("SALARIO", "3450");
+        ContentValues values, funcionario, adm;
+
+        values = new ContentValues();
+        values.put("nome", "João");
+        values.put("dataNascimento", "13/05/2000");
+        values.put("sexo", "Masculino");
+        values.put("tipoTel", "Fixo");
+        values.put("telefone", "(35)8536-7412");
+
         values.put("CEP", "01153-000");
-        values.put("ESTADO", "SP");
-        values.put("CIDADE", "São Paulo");
-        values.put("BAIRRO", "Barra Funda");
-        values.put("RUA", "Rua Vitorino Carmilo");
-        values.put("NUMERO", "2041");
-        values.put("CPF", "126.745.986-20");
-        values.put("SENHA", "barrafunda");
-        values.put("FOTO", (byte[]) null);
-        long inserir = banco.insert("funcionario", null, values);
-        if (inserir == -1)
+        values.put("UF", "SP");
+        values.put("cidade", "São Paulo");
+        values.put("bairro", "Barra Funda");
+        values.put("rua", "Rua Vitorino Carmilo");
+        values.put("numero", "2041");
+
+        values.put("CPF", "126.745.986-22");
+        values.put("senha", "barrafunda");
+
+        values.put("foto", (byte[]) null);
+
+        long inserir = banco.insert("usuario", null, values);
+        if (inserir == -1) {
+            Log.i("TESTE FUNCIONARIO", "AQUI");
             return false;
+        }
         else
-            return true;
+        {
+            funcionario = new ContentValues();
+            funcionario.put("salario", 1250);
+            funcionario.put("CPF", "126.745.986-22");
+            inserir = banco.insert("funcionario", null, funcionario);
+
+            if(inserir != -1)
+            {
+                adm = new ContentValues();
+                adm.put("CPF", "126.745.986-22");
+                inserir = banco.insert("administrador", null, adm);
+                if(inserir != -1)
+                    return true;
+            }
+            return false;
+        }
     }
 
-    public Boolean inserir(Funcionario funcionario) {
-        ContentValues values = new ContentValues();
-        values.put("NOME", funcionario.getNome());
-        values.put("DATA_DE_NASCIMENTO", funcionario.getDataNascimento());
-        values.put("SEXO", funcionario.getSexo());
-        values.put("TIPO_TELEFONE", funcionario.getTipoTelefone());
-        values.put("TELEFONE", funcionario.getTelefone());
-        values.put("EMAIL", funcionario.getEmail());
-        values.put("SALARIO", funcionario.getSalario());
+    /**
+     * Funcao para inserir funcionarios no banco
+     * @param funcionario funcionario a ser inserido
+     * @return verdadeiro se inseriu e falso, caso contrario
+     */
+    public Boolean inserir(Funcionario funcionario, Funcionario funcionarioADM) {
+        ContentValues values, funcionario1, secretario;
+        values = new ContentValues();
+        values.put("nome", funcionario.getNome());
+        values.put("dataNascimento", funcionario.getDataNascimento());
+        values.put("sexo", funcionario.getSexo());
+        values.put("tipoTel", funcionario.getTipoTelefone());
+        values.put("telefone", funcionario.getTelefone());
+
         values.put("CEP", funcionario.getCep());
-        values.put("ESTADO", funcionario.getEstado());
-        values.put("CIDADE", funcionario.getCidade());
-        values.put("BAIRRO", funcionario.getBairro());
-        values.put("RUA", funcionario.getRua());
-        values.put("NUMERO", funcionario.getNumero());
+        values.put("UF", funcionario.getEstado());
+        values.put("cidade", funcionario.getCidade());
+        values.put("bairro", funcionario.getBairro());
+        values.put("rua", funcionario.getRua());
+        values.put("numero", funcionario.getNumero());
+
         values.put("CPF", funcionario.getCpf());
-        values.put("SENHA", funcionario.getSenha());
-        values.put("FOTO", (byte[]) null);
-        long inserir = banco.insert("funcionario", null, values);
+        values.put("senha", funcionario.getSenha());
+        values.put("foto", (byte[]) null);
+
+        long inserir = banco.insert("usuario", null, values);
         if (inserir == -1)
             return false;
         else
-            return true;
+        {
+            funcionario1 = new ContentValues();
+            funcionario1.put("salario", funcionario.getSalario());
+            funcionario1.put("CPF", funcionario.getCpf());
+            inserir = banco.insert("funcionario", null, funcionario1);
+
+            if(inserir != -1)
+            {
+                secretario = new ContentValues();
+                secretario.put("CPF", funcionario.getCpf());
+                secretario.put("CPF_Administrador", funcionarioADM.getCpf());
+                inserir = banco.insert("secretario", null, secretario);
+                return inserir != -1;
+            }
+            return false;
+        }
     }
 
+    /**
+     * Funcao para obter todos os funcionários do banco
+     * @return lista de funcionários
+     */
     public List<Funcionario> obterTodosFuncionarios() {
         List<Funcionario> funcionarioList = new ArrayList<>();
         Cursor cursor = banco.query("funcionario", new String[]{"NOME, DATA_DE_NASCIMENTO, SEXO," +
@@ -89,7 +141,6 @@ public class FuncionarioDAO {
             funcionario.setSexo(cursor.getString(2));
             funcionario.setTipoTelefone(cursor.getString(3));
             funcionario.setTelefone(cursor.getString(4));
-            funcionario.setEmail(cursor.getString(5));
             String salario1 = cursor.getString(6);
             funcionario.setSalario(Double.parseDouble(salario1));
             funcionario.setCep(cursor.getString(7));
@@ -111,35 +162,47 @@ public class FuncionarioDAO {
     }
 
 
-    public boolean excluir(Funcionario funcionario) {
-        long deletar = banco.delete("funcionario", "CPF = ?", new String[]{funcionario.getCpf()});
-        if (deletar == -1)
-            return false;
-        else
-            return true;
-    }
-
+    /**
+     * Funcao para alterar funcionário no banco
+     * @param funcionario funcionário a ser alterado
+     * @return verdadeiro se alterou e falso, caso contrario
+     */
     public boolean alterar(Funcionario funcionario) {
-        ContentValues values = new ContentValues();
-        values.put("NOME", funcionario.getNome());
-        values.put("DATA_DE_NASCIMENTO", funcionario.getDataNascimento());
-        values.put("SEXO", funcionario.getSexo());
-        values.put("TIPO_TELEFONE", funcionario.getTipoTelefone());
-        values.put("TELEFONE", funcionario.getTelefone());
-        values.put("EMAIL", funcionario.getEmail());
-        values.put("SALARIO", funcionario.getSalario());
+        ContentValues values, funcionario1, secretario;
+        values = new ContentValues();
+        values.put("nome", funcionario.getNome());
+        values.put("dataNascimento", funcionario.getDataNascimento());
+        values.put("sexo", funcionario.getSexo());
+        values.put("tipoTel", funcionario.getTipoTelefone());
+        values.put("telefone", funcionario.getTelefone());
+
         values.put("CEP", funcionario.getCep());
-        values.put("ESTADO", funcionario.getEstado());
-        values.put("CIDADE", funcionario.getCidade());
-        values.put("BAIRRO", funcionario.getBairro());
-        values.put("RUA", funcionario.getRua());
-        values.put("NUMERO", funcionario.getNumero());
+        values.put("UF", funcionario.getEstado());
+        values.put("cidade", funcionario.getCidade());
+        values.put("bairro", funcionario.getBairro());
+        values.put("rua", funcionario.getRua());
+        values.put("numero", funcionario.getNumero());
+
         values.put("CPF", funcionario.getCpf());
-        values.put("SENHA", funcionario.getSenha());
-        long inserir = banco.update("funcionario", values, "CPF = ?", new String[]{funcionario.getCpf()});
+        values.put("senha", funcionario.getSenha());
+        long inserir = banco.update("usuario", values, "CPF = ?", new String[]{funcionario.getCpf()});
         if (inserir == -1)
             return false;
         else
-            return true;
+        {
+            funcionario1 = new ContentValues();
+            funcionario1.put("salario", funcionario.getSalario());
+            funcionario1.put("CPF", funcionario.getCpf());
+            inserir = banco.update("funcionario", values, "CPF = ?", new String[]{funcionario.getCpf()});
+
+            if(inserir != -1)
+            {
+                secretario = new ContentValues();
+                secretario.put("CPF", funcionario.getCpf());
+                inserir = banco.update("secretario", values, "CPF = ?", new String[]{funcionario.getCpf()});
+                return inserir != -1;
+            }
+            return false;
+        }
     }
 }

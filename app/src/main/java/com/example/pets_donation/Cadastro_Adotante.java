@@ -28,7 +28,7 @@ import java.util.Date;
 public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //declaracao das variaveis
-    private EditText nome, nascimento, telefone, email, rendaMensal;
+    private EditText nome, nascimento, telefone, rendaMensal;
     private EditText cep, estado, cidade, rua, numero, bairro;
     private EditText cpf, senha, confirmasenha;
     private Button btnLimpar, btnCancelar, btnAvancar, btnPesquisar;
@@ -59,7 +59,6 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         celular = (RadioButton) findViewById(R.id.radioButtonTelefoneCelular);
         telefone = findViewById(R.id.telefone);
         telefone.setFocusable(false);
-        email = findViewById(R.id.email);
         masculino = (RadioButton) findViewById(R.id.radioButtonMasculino);
         feminino = (RadioButton) findViewById(R.id.radioButtonFeminino);
         rendaMensal = findViewById(R.id.rendaMensal);
@@ -104,6 +103,7 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         //obriga o usuario a escrever cep correto
         estado.setFocusable(false);
 
+        //botao de pesquisa
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +140,6 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
                 nome.setText("");
                 nascimento.setText("");
                 telefone.setText("");
-                email.setText("");
                 rendaMensal.setText("");
 
                 estado.setText("");
@@ -164,6 +163,9 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
 
     }
 
+    /**
+     * Funcao para limpar o endereco
+     */
     public void limparEndereco() {
         estado.setText("");
         cidade.setText("");
@@ -172,11 +174,13 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
         numero.setText("");
     }
 
+    /**
+     * Funcao para limpar os dados
+     */
     public void limparDados() {
         nome.setText("");
         nascimento.setText("");
         telefone.setText("");
-        email.setText("");
         rendaMensal.setText("");
 
         estado.setText("");
@@ -300,17 +304,6 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
             return;
         }
 
-        String email1 = email.getText().toString();
-        if (email1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!isEmailValid(email1)) {
-            Toast.makeText(getApplicationContext(), "Email inválido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         String rendaMensal1 = rendaMensal.getText().toString();
         if (rendaMensal1.matches("")) {
             Toast.makeText(getApplicationContext(), "Você não digitou sua renda mensal", Toast.LENGTH_SHORT).show();
@@ -423,7 +416,6 @@ public class Cadastro_Adotante extends AppCompatActivity implements AdapterView.
             adotante.setSexo(sexo);
             adotante.setTipoTelefone(tipoTelefone);
             adotante.setTelefone(telefone1);
-            adotante.setEmail(email1);
 
             //renda mensal
             double rendaMensalDouble = Double.parseDouble(rendaMensal1);

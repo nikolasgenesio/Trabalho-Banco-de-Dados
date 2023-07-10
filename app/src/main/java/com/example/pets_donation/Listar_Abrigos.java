@@ -73,6 +73,10 @@ public class Listar_Abrigos extends AppCompatActivity {
     }
 
 
+    /**
+     * Funcao para funcionario excluir abrigo
+     * @param item abrigo a ser excluido
+     */
     public void excluir(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Abrigo abrigo = abrigoListFiltrados.get(menuInfo.position);
@@ -86,13 +90,17 @@ public class Listar_Abrigos extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         abrigoListFiltrados.remove(abrigo);
                         abrigoList.remove(abrigo);
-                        abrigoDAO.excluir(abrigo);
                         listView.invalidateViews();
                     }
                 }).create();
         dialog.show();
     }
 
+
+    /**
+     * Funcao para adaptar lista
+     * @param myListView Lista de abrigos
+     */
     public void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {

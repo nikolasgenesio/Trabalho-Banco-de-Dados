@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AdotanteAbrigos_Fragment extends Fragment {
 
+    //declaracao da variavel
     GoogleMap map;
 
     @Override
@@ -31,6 +32,7 @@ public class AdotanteAbrigos_Fragment extends Fragment {
         SupportMapFragment supportMapFragment = (SupportMapFragment)
         getChildFragmentManager().findFragmentById(R.id.map);
 
+        //aparecer no Google Maps
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {

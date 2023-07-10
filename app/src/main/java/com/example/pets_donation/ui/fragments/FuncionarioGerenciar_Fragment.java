@@ -30,22 +30,22 @@ import com.example.pets_donation.R;
 
 public class FuncionarioGerenciar_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Funcionario funcionario;
     private ListView listView;
-
 
     String[] maintitle = {
             "Abrigo",
             "Adotante",
             "Animal",
-            "Funcionário",
+            "Veterinário",
             "Relatório de adoções",
             "Relatório de animais",
     };
 
     String[] subtitle = {
             "Editar informações de abrigos", "Editar informações de adotantes",
-            "Editar informações de animais", "Editar informações de funcionários",
+            "Editar informações de animais", "Editar informações de veterinários",
             "Gerar relatório dos processos de adoções", "Gerar relatório dos processos dos animais",
     };
 
@@ -67,11 +67,13 @@ public class FuncionarioGerenciar_Fragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         listView = view.findViewById(R.id.listViewGerencia);
+
+        //exibir lista adaptada
         Funcionario_ListCadastros adapter = new Funcionario_ListCadastros(getActivity(), maintitle, subtitle, imgid);
         listView.setAdapter(adapter);
 
+        //abre novas telas de acordo com a selecao
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -96,9 +98,6 @@ public class FuncionarioGerenciar_Fragment extends Fragment {
                         break;
                     }
                     case 3: {
-                        Intent intent = new Intent(getActivity(), Listar_Funcionarios.class);
-                        intent.putExtra("funcionario", funcionario);
-                        startActivity(intent);
                         break;
                     }
 
@@ -110,9 +109,6 @@ public class FuncionarioGerenciar_Fragment extends Fragment {
                     }
 
                     default: {
-                        Intent intent = new Intent(getActivity(), Listar_AnimaisAdocoes.class);
-                        intent.putExtra("funcionario", funcionario);
-                        startActivity(intent);
                         break;
                     }
                 }

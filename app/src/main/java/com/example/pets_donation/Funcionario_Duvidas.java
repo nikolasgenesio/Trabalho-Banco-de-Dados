@@ -10,6 +10,8 @@ import com.example.pets_donation.ui.fragments.FuncionarioPerfil_Fragment;
 
 public class Funcionario_Duvidas extends AppCompatActivity {
 
+    //declaracao da variavel
+
     private Funcionario funcionario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

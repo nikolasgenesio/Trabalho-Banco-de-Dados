@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Funcionario implements Serializable {
 
     //dados pessoais
-    private String nome, dataNascimento, sexo, tipoTelefone, telefone, email;
+    private String nome, dataNascimento, sexo, tipoTelefone, telefone;
     private Double salario;
 
     //foto
@@ -18,6 +18,16 @@ public class Funcionario implements Serializable {
 
     //login
     private String cpf, senha;
+
+    private String CPF_Administrador;
+
+    public String getCPF_Administrador() {
+        return CPF_Administrador;
+    }
+
+    public void setCPF_Administrador(String CPF_Administrador) {
+        this.CPF_Administrador = CPF_Administrador;
+    }
 
     public String getNome() {
         return nome;
@@ -57,14 +67,6 @@ public class Funcionario implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Double getSalario() {

@@ -20,6 +20,7 @@ import com.example.pets_donation.SlideAdapter;
 
 public class AdotanteInformacoes_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
     private SlideAdapter slideAdapter;
@@ -41,6 +42,7 @@ public class AdotanteInformacoes_Fragment extends Fragment {
         mNextBtn = (Button) view.findViewById(R.id.btnContinuar1);
         mBackBtn = (Button) view.findViewById(R.id.btnVoltar1);
 
+        //aparecer slide na tela
         slideAdapter = new SlideAdapter(getActivity());
         mSlideViewPager.setAdapter(slideAdapter);
 
@@ -49,6 +51,10 @@ public class AdotanteInformacoes_Fragment extends Fragment {
         mSlideViewPager.addOnPageChangeListener(viewListener);
     }
 
+    /**
+     * Funcao para adicionar slide
+     * @param position posicao
+     */
     public void addDotsIndicator(int position) {
         mDots = new TextView[11];
         mDotLayout.removeAllViews();
@@ -67,6 +73,9 @@ public class AdotanteInformacoes_Fragment extends Fragment {
         }
     }
 
+    /**
+     * Ver os slides
+     */
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int i, float v, int i1) {

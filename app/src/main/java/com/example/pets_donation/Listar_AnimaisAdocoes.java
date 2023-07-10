@@ -6,22 +6,20 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.pets_donation.Lib.Conexao_Banco;
-import com.example.pets_donation.Models.AdocoesDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Listar_AnimaisAdocoes extends AppCompatActivity {
 
+    //declaracao das variaveis
     private TextView txtMsg, txtAdotados, txtNaoAdotados;
     private ListView listView1, listView2;
-    private AdocoesDAO adocoesDAO;
     private Funcionario funcionario;
 
     private List<Adocoes> adocoesList;
@@ -45,15 +43,12 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
         banco = new Conexao_Banco(this);
 
+        //inicializando as variaveis
         txtMsg = findViewById(R.id.msgAdocoes);
         txtAdotados = findViewById(R.id.textAnimaisAdotados);
         txtNaoAdotados = findViewById(R.id.textAnimaisNaoAdotados);
         listView1 = findViewById(R.id.lista_animaisAdotados);
         listView2 = findViewById(R.id.lista_animaisNaoAdotados);
-        adocoesDAO = new AdocoesDAO(this);
-
-
-        adocoesList = adocoesDAO.obterTodosAnimaisAdotados();
         adocoesListFiltrados.addAll(adocoesList);
 
         if (adocoesList != null && adocoesList.isEmpty()) {
@@ -79,6 +74,10 @@ public class Listar_AnimaisAdocoes extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para adaptar lista
+     * @param myListView Lista de animais participantes ou nao de adocao
+     */
     public void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {

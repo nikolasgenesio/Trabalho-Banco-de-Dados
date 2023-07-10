@@ -151,19 +151,6 @@
             android:inputType="number"
             />
 
-        <EditText android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/colorHint"
-            android:maxLines="1"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:hint="E-mail"
-            android:drawableLeft="@drawable/email"
-            android:layout_marginTop="10dp"
-            android:inputType="text"
-            />
-
         <EditText android:id="@+id/salario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

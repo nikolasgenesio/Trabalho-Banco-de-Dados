@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.pets_donation.AdocaoFuncionario;
+import com.example.pets_donation.Adocao_View;
 import com.example.pets_donation.AnimalAdocaoListAdapter;
 import com.example.pets_donation.Funcionario;
 import com.example.pets_donation.Models.ProcessoAdocaoDAO;
@@ -25,10 +26,11 @@ import java.util.List;
 
 public class FuncionarioAdocao_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Funcionario funcionario;
     private ListView listView;
     private ProcessoAdocaoDAO processoAdocaoDAO;
-    private List<ProcessoAdocao> processoAdocaoList;
+    private List<Adocao_View> processoAdocaoList;
     private AdocaoFuncionario adocaoFuncionario;
     private TextView textView;
 
@@ -45,8 +47,9 @@ public class FuncionarioAdocao_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         listView = view.findViewById(R.id.lista_adocoes);
         processoAdocaoDAO = new ProcessoAdocaoDAO(getActivity());
-        processoAdocaoList = processoAdocaoDAO.retornaStatusAdocaoFuncionario();
+        processoAdocaoList = processoAdocaoDAO.retornaAnimaisAdocao();
         adocaoFuncionario = new AdocaoFuncionario(getActivity(), R.layout.list_view_adocoes, processoAdocaoList, funcionario);
+        //exibir lista adaptada ou mensagem de aviso
         if(adocaoFuncionario.getCount() != 0)
         {
             listView.setAdapter(adocaoFuncionario);

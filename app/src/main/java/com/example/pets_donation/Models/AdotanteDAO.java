@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.example.pets_donation.Adotante;
 import com.example.pets_donation.Lib.Conexao_Banco;
@@ -36,105 +37,50 @@ public class AdotanteDAO {
      */
     public Boolean inserir(Adotante adotante)
     {
-        ContentValues values = new ContentValues();
-        values.put("NOME", adotante.getNome());
-        values.put("DATA_DE_NASCIMENTO", adotante.getDataNascimento());
-        values.put("SEXO", adotante.getSexo());
-        values.put("TIPO_TELEFONE", adotante.getTipoTelefone());
-        values.put("TELEFONE", adotante.getTelefone());
-        values.put("EMAIL", adotante.getEmail());
-        values.put("RENDA_MENSAL", adotante.getRendaMensal());
+        ContentValues values, adotante1;
+        values = new ContentValues();
+        values.put("nome", adotante.getNome());
+        values.put("dataNascimento", adotante.getDataNascimento());
+        values.put("sexo", adotante.getSexo());
+        values.put("tipoTel", adotante.getTipoTelefone());
+        values.put("telefone", adotante.getTelefone());
+
         values.put("CEP", adotante.getCep());
-        values.put("ESTADO", adotante.getEstado());
-        values.put("CIDADE", adotante.getCidade());
-        values.put("BAIRRO", adotante.getBairro());
-        values.put("RUA", adotante.getRua());
-        values.put("NUMERO", adotante.getNumero());
+        values.put("UF", adotante.getEstado());
+        values.put("cidade", adotante.getCidade());
+        values.put("bairro", adotante.getBairro());
+        values.put("rua", adotante.getRua());
+        values.put("numero", adotante.getNumero());
+
         values.put("CPF", adotante.getCpf());
-        values.put("SENHA", adotante.getSenha());
-        values.put("FOTO", (byte[]) null);
-        long inserir = banco.insert("adotante", null, values);
-        if(inserir == -1)
+        values.put("senha", adotante.getSenha());
+
+        values.put("foto", (byte[]) null);
+        long inserir = banco.insert("usuario", null, values);
+        if(inserir == -1) {
+            Log.i("Tarefa 1 - status Tela", "ENTROUU: " + adotante.getNome());
+
             return false;
+        }
         else
-            return true;
+        {
+            Log.i("Tarefa 1 - status Tela", "ENTROU: " + adotante.getNome());
+
+            adotante1 = new ContentValues();
+            adotante1.put("rendaMensal", adotante.getRendaMensal());
+            adotante1.put("CPF", adotante.getCpf());
+            inserir = banco.insert("adotante", null, adotante1);
+            return inserir != -1;
+        }
     }
 
     /**
      * Funcao para obter todos os adotantes cadastrados no banco
-     * @return
+     * @return lista de adotantes
      */
     public List<Adotante> obterTodosAdotantes()
     {
-        List<Adotante> adotanteList = new ArrayList<>();
-        Cursor cursor = banco.query("adotante", new String[]{"NOME, DATA_DE_NASCIMENTO, SEXO," +
-                "TIPO_TELEFONE, TELEFONE, EMAIL, RENDA_MENSAL, CEP, ESTADO, CIDADE, " +
-                        "BAIRRO, RUA, NUMERO, CPF, SENHA, FOTO"}, null, null,
-                null, null, null);
-
-        //deslocar nas linhas da tabela
-        while(cursor.moveToNext())
-        {
-            Adotante adotante = new Adotante();
-            adotante.setNome(cursor.getString(0));
-            adotante.setDataNascimento(cursor.getString(1));
-            adotante.setSexo(cursor.getString(2));
-            adotante.setTipoTelefone(cursor.getString(3));
-            adotante.setTelefone(cursor.getString(4));
-            adotante.setEmail(cursor.getString(5));
-            String rendaMensal1 = cursor.getString(6);
-            adotante.setRendaMensal(Double.parseDouble(rendaMensal1));
-            adotante.setCep(cursor.getString(7));
-            adotante.setEstado(cursor.getString(8));
-            adotante.setCidade(cursor.getString(9));
-            adotante.setBairro(cursor.getString(10));
-            adotante.setRua(cursor.getString(11));
-            adotante.setNumero(cursor.getString(12));
-            adotante.setCpf(cursor.getString(13));
-            adotante.setSenha(cursor.getString(14));
-            byte[] imageByte = cursor.getBlob(15);
-            if (imageByte != null) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
-                adotante.setFoto(bitmap);
-            }
-            adotanteList.add(adotante);
-        }
-        return adotanteList;
+        return conexaoBanco.adotanteList();
     }
-
-    public boolean excluir(Adotante adotante) {
-        long deletar = banco.delete("adotante", "CPF = ?", new String[]{adotante.getCpf()});
-        if (deletar == -1)
-            return false;
-        else
-            return true;
-    }
-
-    public boolean alterar(Adotante adotante) {
-        ContentValues values = new ContentValues();
-        values.put("NOME", adotante.getNome());
-        values.put("DATA_DE_NASCIMENTO", adotante.getDataNascimento());
-        values.put("SEXO", adotante.getSexo());
-        values.put("TIPO_TELEFONE", adotante.getTipoTelefone());
-        values.put("TELEFONE", adotante.getTelefone());
-        values.put("EMAIL", adotante.getEmail());
-        values.put("RENDA_MENSAL", adotante.getRendaMensal());
-        values.put("CEP", adotante.getCep());
-        values.put("ESTADO", adotante.getEstado());
-        values.put("CIDADE", adotante.getCidade());
-        values.put("BAIRRO", adotante.getBairro());
-        values.put("RUA", adotante.getRua());
-        values.put("NUMERO", adotante.getNumero());
-        values.put("CPF", adotante.getCpf());
-        values.put("SENHA", adotante.getSenha());
-        long inserir = banco.update("adotante", values, "CPF = ?", new String[]{adotante.getCpf()});
-        if (inserir == -1)
-            return false;
-        else
-            return true;
-    }
-
-
-
 
 }

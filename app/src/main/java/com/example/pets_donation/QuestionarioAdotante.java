@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pets_donation.Adotante;
@@ -16,8 +18,12 @@ import com.example.pets_donation.Lib.Conexao_Banco;
 import com.example.pets_donation.Models.ProcessoAdocaoDAO;
 import com.example.pets_donation.R;
 
-public class QuestionarioAdotante extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
+public class QuestionarioAdotante extends AppCompatActivity {
 
     //botões
     private RadioButton apartamento, casa;
@@ -38,6 +44,7 @@ public class QuestionarioAdotante extends AppCompatActivity {
 
     private Conexao_Banco banco;
     private ProcessoAdocaoDAO processoAdocaoDAO;
+    private String[] texto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class QuestionarioAdotante extends AppCompatActivity {
         banco = new Conexao_Banco(this);
         processoAdocaoDAO = new ProcessoAdocaoDAO(this);
 
+        //inicializando variaveis
         apartamento = (RadioButton) findViewById(R.id.radioButtonApartamento);
         casa = (RadioButton) findViewById(R.id.radioButtonCasa);
 
@@ -75,6 +83,25 @@ public class QuestionarioAdotante extends AppCompatActivity {
 
         simVet = (RadioButton) findViewById(R.id.radioButtonSimVet);
         naoVet = (RadioButton) findViewById(R.id.radioButtonNaoVet);
+
+//        int[] selecao = {R.id.pergunta1, R.id.pergunta2, R.id.pergunta3, R.id.pergunta4, R.id.pergunta5,
+//                R.id.pergunta6, R.id.pergunta7, R.id.pergunta8, R.id.pergunta9, R.id.pergunta10,
+//                R.id.pergunta11, R.id.pergunta12, R.id.pergunta13, R.id.pergunta14, R.id.pergunta15,
+//                R.id.pergunta16, R.id.pergunta17, R.id.pergunta18, R.id.pergunta19, R.id.pergunta20};
+
+        texto = new String[] { "1. Mora em casa ou apartamento?", "2. Você tem certeza que é permitido animais no imóvel?", "3. Quantas pessoas moram no imóvel?",
+                "4. Existem outros animais em casa? Quais?", "5. Onde ficará o animal?", "6. Como o animal vai permanecer (preso parte do dia ou o dia todo, solto...):",
+                "7. Se você tem outros animais atualmente, haverá espaço para prevenir uma briga territorial? Terá paciência para fazer a adaptação deles? Como será a adaptação?",
+                "8. Já teve algum animal que faleceu? Por que motivo?",
+                "9. Quem vai sustentar o animal adotado?", "10. Qual será sua atitude se o animal fazer barulho à noite ou quando não há ninguém em casa (tendo reclamações dos vizinhos)?",
+                "11. Está disposto a limpar xixi e cocô, levá-lo para passear, dar comida nos horários certos, tratá-lo quando doente e dar atenção e carinho?",
+                "12. Poderá arcar com os custos de ração de qualidade, vermifugação, vacinação, castração e assistência veterinária? Qual seria sua atitude se ele adoecesse ou sofresse algum acidente?",
+                "13. Alguém da sua família apresenta sinais de alergia a pêlos de animais? Se, após a adoção, você descobrisse que alguém na sua casa tem alergia, o que faria?",
+                "14. Todos os moradores da casa respeitam animais e aceitaram a adoção sem problemas e restrições? Qual seria sua atitude se alguém da residência não se adaptasse ao bichinho?",
+                "15. Se tiver criança em casa, se responsabilizará a ensiná-la que o animal não é um brinquedo, que sente dor e deve ser respeitado, evitando que ambos se machuquem?",
+                "16. Em média, quantas horas seu animal ficará sozinho em casa? Caso seja necessário ficar mais de 6h sozinho, está disposto a enriquecer o ambiente com brinquedos, passear antes de sair e ao chegar e/ou contratar uma petsitter?",
+                "17. Em caso de viagens longas com quem ficará o animal?", "18. O que fará se o animal fugir ou se perder?",
+                "19. O que fará se não puder mais criar o animal?", "20. Em caso de emergência, tem como levar o animal imediatamento a um veterinário?"};
 
         btnAvancar = findViewById(R.id.btnConfirma);
         btnCancelar = findViewById(R.id.btnCancela);
@@ -122,6 +149,9 @@ public class QuestionarioAdotante extends AppCompatActivity {
     }
 
 
+    /**
+     * Funcao para adicionar processo de adocao
+     */
     public void processo_Adocao() {
 
         if (apartamento.isChecked()) {
@@ -265,6 +295,7 @@ public class QuestionarioAdotante extends AppCompatActivity {
         //tudo certo
         ProcessoAdocao adocao = new ProcessoAdocao();
 
+        //questionario
         adocao.setMorada(morada);
         adocao.setImovel(imovel);
         adocao.setQtdePessoas(qtdePessoas1);
@@ -286,8 +317,35 @@ public class QuestionarioAdotante extends AppCompatActivity {
         adocao.setCriarAnimal(criarAnimal1);
         adocao.setVeterinario(veterinario);
 
+        adocao.setQuestionario(
+                texto[0] + adocao.getMorada() + "\n" +
+                        texto[1] + " " + adocao.getImovel() + "\n" +
+                        texto[2] + " " + adocao.getQtdePessoas() + "\n" +
+                        texto[3] + " " + adocao.getQtdeAnimais() + "\n" +
+                        texto[4] + " " + adocao.getLocalAnimais() + "\n" +
+                        texto[5] + " " + adocao.getPermanecerAnimais() + "\n" +
+                        texto[6] + " " + adocao.getAnimaisAtual() + "\n" +
+                        texto[7] + " " + adocao.getAnimalFalecido() + "\n" +
+                        texto[8] + " " + adocao.getSustentarAnimal() + "\n" +
+                        texto[9] + " " + adocao.getVizinhosAnimal() + "\n" +
+                        texto[10] + " " + adocao.getPasseioAnimal() + "\n" +
+                        texto[11] + " " + adocao.getCustosAnimal() + "\n" +
+                        texto[12] + " " + adocao.getAlergiaAnimal() + "\n" +
+                        texto[13] + " " + adocao.getRespeitoAnimal() + "\n" +
+                        texto[14] + " " + adocao.getCriancaAnimal() + "\n" +
+                        texto[15] + " " + adocao.getHorasAnimal() + "\n" +
+                        texto[16] + " " + adocao.getViajarAnimal() + "\n" +
+                        texto[17] + " " + adocao.getFugirAnimal() + "\n" +
+                        texto[18] + " " + adocao.getCriarAnimal() + "\n" +
+                        texto[19] + " " + adocao.getVeterinario());
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault());
+        adocao.setData(df.format(c));
+
+        //chaves estrangerias
         adocao.setCPFAdotante(adotante.getCpf());
-        adocao.setIDAnimal(animal.getID());
+        adocao.setIDAnimal(animal.getId_animal());
+
         adocao.setStatus("Em Andamento");
 
         Boolean inserir = processoAdocaoDAO.inserir(adocao);

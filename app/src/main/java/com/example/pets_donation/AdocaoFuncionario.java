@@ -18,13 +18,21 @@ import java.util.List;
 
 public class AdocaoFuncionario extends BaseAdapter {
 
+    //declaracao das variaveis
     private Context context;
     private int layout;
-    private List<ProcessoAdocao> processoAdocaoList;
+    private List<Adocao_View> processoAdocaoList;
     private Conexao_Banco banco;
     private Funcionario funcionario;
 
-    public AdocaoFuncionario(Context context, int layout, List<ProcessoAdocao> processoAdocaoList, Funcionario funcionario) {
+    /**
+     * Construtor
+     * @param context context
+     * @param layout layout da lista
+     * @param processoAdocaoList lista de processos de adocoes
+     * @param funcionario funcionario
+     */
+    public AdocaoFuncionario(Context context, int layout, List<Adocao_View> processoAdocaoList, Funcionario funcionario) {
         this.context = context;
         this.layout = layout;
         this.processoAdocaoList = processoAdocaoList;
@@ -33,26 +41,50 @@ public class AdocaoFuncionario extends BaseAdapter {
     }
 
 
+    /**
+     * Funcao para retornar o tamanho da lista
+     * @return tamanho da lista
+     */
     @Override
     public int getCount() {
         return processoAdocaoList.size();
     }
 
+    /**
+     * Funcao para retornar o objeto na posicao da lista
+     * @param position posicao
+     * @return objeto na posicao
+     */
     @Override
     public Object getItem(int position) {
         return processoAdocaoList.get(position);
     }
 
+    /**
+     * Funcao para retonar posicao do objeto
+     * @param position posicao
+     * @return posicao do objeto
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * Classe para a lista adaptada
+     */
     private class ViewHolder {
         ImageView imageView;
         TextView textNome, textInfo;
     }
 
+    /**
+     * Funcao para exibir a lista adaptada
+     * @param position posicao
+     * @param convertView auxiliar
+     * @param parent auxiliar
+     * @return lista adaptada
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -73,13 +105,13 @@ public class AdocaoFuncionario extends BaseAdapter {
             viewHolder = (ViewHolder) row.getTag();
         }
 
-        ProcessoAdocao processoAdocao = processoAdocaoList.get(position);
+        Adocao_View processoAdocao = processoAdocaoList.get(position);
 
         Adotante adotante = banco.obterAdotanteAdocao(processoAdocao.getCPFAdotante());
-        Animal animal = banco.obterAnimal(processoAdocao.getIDAnimal());
+        Animal animal = banco.obterAnimal(processoAdocao.getId_animal());
 
         viewHolder.textNome.setText("Adotante: " + adotante.getNome());
-        viewHolder.textInfo.setText("Status: " + processoAdocao.getStatus());
+        viewHolder.textInfo.setText("Status: " + processoAdocao.getResposta());
 
         viewHolder.imageView.setImageBitmap(animal.getFoto());
 

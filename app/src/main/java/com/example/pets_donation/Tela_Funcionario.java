@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class Tela_Funcionario extends AppCompatActivity {
 
+    //declaracao das variaveis
     private BottomNavigationView bottomNavigationView;
     private Funcionario funcionario;
 
@@ -31,6 +32,7 @@ public class Tela_Funcionario extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame,
                 new FuncionarioInicio_Fragment()).commit();
 
+        //opcoes
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

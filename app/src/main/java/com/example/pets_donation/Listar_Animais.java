@@ -70,6 +70,11 @@ public class Listar_Animais extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Funcao para adaptar lista
+     * @param myListView Lista de animais
+     */
     public void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {

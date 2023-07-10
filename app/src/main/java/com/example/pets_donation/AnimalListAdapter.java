@@ -16,11 +16,19 @@ import java.util.List;
 
 public class AnimalListAdapter extends BaseAdapter {
 
+    //declaracao das variaveis
     private Context context;
     private int layout;
     private List<Animal> animals;
     private Funcionario funcionario;
 
+    /**
+     * Construtor
+     * @param context context
+     * @param layout layout da lista
+     * @param animals lista de animais
+     * @param funcionario funcionário
+     */
     public AnimalListAdapter(Context context, int layout, List<Animal> animals, Funcionario funcionario) {
         this.context = context;
         this.layout = layout;
@@ -28,26 +36,50 @@ public class AnimalListAdapter extends BaseAdapter {
         this.funcionario = funcionario;
     }
 
+    /**
+     * Funcao para retornar o tamanho da lista
+     * @return tamanho da lista
+     */
     @Override
     public int getCount() {
         return animals.size();
     }
 
+    /**
+     * Funcao para retornar o objeto na posicao da lista
+     * @param position posicao
+     * @return objeto na posicao
+     */
     @Override
     public Object getItem(int position) {
         return animals.get(position);
     }
 
+    /**
+     * Funcao para retonar posicao do objeto
+     * @param position posicao
+     * @return posicao do objeto
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * Classe para a lista adaptada
+     */
     private class ViewHolder {
         ImageView imageView;
         TextView textNome, textInfo;
     }
 
+    /**
+     * Funcao para exibir a lista adaptada
+     * @param position posicao
+     * @param convertView auxiliar
+     * @param parent auxiliar
+     * @return lista adaptada
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

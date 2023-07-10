@@ -27,6 +27,7 @@ import java.util.List;
 
 public class fragment2Adocao extends Fragment {
 
+    //declaracao das variaveis
     private Adotante adotante;
     private RecyclerView recyclerView;
     private List<Animal> animalList;
@@ -50,12 +51,11 @@ public class fragment2Adocao extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.recyclerView);
         textView = view.findViewById(R.id.msgGatos);
-        //animalDAO = new AnimalDAO(getActivity());
-        //animalList = animalDAO.obterTodosAnimais();
 
         banco = new Conexao_Banco(getActivity());
         animalList = banco.animaisAdocao();
 
+        //exibir somente gatos
         for (Animal animal : animalList) {
             if (animal.getTipo().equals("Gato")) {
                 animalListFiltrados.add(animal);
@@ -68,6 +68,9 @@ public class fragment2Adocao extends Fragment {
             initRecyclerView();
     }
 
+    /**
+     * Funcao para exibir os gatos em uma lista adaptada
+     */
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);

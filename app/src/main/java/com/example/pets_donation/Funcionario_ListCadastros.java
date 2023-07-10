@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class Funcionario_ListCadastros extends ArrayAdapter<String> {
 
+    //declaracao das variaveis
     private final Activity context;
     private final String[] maintitle;
     private final String[] subtitle;
@@ -25,6 +26,13 @@ public class Funcionario_ListCadastros extends ArrayAdapter<String> {
         this.imgid=imgid;
     }
 
+    /**
+     * Funcao para exibir a lista adaptada
+     * @param position posicao
+     * @param view auxiliar
+     * @param parent auxiliar
+     * @return lista adaptada
+     */
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.list_view_cadastro, null,true);

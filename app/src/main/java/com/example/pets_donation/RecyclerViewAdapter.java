@@ -24,6 +24,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
+    //declaracao das variaveis
+
     private static final String TAG = "RecyclerViewAdapter";
 
     private Context context;
@@ -62,9 +64,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.nome.setText(animal.getNome() + ", " + animal.getIdade());
         holder.raca.setText(animal.getRaca());
         holder.genero.setText(animal.getGenero());
-        holder.porteFisico.setText(animal.getPortFisico());
+        holder.porteFisico.setText(animal.getPorteFisico());
 
-        String cidade1 = banco.retornaEnderecoAbrigo(animal.getIDAbrigo());
+        String cidade1 = banco.retornaEnderecoAbrigo(animal.getId_abrigo());
         holder.cidade.setText(cidade1);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,11 +81,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         });
     }
 
+    /**
+     * Funcao para retornar o tamanho da lista
+     * @return tamanho da lista
+     */
     @Override
     public int getItemCount() {
         return animals.size();
     }
 
+    /**
+     * Classe para a lista adaptada
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView imageView;
         TextView nome, raca, genero, porteFisico, cidade;

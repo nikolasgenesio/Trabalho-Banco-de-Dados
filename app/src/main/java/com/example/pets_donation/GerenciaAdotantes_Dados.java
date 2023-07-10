@@ -109,6 +109,7 @@ public class GerenciaAdotantes_Dados extends AppCompatActivity {
 
         preencheInformacoes();
 
+        //botao de pesquisa
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,23 +138,28 @@ public class GerenciaAdotantes_Dados extends AppCompatActivity {
             }
         });
 
+        //botao de alterar
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alterar_Adotante();
+                //alterar_Adotante();
             }
         });
 
+        //botao de deletar
         btnDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletar_Adotante();
+                //deletar_Adotante();
             }
         });
 
 
     }
 
+    /**
+     * Funcao para preencher informacoes
+     */
     public void preencheInformacoes() {
         nome.setText(adotante.getNome());
         nascimento.setText(adotante.getDataNascimento());
@@ -190,218 +196,6 @@ public class GerenciaAdotantes_Dados extends AppCompatActivity {
         cpf.setFocusable(false);
 
         senha.setText(adotante.getSenha());
-    }
-
-    public void alterar_Adotante() {
-        String nome1 = nome.getText().toString();
-        if (nome1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu nome", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String nascimento1 = nascimento.getText().toString();
-        if (nascimento1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua data de nascimento", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Date data = null;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            format.setLenient(false);
-            data = format.parse(nascimento1);
-        } catch (ParseException e) {
-            Toast.makeText(getApplicationContext(), "Data inválida. Tente novamente!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //verificar idade com requisito de 18 anos
-        int dia = Integer.parseInt(nascimento1.substring(0, 2));
-        int mes = Integer.parseInt(nascimento1.substring(3, 5));
-        int ano = Integer.parseInt(nascimento1.substring(6, 10));
-        int idade = Integer.parseInt(calculaIdade(ano, mes, dia));
-
-        if (idade < 18) {
-            Toast.makeText(getApplicationContext(), "Você não possui idade suficiente para adotar!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Log.i("Tarefa 1 - status", "Teste = " + dia + "/" + mes + "/" + ano);
-
-        if (masculino.isChecked()) {
-            sexo = "Masculino";
-        }
-        if (feminino.isChecked()) {
-            sexo = "Feminino";
-        }
-
-        if (!(masculino.isChecked() || feminino.isChecked())) {
-            Toast.makeText(getApplicationContext(), "Por favor, selecione um sexo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (fixo.isChecked()) {
-            tipoTelefone = "Fixo";
-        }
-        if (celular.isChecked()) {
-            tipoTelefone = "Celular";
-        }
-
-        if (!(fixo.isChecked() || celular.isChecked())) {
-            Toast.makeText(getApplicationContext(), "Por favor, selecione um tipo de telefone", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String telefone1 = telefone.getText().toString();
-        if (telefone1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu telefone", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (telefone1.length() != 13 && telefone1.length() != 14) {
-            Toast.makeText(getApplicationContext(), "Telefone inválido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String email1 = email.getText().toString();
-        if (email1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!isEmailValid(email1)) {
-            Toast.makeText(getApplicationContext(), "Email inválido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String rendaMensal1 = rendaMensal.getText().toString();
-        if (rendaMensal1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua renda mensal", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String cep1 = cep.getText().toString();
-        if (cep1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu CEP", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String estado1 = estado.getText().toString();
-        if (estado1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu estado", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String cidade1 = cidade.getText().toString();
-        if (cidade1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua cidade", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String bairro1 = bairro.getText().toString();
-        if (bairro1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu bairro", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String rua1 = rua.getText().toString();
-        if (rua1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua rua", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String numero1 = numero.getText().toString();
-        if (numero1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou seu número", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String cpf1 = cpf.getText().toString();
-
-        String senha1 = senha.getText().toString();
-        if (senha1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua senha", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (senha1.length() < 8) {
-            Toast.makeText(getApplicationContext(), "Senha: mínimo 8 digitos", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String confirmaSenha1 = confirmasenha.getText().toString();
-        if (confirmaSenha1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou sua senha para confirmar", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!senha1.equals(confirmaSenha1)) {
-            Toast.makeText(getApplicationContext(), "Senhas não batem", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-        //dados pessoais
-        adotante.setNome(nome1);
-        adotante.setDataNascimento(nascimento1);
-        adotante.setSexo(sexo);
-        adotante.setTipoTelefone(tipoTelefone);
-        adotante.setTelefone(telefone1);
-        adotante.setEmail(email1);
-
-        //renda mensal
-        double rendaMensalDouble = Double.parseDouble(rendaMensal1);
-        adotante.setRendaMensal(rendaMensalDouble);
-
-        //endereco
-        adotante.setCep(cep1);
-        adotante.setEstado(estado1);
-        adotante.setCidade(cidade1);
-        adotante.setBairro(bairro1);
-        adotante.setRua(rua1);
-        adotante.setNumero(numero1);
-        adotante.setCpf(cpf1);
-        adotante.setSenha(senha1);
-
-        boolean alterar = adotanteDAO.alterar(adotante);
-        if (alterar) {
-            Intent intent = getIntent();
-            if (intent.hasExtra("funcionario")) {
-                this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
-                Toast.makeText(getApplicationContext(), "Adotante alterado", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getApplicationContext(), Listar_Adotantes.class);
-                intent.putExtra("funcionario", funcionario);
-                startActivity(intent);
-                finish();
-            } else {
-                Toast.makeText(getApplicationContext(), "Informações alteradas", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getApplicationContext(), Tela_Adotante.class);
-                intent.putExtra("adotante", adotante);
-                startActivity(intent);
-                finish();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "Informações não alteradas", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void deletar_Adotante() {
-        boolean deletar = adotanteDAO.excluir(adotante);
-        if (deletar) {
-            Intent intent = getIntent();
-            if (intent.hasExtra("funcionario")) {
-                this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
-                Toast.makeText(getApplicationContext(), "Adotante excluído", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getApplicationContext(), Listar_Adotantes.class);
-                intent.putExtra("funcionario", funcionario);
-                startActivity(intent);
-                finish();
-            } else {
-                Toast.makeText(getApplicationContext(), "Excluído", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "Não excluído", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void onRadioButtonClicked(View view) {
@@ -441,6 +235,9 @@ public class GerenciaAdotantes_Dados extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para limpar endereco
+     */
     public void limparEndereco() {
         estado.setText("");
         cidade.setText("");

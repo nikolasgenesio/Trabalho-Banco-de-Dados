@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pets_donation.Lib.Conexao_Banco;
@@ -26,7 +27,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
     //atores
     private Adotante adotante;
     private Animal animal;
-    private ProcessoAdocao processoAdocao;
+    private Adocao_View processoAdocao;
     private Funcionario funcionario;
 
     //variaveis adotante
@@ -38,15 +39,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
     private String sexo, tipoTelefone;
 
     //variaveis questionario
-
-    //botões
-    private RadioButton apartamento, casa;
-    private RadioButton simImovel, naoImovel;
-    private RadioButton simVet, naoVet;
-
-    //respostas
-    private EditText qtdePessoas, qtdeAnimais, localAnimais, permanecerAnimais, animaisAtual, animalFalecido, sustentarAnimal, vizinhosAnimal;
-    private EditText passeioAnimal, custosAnimal, alergiaAnimal, respeitoAnimal, criancaAnimal, horasAnimal, viajarAnimal, fugirAnimal, criarAnimal;
+    private TextView textView;
 
     //auxiliares
     private String morada, imovel, veterinario;
@@ -66,7 +59,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
 
         this.adotante = (Adotante) getIntent().getSerializableExtra("adotante");
         this.animal = (Animal) getIntent().getSerializableExtra("animal");
-        this.processoAdocao = (ProcessoAdocao) getIntent().getSerializableExtra("adocao");
+        this.processoAdocao = (Adocao_View) getIntent().getSerializableExtra("adocao");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
         banco = new Conexao_Banco(this);
@@ -108,60 +101,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         numero.setFocusable(false);
         bairro.setFocusable(false);
 
-        //questionario
-        apartamento = (RadioButton) findViewById(R.id.radioButtonApartamento);
-        casa = (RadioButton) findViewById(R.id.radioButtonCasa);
-
-        apartamento.setEnabled(false);
-        casa.setEnabled(false);
-
-        simImovel = (RadioButton) findViewById(R.id.radioButtonSimImovel);
-        naoImovel = (RadioButton) findViewById(R.id.radioButtonNaoImovel);
-
-        simImovel.setEnabled(false);
-        naoImovel.setEnabled(false);
-
-        qtdePessoas = findViewById(R.id.qtdePessoas);
-        qtdeAnimais = findViewById(R.id.qtdeAnimais);
-        localAnimais = findViewById(R.id.localAnimais);
-        permanecerAnimais = findViewById(R.id.permanecerAnimais);
-        animaisAtual = findViewById(R.id.animaisAtual);
-        animalFalecido = findViewById(R.id.animalFalecido);
-        sustentarAnimal = findViewById(R.id.sustentarAnimal);
-        vizinhosAnimal = findViewById(R.id.vizinhosAnimal);
-        passeioAnimal = findViewById(R.id.passeioAnimal);
-        custosAnimal = findViewById(R.id.custosAnimal);
-        alergiaAnimal = findViewById(R.id.alergiaAnimal);
-        respeitoAnimal = findViewById(R.id.respeitoAnimal);
-        criancaAnimal = findViewById(R.id.criancaAnimal);
-        horasAnimal = findViewById(R.id.horasAnimal);
-        viajarAnimal = findViewById(R.id.viajarAnimal);
-        fugirAnimal = findViewById(R.id.fugirAnimal);
-        criarAnimal = findViewById(R.id.criarAnimal);
-
-        qtdePessoas.setFocusable(false);
-        qtdeAnimais.setFocusable(false);
-        localAnimais.setFocusable(false);
-        permanecerAnimais.setFocusable(false);
-        animaisAtual.setFocusable(false);
-        animalFalecido.setFocusable(false);
-        sustentarAnimal.setFocusable(false);
-        vizinhosAnimal.setFocusable(false);
-        passeioAnimal.setFocusable(false);
-        custosAnimal.setFocusable(false);
-        alergiaAnimal.setFocusable(false);
-        respeitoAnimal.setFocusable(false);
-        criancaAnimal.setFocusable(false);
-        horasAnimal.setFocusable(false);
-        viajarAnimal.setFocusable(false);
-        fugirAnimal.setFocusable(false);
-        criarAnimal.setFocusable(false);
-
-        simVet = (RadioButton) findViewById(R.id.radioButtonSimVet);
-        naoVet = (RadioButton) findViewById(R.id.radioButtonNaoVet);
-
-        simVet.setEnabled(false);
-        naoVet.setEnabled(false);
+        textView = (TextView) findViewById(R.id.respostasQuestionario);
 
         btnDeletar = findViewById(R.id.btnDeleta);
         btnCancelar = findViewById(R.id.btnCancela);
@@ -169,6 +109,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
 
         preencheInformacoes();
 
+        //botao de cancelamento
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +117,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
             }
         });
 
+        //botao de confirmacao
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,6 +125,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
             }
         });
 
+        //botao para deletar
         btnDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +134,9 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funcao para preencher as informacoes
+     */
     public void preencheInformacoes() {
         //adotante
         nome.setText(adotante.getNome());
@@ -223,53 +169,20 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
         numero.setText(adotante.getNumero());
         bairro.setText(adotante.getBairro());
 
-        //questionario
-        if (processoAdocao.getMorada().equals("Apartamento")) {
-            apartamento.setChecked(true);
-        } else if (processoAdocao.getMorada().equals("Caso")) {
-            casa.setChecked(true);
-        }
+        textView.setText(processoAdocao.getQuestionario());
 
-        if (processoAdocao.getImovel().equals("Sim, já verifiquei e tenho certeza!")) {
-            simImovel.setChecked(true);
-        } else if (processoAdocao.getImovel().equals("Não")) {
-            naoImovel.setChecked(true);
-        }
-
-        qtdePessoas.setText(processoAdocao.getQtdePessoas());
-        qtdeAnimais.setText(processoAdocao.getQtdeAnimais());
-        localAnimais.setText(processoAdocao.getLocalAnimais());
-        permanecerAnimais.setText(processoAdocao.getPermanecerAnimais());
-        animaisAtual.setText(processoAdocao.getAnimaisAtual());
-        animalFalecido.setText(processoAdocao.getAnimalFalecido());
-        sustentarAnimal.setText(processoAdocao.getSustentarAnimal());
-        vizinhosAnimal.setText(processoAdocao.getVizinhosAnimal());
-        passeioAnimal.setText(processoAdocao.getPasseioAnimal());
-        custosAnimal.setText(processoAdocao.getCustosAnimal());
-        alergiaAnimal.setText(processoAdocao.getAlergiaAnimal());
-        respeitoAnimal.setText(processoAdocao.getRespeitoAnimal());
-        criancaAnimal.setText(processoAdocao.getCriancaAnimal());
-        horasAnimal.setText(processoAdocao.getHorasAnimal());
-        viajarAnimal.setText(processoAdocao.getViajarAnimal());
-        fugirAnimal.setText(processoAdocao.getFugirAnimal());
-        criarAnimal.setText(processoAdocao.getCriarAnimal());
-
-        if (processoAdocao.getVeterinario().equals("Sim")) {
-            simVet.setChecked(true);
-        } else if (processoAdocao.getVeterinario().equals("Não")) {
-            naoVet.setChecked(true);
-        }
     }
 
+    /**
+     * Funcao para confirmar a adocao
+     */
     public void confirmar_Adocao() {
-        processoAdocao.setStatus("Finalizado! Buscar animal!");
+        processoAdocao.setResposta("Finalizado! Buscar animal!");
         boolean alterar = processoAdocaoDAO.alterarStatus(processoAdocao);
-        boolean inserir = processoAdocaoDAO.inserirAdocaoDeferida(processoAdocao, funcionario);
-        if (alterar && inserir) {
-
-            List<ProcessoAdocao> exclusao = processoAdocaoDAO.automatizaSistemaAdocoes(processoAdocao.getIDAnimal());
-            for (ProcessoAdocao processoAdocao1 : exclusao) {
-                processoAdocao1.setStatus("Indeferido! Motivo: animal adotado!");
+        if (alterar) {
+            List<Adocao_View> exclusao = processoAdocaoDAO.automatizaSistemaAdocoes(processoAdocao.getId_animal());
+            for (Adocao_View processoAdocao1 : exclusao) {
+                processoAdocao1.setResposta("Indeferido! Motivo: animal adotado!");
                 alterar = processoAdocaoDAO.alterarStatus(processoAdocao1);
             }
 
@@ -279,16 +192,17 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            if (!alterar) {
-                Toast.makeText(getApplicationContext(), "Adoção não confirmada", Toast.LENGTH_SHORT).show();
-            } else if (!inserir) {
-                Toast.makeText(getApplicationContext(), "Inserção não confirmada", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(getApplicationContext(), "Adoção não confirmada", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void deletar_Adocao() {
 
+
+    /**
+     * Funcao para deletar adocao
+     */
+    public void deletar_Adocao() {
+        /*
         // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.dialog_adocao_indeferida, null);
@@ -340,6 +254,7 @@ public class FuncionarioFinalizar_Adocao extends AppCompatActivity {
 
         // show it
         alertDialog.show();
+        */
     }
 
     @Override

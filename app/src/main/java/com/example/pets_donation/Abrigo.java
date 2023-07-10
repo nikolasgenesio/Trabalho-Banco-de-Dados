@@ -12,6 +12,15 @@ public class Abrigo implements Serializable {
     private String nome, tipoTelefone, telefone;
     //endereco
     private String cep, estado, cidade, bairro, rua, numero;
+    private String CPF_Secretario;
+
+    public String getCPF_Secretario() {
+        return CPF_Secretario;
+    }
+
+    public void setCPF_Secretario(String CPF_Secretario) {
+        this.CPF_Secretario = CPF_Secretario;
+    }
 
     public Integer getID() {
         return ID;

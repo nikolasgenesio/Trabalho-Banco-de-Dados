@@ -2,6 +2,7 @@ package com.example.pets_donation;
 
 public class Adocoes {
 
+    //dados da adocao
     private int ID, ID_Animal;
     private String data, CPF_Adotante, CPF_Funcionario;
 

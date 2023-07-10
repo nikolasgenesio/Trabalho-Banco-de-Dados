@@ -3,6 +3,7 @@ package com.example.pets_donation;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.example.pets_donation.Models.FuncionarioDAO;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import java.io.Serializable;
 import java.util.EventListener;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         banco = new Conexao_Banco(this);
         //inserindo funcionario
 
-        if (!(banco.checkSenhaFuncionario("126.745.986-20", "barrafunda"))) {
+        if (!(banco.checkSenhaAdministrador("126.745.986-22", "barrafunda"))) {
             funcionarioDAO = new FuncionarioDAO(this);
             Boolean inserirFuncionario = funcionarioDAO.inserirFuncionarioADM();
             if (inserirFuncionario)
@@ -63,15 +65,15 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         checkBox = (CheckBox) findViewById(R.id.salvar);
 
-        //cpf.setText("126.745.986-20");
-        //cpf.setText("125.789.652-36");
-        //senha.setText("barrafunda");
-
         //Criando a máscara para o campo de CPF
         SimpleMaskFormatter cpf1 = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
         MaskTextWatcher cpf2 = new MaskTextWatcher(cpf, cpf1);
         cpf.addTextChangedListener(cpf2);
         //Fim da máscara
+
+        //cpf.setText("884.825.720-83");
+        //cpf.setText("200.117.980-41");
+        //senha.setText("nikolas1");
 
         //clique no botao de login
         btnLogar.setOnClickListener(new View.OnClickListener() {
@@ -107,12 +109,12 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         content1.setSpan(new UnderlineSpan(), 0, content1.length(), 0);
         esqueciSenha.setText(content1);
 
-        //teste
+        //NAO IMPLEMENTADO
         esqueciSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Termos.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, Termos.class);
+                //startActivity(intent);
             }
         });
     }
@@ -151,36 +153,64 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             return;
         }
 
-        /*
-        if (checkBox.isChecked()) {
-            editor.putBoolean("savelogin", true);
-            editor.putString("username", username);
-            editor.putString("password", password);
-            editor.commit();
-        } else {
-            editor.putBoolean("savelogin", false);
-            editor.clear();
-            editor.commit();
-        }
-         */
+        String tipo = banco.checkCPFForAll(username);
+        Log.i("Tarefa 1 - status Main", "OIi: " + tipo);
 
-        if (banco.checkSenhaAdotante(username, password)) {
-            Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, Tela_Adotante.class);
-            Adotante adotante = banco.obterAdotante(username, password);
-            Log.i("Tarefa 1 - status Main", "NOME: " + adotante.getNome());
-            intent.putExtra("adotante", adotante);
-            startActivity(intent);
-        } else if (banco.checkSenhaFuncionario(username, password)) {
-            Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
-            Intent intent1 = new Intent(MainActivity.this, Tela_Funcionario.class);
-            Funcionario funcionario = banco.obterFuncionario(username, password);
-            Log.i("Tarefa 1 - status Main", "NOME: " + funcionario.getNome());
-            intent1.putExtra("funcionario", funcionario);
-            startActivity(intent1);
-        } else {
-            Toast.makeText(MainActivity.this, "CPF e/ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
+        switch (tipo) {
+            case "administrador":
+                if (banco.checkSenhaAdministrador(username, password)) {
+                    Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(MainActivity.this, Tela_Administrador.class);
+                    Funcionario funcionario = banco.obterAdministrador(username, password);
+                    Log.i("Tarefa 1 - status Main", "ADM: ");
+                    intent1.putExtra("funcionario", funcionario);
+                    startActivity(intent1);
+                }
+                break;
+            case "secretario":
+                if (banco.checkSenhaSecretario(username, password)) {
+                    Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(MainActivity.this, Tela_Funcionario.class);
+                    Funcionario funcionario = banco.obterSecretario(username, password);
+                    intent1.putExtra("funcionario", funcionario);
+                    startActivity(intent1);
+                }
+                break;
+            case "adotante":
+                if (banco.checkSenhaAdotante(username, password)) {
+                    Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(MainActivity.this, Tela_Adotante.class);
+                    Adotante adotante = banco.obterAdotante(username, password);
+                    intent1.putExtra("adotante", adotante);
+                    startActivity(intent1);
+                }
+                break;
+            default:
+                Toast.makeText(MainActivity.this, "CPF e/ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
+                break;
         }
+
+
+//        else if (banco.checkSenhaSecretario(username, password)) {
+//            Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+//            Intent intent1 = new Intent(MainActivity.this, Tela_Secretario.class);
+//            Funcionario funcionario = banco.obterFuncionario(username, password);
+//            Log.i("Tarefa 1 - status Main", "NOME: " + funcionario.getNome());
+//            intent1.putExtra("funcionario", funcionario);
+//            startActivity(intent1);
+//        }
+//        else if (banco.checkSenhaAdministrador(username, password)) {
+//            Toast.makeText(MainActivity.this, "Login com sucesso!", Toast.LENGTH_SHORT).show();
+//            Intent intent1 = new Intent(MainActivity.this, Tela_Administrador.class);
+//            Funcionario funcionario = banco.obterFuncionario(username, password);
+//            Log.i("Tarefa 1 - status Main", "NOME: " + funcionario.getNome());
+//            intent1.putExtra("funcionario", funcionario);
+//            startActivity(intent1);
+//        }
+
+//        else {
+//            Toast.makeText(MainActivity.this, "CPF e/ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
+//        }
     }
 }
 

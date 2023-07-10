@@ -30,6 +30,7 @@ import java.util.List;
 
 public class FuncionarioGerencia_Animal extends AppCompatActivity {
 
+    //declaracao das variaveis
     private RadioButton cachorro, gato;
     private RadioButton macho, femea;
     private EditText nome, idade, cor, raca, porteFisico, vacinacao;
@@ -69,7 +70,7 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
         abrigoDAO = new AbrigoDAO(this);
         abrigoList = abrigoDAO.obterTodosAbrigos();
 
-
+        //Inicializando as variaveis
         nome = findViewById(R.id.nomeAnimal);
         idade = findViewById(R.id.idade);
         cor = findViewById(R.id.cor);
@@ -107,31 +108,36 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
             }
         });
 
+        //botao de alterar
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alterar_Animal();
+                //alterar_Animal();
             }
         });
 
+        //botao para deletar
         btnDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletar_Animal();
+                //deletar_Animal();
             }
         });
 
     }
 
+    /**
+     * Funcao para preencher as informacoes
+     */
     public void preencheInformacoes() {
         nome.setText(animal.getNome());
         idade.setText(animal.getIdade());
         cor.setText(animal.getCor());
         raca.setText(animal.getRaca());
-        porteFisico.setText(animal.getPortFisico());
+        porteFisico.setText(animal.getPorteFisico());
 
-        String str = String.join(", ", animal.getVacinacao());
-        vacinacao.setText(str);
+//        String str = String.join(", ", animal.getVacinacao());
+//        vacinacao.setText(str);
 
         if (animal.getTipo().equals("Cachorro")) {
             cachorro.setChecked(true);
@@ -149,7 +155,7 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
         adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adp1);
 
-        String selecionado = banco.retornaNomeAbrigo(animal.getIDAbrigo());
+        String selecionado = banco.retornaNomeAbrigo(animal.getId_abrigo());
         spinner.setSelection(getIndex(spinner, selecionado));
 
         Bitmap imagem = banco.retornaFotoAnimal(animal);
@@ -170,95 +176,10 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
     }
 
 
-    public void alterar_Animal() {
-        String nome1 = nome.getText().toString();
-        if (nome1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou o nome", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        String idade1 = idade.getText().toString();
-        if (idade1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou a idade", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String cor1 = cor.getText().toString();
-        if (idade1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou a idade", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String raca1 = raca.getText().toString();
-        if (raca1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou a raça", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String porteFisico1 = porteFisico.getText().toString();
-        if (porteFisico1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou o porte físico", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String vacinacao1 = vacinacao.getText().toString();
-        if (vacinacao1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou a vacinação", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (macho.isChecked()) {
-            genero = "Macho";
-        }
-        if (femea.isChecked()) {
-            genero = "Fêmea";
-        }
-
-        if (cachorro.isChecked()) {
-            tipo = "Cachorro";
-        }
-        if (gato.isChecked()) {
-            tipo = "Gato";
-        }
-
-        if (imageToStore == null) {
-            Toast.makeText(getApplicationContext(), "Você não arquivou a foto", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (abrigoList == null || abrigoList.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Cadastre o abrigo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        animal.setNome(nome1);
-        animal.setTipo(tipo);
-        animal.setIdade(idade1);
-        animal.setCor(cor1);
-        animal.setRaca(raca1);
-        animal.setGenero(genero);
-        animal.setPortFisico(porteFisico1);
-
-        List<String> vacinacoes = Arrays.asList(vacinacao1.split("\\s*,\\s*"));
-
-        animal.setVacinacao(vacinacoes);
-        animal.setFoto(imageToStore);
-
-        String Nomeabrigo = spinner.getSelectedItem().toString();
-        animal.setIDAbrigo(banco.retornaIDAbrigo(Nomeabrigo));
-
-        boolean alterar = animalDAO.alterar(animal);
-        if (alterar) {
-            Toast.makeText(getApplicationContext(), "Animal alterado", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Listar_Animais.class);
-            intent.putExtra("funcionario", funcionario);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "Animal não alterado", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
+    /**
+     * Funcao para abrir a galeria e selecionar imagem
+     */
     private void imagePickDialog() {
         String[] options = {"Abrir a galeria"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -291,6 +212,9 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para selecionar imagem
+     */
     private void chooseImage() {
         try {
             Intent intent = new Intent();
@@ -302,18 +226,6 @@ public class FuncionarioGerencia_Animal extends AppCompatActivity {
         }
     }
 
-    public void deletar_Animal() {
-        boolean deletar = animalDAO.excluir(animal);
-        if (deletar) {
-            Toast.makeText(getApplicationContext(), "Animal excluído", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Listar_Animais.class);
-            intent.putExtra("funcionario", funcionario);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "Animal não excluído", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar

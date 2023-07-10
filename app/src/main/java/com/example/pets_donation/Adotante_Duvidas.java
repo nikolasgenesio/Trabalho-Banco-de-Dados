@@ -8,7 +8,9 @@ import android.view.MenuItem;
 
 public class Adotante_Duvidas extends AppCompatActivity {
 
+    //declaracao da variavel
     private Adotante adotante;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -23,6 +23,7 @@ import java.util.List;
 
 public class AdotanteVisualiza_Animal extends AppCompatActivity {
 
+    //declaracao das variaveis
     private RadioButton cachorro, gato;
     private RadioButton macho, femea;
     private TextView nome, idade, cor, raca, porteFisico, vacinacao;
@@ -53,6 +54,7 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Animal Selecionado");
 
+        //atribuicoes
         animalDAO = new AnimalDAO(this);
         banco = new Conexao_Banco(this);
         this.adotante = (Adotante) getIntent().getSerializableExtra("adotante");
@@ -90,6 +92,7 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
 
         preencheInformacoes();
 
+        //clique no botao de cancelar
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +100,7 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
             }
         });
 
+        //clique no botao de confirmar
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,15 +112,16 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
         });
     }
 
+    /**
+     * Preencher informacoes do animal
+     */
     public void preencheInformacoes() {
         nome.setText("Nome: " + animal.getNome());
         idade.setText("Idade: " + animal.getIdade());
         cor.setText("Cor: " + animal.getCor());
         raca.setText("Raça: " + animal.getRaca());
-        porteFisico.setText("Porte Físico: " + animal.getPortFisico());
+        porteFisico.setText("Porte Físico: " + animal.getPorteFisico());
 
-        String str = String.join(", ", animal.getVacinacao());
-        vacinacao.setText("Vacinação: " + str);
 
         if (animal.getTipo().equals("Cachorro")) {
             cachorro.setChecked(true);
@@ -126,7 +131,7 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
 
         if (animal.getGenero().equals("Macho")) {
             macho.setChecked(true);
-        } else if (animal.getTipo().equals("Fêmea")) {
+        } else if (animal.getGenero().equals("Fêmea")) {
             femea.setChecked(true);
         }
 
@@ -139,7 +144,7 @@ public class AdotanteVisualiza_Animal extends AppCompatActivity {
         adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adp1);
 
-        String selecionado = banco.retornaNomeAbrigo(animal.getIDAbrigo());
+        String selecionado = banco.retornaNomeAbrigo(animal.getId_abrigo());
         spinner.setSelection(getIndex(spinner, selecionado));
         spinner.setEnabled(false);
 

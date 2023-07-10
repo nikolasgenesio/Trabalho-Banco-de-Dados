@@ -19,13 +19,16 @@ public class VPAdapter extends FragmentStateAdapter {
         switch (position)
         {
             case 1:
-
                 return new fragment2Adocao();
             default:
                 return new fragment1Adocao();
         }
     }
 
+    /**
+     * Funcao para retornar o tamanho do TabLayout
+     * @return tamanho
+     */
     @Override
     public int getItemCount() {
         return 2;

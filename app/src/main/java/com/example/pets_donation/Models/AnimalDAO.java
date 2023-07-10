@@ -31,26 +31,30 @@ public class AnimalDAO {
         banco = conexaoBanco.getWritableDatabase();
     }
 
+    /**
+     * Funcao para inserir animal no banco
+     * @param animal animal a ser inserido
+     * @return verdadeiro se inseriu e falso, caso contrario
+     */
     public Boolean inserir(Animal animal) {
         ContentValues values = new ContentValues();
-        values.put("NOME", animal.getNome());
-        values.put("TIPO", animal.getTipo());
-        values.put("IDADE", animal.getIdade());
-        values.put("COR", animal.getCor());
-        values.put("RACA", animal.getRaca());
-        values.put("GENERO", animal.getGenero());
-        values.put("PORTE_FISICO", animal.getPortFisico());
+        values.put("nome", animal.getNome());
+        values.put("tipo", animal.getTipo());
+        values.put("idade", animal.getIdade());
+        values.put("cor", animal.getCor());
+        values.put("raca", animal.getRaca());
+        values.put("genero", animal.getGenero());
+        values.put("porte_fisico", animal.getPorteFisico());
 
-        String listString = String.join(", ", animal.getVacinacao());
-        values.put("VACINACAO", listString);
 
         byteArrayOutputStream = new ByteArrayOutputStream();
         animal.getFoto().compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         imageInBytes = byteArrayOutputStream.toByteArray();
 
-        values.put("FOTO", imageInBytes);
-        values.put("ID_ABRIGO", animal.getIDAbrigo());
-        values.put("CPF_FUNCIONARIO", animal.getCPF_Funcionario());
+        values.put("foto", imageInBytes);
+        values.put("id_abrigo", animal.getId_abrigo());
+        values.put("CPF_Secretario", animal.getCPF_Secretario());
+        values.put("CPF_Fiscal", animal.getCPF_Fiscal());
         long inserir = banco.insert("animal", null, values);
         if (inserir == -1)
             return false;
@@ -58,68 +62,12 @@ public class AnimalDAO {
             return true;
     }
 
+    /**
+     * Funcao para obter todos os animais do banco
+     * @return lista de animais
+     */
     public List<Animal> obterTodosAnimais() {
-        List<Animal> animalList = new ArrayList<>();
-        Cursor cursor = banco.query("animal", new String[]{"ID, NOME, TIPO, IDADE," +
-                        "COR, RACA, GENERO, PORTE_FISICO, VACINACAO, FOTO, ID_ABRIGO, CPF_FUNCIONARIO"}, null, null,
-                null, null, null);
-
-        //deslocar nas linhas da tabela
-        while (cursor.moveToNext()) {
-            Animal animal = new Animal();
-            animal.setID(cursor.getInt(0));
-            animal.setNome(cursor.getString(1));
-            animal.setTipo(cursor.getString(2));
-            animal.setIdade(cursor.getString(3));
-            animal.setCor(cursor.getString(4));
-            animal.setRaca(cursor.getString(5));
-            animal.setGenero(cursor.getString(6));
-            animal.setPortFisico(cursor.getString(7));
-            List<String> vacinacoes = Arrays.asList(cursor.getString(8).split("\\s*,\\s*"));
-            animal.setVacinacao(vacinacoes);
-            byte[] imageByte = cursor.getBlob(9);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
-            animal.setFoto(bitmap);
-            animal.setIDAbrigo(cursor.getInt(10));
-            animal.setCPF_Funcionario(cursor.getString(11));
-            animalList.add(animal);
-        }
-        return animalList;
+        return conexaoBanco.animalList();
     }
 
-
-    public boolean alterar(Animal animal) {
-        ContentValues values = new ContentValues();
-        values.put("NOME", animal.getNome());
-        values.put("TIPO", animal.getTipo());
-        values.put("IDADE", animal.getIdade());
-        values.put("COR", animal.getCor());
-        values.put("RACA", animal.getRaca());
-        values.put("GENERO", animal.getGenero());
-        values.put("PORTE_FISICO", animal.getPortFisico());
-        String listString = String.join(", ", animal.getVacinacao());
-        values.put("VACINACAO", listString);
-        values.put("ID_ABRIGO", animal.getIDAbrigo());
-
-        Bitmap imagem = animal.getFoto();
-        byteArrayOutputStream = new ByteArrayOutputStream();
-        imagem.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        imageInBytes = byteArrayOutputStream.toByteArray();
-        values.put("FOTO", imageInBytes);
-
-        long inserir = banco.update("animal", values, "ID = ?", new String[]{animal.getID().toString()});
-        if (inserir == -1)
-            return false;
-        else
-            return true;
-    }
-
-
-    public boolean excluir(Animal animal) {
-        long deletar = banco.delete("animal", "ID = ?", new String[]{animal.getID().toString()});
-        if (deletar == -1)
-            return false;
-        else
-            return true;
-    }
 }

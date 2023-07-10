@@ -21,6 +21,7 @@ import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 public class Cadastro_Abrigo extends AppCompatActivity {
 
+    //declaracao das variaveis
     private EditText nome, telefone;
     private EditText cep, estado, cidade, rua, numero, bairro;
     private Button btnLimpar, btnCancelar, btnConfirmar, btnPesquisar;
@@ -76,6 +77,7 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         //obriga o usuario a escrever cep correto
         estado.setFocusable(false);
 
+        //clique no botao de pesquisa
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +130,9 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funcao para limpar os dados
+     */
     public void limparDados() {
         nome.setText("");
         telefone.setText("");
@@ -138,6 +143,9 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         numero.setText("");
     }
 
+    /**
+     * Funcao para limpar o endereco
+     */
     public void limparEndereco() {
         estado.setText("");
         cidade.setText("");
@@ -183,6 +191,9 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para adicionar abrigo
+     */
     public void adicionar_Abrigo() {
         String nome1 = nome.getText().toString();
         if (nome1.matches("")) {
@@ -262,21 +273,17 @@ public class Cadastro_Abrigo extends AppCompatActivity {
         abrigo.setBairro(bairro1);
         abrigo.setRua(rua1);
         abrigo.setNumero(numero1);
+        abrigo.setCPF_Secretario(funcionario.getCpf());
 
-        long id = abrigoDAO.inserir(abrigo);
-        Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
-        limparDados();
-        Intent intent = new Intent(Cadastro_Abrigo.this, Tela_Funcionario.class);
-        intent.putExtra("funcionario", funcionario);
-        startActivity(intent);
-        /*
-        Toast.makeText(getApplicationContext(), "Nome: " +nome1 + "\ntipo: "+ tipoTelefone
-                + "\nTelefone: "+telefone1 + "\nCEP: " + cep1 + "\nEstado: " + estado1
-                + "\nCidade: " + cidade1 + "\nBairro: " + bairro1 + "\nRua: " + rua1
-                + "\nNumero: " + numero1, Toast.LENGTH_SHORT).show();
-         */
-
-
+        Boolean aBoolean = abrigoDAO.inserir(abrigo);
+        if (aBoolean)
+        {
+            Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
+            limparDados();
+            Intent intent = new Intent(Cadastro_Abrigo.this, Tela_Funcionario.class);
+            intent.putExtra("funcionario", funcionario);
+            startActivity(intent);
+        }
     }
 
     private class DownloadCEPTask extends AsyncTask<String, Void, BuscaCep> {

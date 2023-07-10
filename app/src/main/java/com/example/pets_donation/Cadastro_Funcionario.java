@@ -28,7 +28,7 @@ import java.util.Date;
 public class Cadastro_Funcionario extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //declaracao das variaveis
-    private EditText nome, nascimento, telefone, email, salario;
+    private EditText nome, nascimento, telefone, salario;
     private EditText cep, estado, cidade, rua, numero, bairro;
     private EditText cpf, senha, confirmasenha;
     private Button btnLimpar, btnCancelar, btnAvancar, btnPesquisar;
@@ -38,7 +38,6 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
     private String sexo, tipoTelefone;
     private SimpleMaskFormatter telefoneCelular, telefoneFixo;
     private MaskTextWatcher telefone1;
-
 
     private FuncionarioDAO funcionarioDAO;
     private Conexao_Banco banco;
@@ -62,7 +61,6 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
         celular = (RadioButton) findViewById(R.id.radioButtonTelefoneCelular);
         telefone = findViewById(R.id.telefone);
         telefone.setFocusable(false);
-        email = findViewById(R.id.email);
         masculino = (RadioButton) findViewById(R.id.radioButtonMasculino);
         feminino = (RadioButton) findViewById(R.id.radioButtonFeminino);
         salario = findViewById(R.id.salario);
@@ -109,13 +107,13 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
 
         this.funcionarioADM = (Funcionario) getIntent().getSerializableExtra("adm");
 
+        //caso tenha funcionario
         Intent intent = getIntent();
         if (intent.hasExtra("funcionario")) {
             funcionario = (Funcionario) intent.getSerializableExtra("funcionario");
             nome.setText(funcionario.getNome());
             nascimento.setText(funcionario.getDataNascimento());
             telefone.setText(funcionario.getTelefone());
-            email.setText(funcionario.getEmail());
 
             Double salario1 = funcionario.getSalario();
             salario.setText(String.valueOf(salario1));
@@ -142,6 +140,7 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
                 fixo.setChecked(true);
         }
 
+        //botao de pesquisa
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,11 +167,11 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View v) {
                 if (funcionario == null) {
-                    Intent intent = new Intent(Cadastro_Funcionario.this, Tela_Funcionario.class);
+                    Intent intent = new Intent(Cadastro_Funcionario.this, Tela_Administrador.class);
                     intent.putExtra("funcionario", funcionarioADM);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(Cadastro_Funcionario.this, Tela_Funcionario.class);
+                    Intent intent = new Intent(Cadastro_Funcionario.this, Tela_Administrador.class);
                     intent.putExtra("funcionario", funcionario);
                     startActivity(intent);
                 }
@@ -187,7 +186,6 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
                 nome.setText("");
                 nascimento.setText("");
                 telefone.setText("");
-                email.setText("");
                 salario.setText("");
 
                 estado.setText("");
@@ -211,6 +209,9 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
 
     }
 
+    /**
+     * Funcao para limpar endereco
+     */
     public void limparEndereco() {
         estado.setText("");
         cidade.setText("");
@@ -219,11 +220,13 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
         numero.setText("");
     }
 
+    /**
+     * Funcao para limpar dados
+     */
     public void limparDados() {
         nome.setText("");
         nascimento.setText("");
         telefone.setText("");
-        email.setText("");
         salario.setText("");
 
         estado.setText("");
@@ -334,16 +337,6 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
             return;
         }
 
-        String email1 = email.getText().toString();
-        if (email1.matches("")) {
-            Toast.makeText(getApplicationContext(), "Você não digitou o email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!isEmailValid(email1)) {
-            Toast.makeText(getApplicationContext(), "Email inválido", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         String salario1 = salario.getText().toString();
         if (salario1.matches("")) {
@@ -437,7 +430,7 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
         }
 
 
-        Boolean verificarFucnionario = banco.checkSenhaFuncionario(nome1, senha1);
+        Boolean verificarFucnionario = banco.checkSenhaUsuario(nome1, senha1);
         if (verificarFucnionario) {
             Toast.makeText(getApplicationContext(), "Funcionário Existente!", Toast.LENGTH_SHORT).show();
         } else {
@@ -450,7 +443,6 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
                 funcionario.setSexo(sexo);
                 funcionario.setTipoTelefone(tipoTelefone);
                 funcionario.setTelefone(telefone1);
-                funcionario.setEmail(email1);
 
                 //renda mensal
                 double salario = Double.parseDouble(salario1);
@@ -466,11 +458,13 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
                 funcionario.setCpf(cpf1);
                 funcionario.setSenha(senha1);
 
-                Boolean inserir = funcionarioDAO.inserir(funcionario);
+                funcionario.setCPF_Administrador(funcionarioADM.getCPF_Administrador());
+
+                Boolean inserir = funcionarioDAO.inserir(funcionario, funcionarioADM);
                 if (inserir) {
                     Toast.makeText(getApplicationContext(), "CADASTRO COM SUCESSO!", Toast.LENGTH_SHORT).show();
                     limparDados();
-                    Intent intent = new Intent(Cadastro_Funcionario.this, Tela_Funcionario.class);
+                    Intent intent = new Intent(Cadastro_Funcionario.this, Tela_Administrador.class);
                     intent.putExtra("funcionario", funcionarioADM);
                     startActivity(intent);
                 } else
@@ -482,7 +476,6 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
                 funcionario.setSexo(sexo);
                 funcionario.setTipoTelefone(tipoTelefone);
                 funcionario.setTelefone(telefone1);
-                funcionario.setEmail(email1);
 
                 //renda mensal
                 double salario = Double.parseDouble(salario1);
@@ -497,6 +490,7 @@ public class Cadastro_Funcionario extends AppCompatActivity implements AdapterVi
                 funcionario.setNumero(numero1);
                 funcionario.setCpf(cpf1);
                 funcionario.setSenha(senha1);
+                funcionario.setCPF_Administrador(funcionarioADM.getCPF_Administrador());
 
                 Boolean inserir = funcionarioDAO.alterar(funcionario);
                 if (inserir) {

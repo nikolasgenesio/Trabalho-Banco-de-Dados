@@ -35,6 +35,7 @@ import java.util.List;
 
 public class AdotantePerfil_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Adotante adotante;
     private ListView listView;
     private CircleImageView circleImageView;
@@ -66,13 +67,14 @@ public class AdotantePerfil_Fragment extends Fragment {
         textView = view.findViewById(R.id.textNomePerfil);
         textView.setText(adotante.getNome());
 
-
+        //selecao
         values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "Nova Imagem");
         values.put(MediaStore.Images.Media.DESCRIPTION, "Sua camera");
         imageUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
 
+        //se ja existe imagem
         Bitmap imagem = banco.retornaFotoAdotante(adotante.getCpf(), adotante.getSenha());
         if (imagem != null) {
             circleImageView.setImageBitmap(imagem);
@@ -91,6 +93,7 @@ public class AdotantePerfil_Fragment extends Fragment {
         ArrayAdapter arrayAdapter = new ArrayAdapter(view.getContext(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(arrayAdapter);
 
+        //clique para gerenciar dados
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -101,6 +104,9 @@ public class AdotantePerfil_Fragment extends Fragment {
         });
     }
 
+    /**
+     * Funcao para abrir a galeria e selecionar imagem
+     */
     private void imagePickDialog() {
         String[] options = {"Abrir a galeria"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -127,13 +133,16 @@ public class AdotantePerfil_Fragment extends Fragment {
                 imagePath = data.getData();
                 imageToStore = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imagePath);
                 circleImageView.setImageBitmap(imageToStore);
-                banco.alterarFotoAdotante(adotante.getCpf(), adotante.getSenha(), imageToStore);
+                //banco.alterarFotoAdotante(adotante.getCpf(), adotante.getSenha(), imageToStore);
             }
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * Funcao para escolher imagem
+     */
     private void chooseImage() {
         try {
             Intent intent = new Intent();

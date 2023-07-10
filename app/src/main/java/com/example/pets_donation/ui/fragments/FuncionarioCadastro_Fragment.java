@@ -30,6 +30,7 @@ import java.util.Calendar;
 
 public class FuncionarioCadastro_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Funcionario funcionario;
     private ListView listView;
     private TextView textView;
@@ -37,17 +38,22 @@ public class FuncionarioCadastro_Fragment extends Fragment {
     String[] maintitle = {
             "Cadastrar Abrigo",
             "Cadastrar Animal",
-            "Cadastrar Funcionário",
+            "Cadastrar Veterinário",
+            "Cadastrar Vacina",
+            "Cadastrar Serviço",
+            "Cadastrar Consulta",
     };
 
     String[] subtitle = {
             "Informações gerais do abrigo", "Registro geral do animal",
-            "Efetivar registro do funcionário",
+            "Efetivar registro do veterinário", "Registrar vacina que um animal tomou",
+            "Registrar serviço que um animal precisou", "Registrar consulta do animal no veterinário",
     };
 
     Integer[] imgid = {
             R.drawable.adicionar_abrigo_vector, R.drawable.pets_vector,
-            R.drawable.adicionar_funcionario_vector,
+            R.drawable.adicionar_funcionario_vector, R.drawable.animal_vacina,
+            R.drawable.animal_servico, R.drawable.animal_veterinario
     };
 
     @Override
@@ -66,6 +72,7 @@ public class FuncionarioCadastro_Fragment extends Fragment {
         listView = view.findViewById(R.id.listViewPerfil);
         textView = view.findViewById(R.id.textoBoas);
 
+        //verificar a hora para exibir mensagem
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
@@ -77,10 +84,11 @@ public class FuncionarioCadastro_Fragment extends Fragment {
             textView.setText("Boa Noite " + funcionario.getNome());
         }
 
-
+        //exibir lista adaptada
         Funcionario_ListCadastros adapter = new Funcionario_ListCadastros(getActivity(), maintitle, subtitle, imgid);
         listView.setAdapter(adapter);
 
+        //abre novas telas de acordo com a selecao
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -96,6 +104,18 @@ public class FuncionarioCadastro_Fragment extends Fragment {
                         intent.putExtra("funcionario", funcionario);
 
                         startActivity(intent);
+                        break;
+                    }
+                    case 2: {
+                        break;
+                    }
+                    case 3: {
+                        break;
+                    }
+                    case 4: {
+                        break;
+                    }
+                    case 5: {
                         break;
                     }
                     default: {

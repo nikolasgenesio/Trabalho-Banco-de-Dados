@@ -7,11 +7,27 @@ import java.util.List;
 
 public class Animal implements Serializable {
 
-    private Integer ID, IDAbrigo;
-    private String nome, tipo, idade, cor, raca, genero, portFisico;
+    //dados do animal
+    private Integer id_animal, id_abrigo;
+    private String nome, idade, cor, raca, genero, porteFisico, tipo;
     private transient Bitmap foto;
-    private List<String> vacinacao;
-    private String CPF_Funcionario;
+    private String CPF_Secretario, CPF_Fiscal;
+
+    public Integer getId_animal() {
+        return id_animal;
+    }
+
+    public void setId_animal(Integer id_animal) {
+        this.id_animal = id_animal;
+    }
+
+    public Integer getId_abrigo() {
+        return id_abrigo;
+    }
+
+    public void setId_abrigo(Integer id_abrigo) {
+        this.id_abrigo = id_abrigo;
+    }
 
     public String getNome() {
         return nome;
@@ -19,30 +35,6 @@ public class Animal implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Integer getID() {
-        return ID;
-    }
-
-    public void setID(Integer ID) {
-        this.ID = ID;
-    }
-
-    public Integer getIDAbrigo() {
-        return IDAbrigo;
-    }
-
-    public void setIDAbrigo(Integer IDAbrigo) {
-        this.IDAbrigo = IDAbrigo;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public String getIdade() {
@@ -77,12 +69,20 @@ public class Animal implements Serializable {
         this.genero = genero;
     }
 
-    public String getPortFisico() {
-        return portFisico;
+    public String getPorteFisico() {
+        return porteFisico;
     }
 
-    public void setPortFisico(String portFisico) {
-        this.portFisico = portFisico;
+    public void setPorteFisico(String porteFisico) {
+        this.porteFisico = porteFisico;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Bitmap getFoto() {
@@ -93,20 +93,20 @@ public class Animal implements Serializable {
         this.foto = foto;
     }
 
-    public List<String> getVacinacao() {
-        return vacinacao;
+    public String getCPF_Secretario() {
+        return CPF_Secretario;
     }
 
-    public void setVacinacao(List<String> vacinacao) {
-        this.vacinacao = vacinacao;
+    public void setCPF_Secretario(String CPF_Secretario) {
+        this.CPF_Secretario = CPF_Secretario;
     }
 
-    public String getCPF_Funcionario() {
-        return CPF_Funcionario;
+    public String getCPF_Fiscal() {
+        return CPF_Fiscal;
     }
 
-    public void setCPF_Funcionario(String CPF_Funcionario) {
-        this.CPF_Funcionario = CPF_Funcionario;
+    public void setCPF_Fiscal(String CPF_Fiscal) {
+        this.CPF_Fiscal = CPF_Fiscal;
     }
 
     @Override

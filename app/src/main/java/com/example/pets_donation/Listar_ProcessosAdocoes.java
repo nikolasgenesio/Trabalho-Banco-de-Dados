@@ -21,11 +21,12 @@ import android.widget.Toast;
 
 public class Listar_ProcessosAdocoes extends AppCompatActivity {
 
+    //declaracao das variaveis
     private TextView textView;
     private Funcionario funcionario;
     private ListView listView;
     private ProcessoAdocaoDAO processoAdocaoDAO;
-    private List<ProcessoAdocao> processoAdocaoList;
+    private List<Adocao_View> processoAdocaoList;
     private AdocaoFuncionario adocaoFuncionario;
 
     @Override
@@ -38,6 +39,7 @@ public class Listar_ProcessosAdocoes extends AppCompatActivity {
         getSupportActionBar().setTitle("Relatório - Processos");
         this.funcionario = (Funcionario) getIntent().getSerializableExtra("funcionario");
 
+        //inicializando as variaveis
         textView = findViewById(R.id.msgProcessos);
         listView = findViewById(R.id.lista_adocoes);
         processoAdocaoDAO = new ProcessoAdocaoDAO(this);
@@ -53,6 +55,10 @@ public class Listar_ProcessosAdocoes extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcao para adaptar lista
+     * @param myListView Lista de processos de adocao
+     */
     public void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {

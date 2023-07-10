@@ -187,19 +187,6 @@
             android:maxLines="1"
             android:textColorHint="@color/black" />
 
-        <EditText
-            android:id="@+id/vacinacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/nome"
-            android:hint="Vacinação"
-            android:inputType="text"
-            android:maxLines="2"
-            android:textColorHint="@color/black" />
-
         <LinearLayout
 
             android:layout_width="wrap_content"

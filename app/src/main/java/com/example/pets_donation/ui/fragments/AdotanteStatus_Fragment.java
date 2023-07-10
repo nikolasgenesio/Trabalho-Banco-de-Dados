@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.pets_donation.Adocao_View;
 import com.example.pets_donation.Adotante;
 import com.example.pets_donation.AnimalAdocaoListAdapter;
 import com.example.pets_donation.Models.ProcessoAdocaoDAO;
@@ -24,10 +25,11 @@ import java.util.List;
 
 public class AdotanteStatus_Fragment extends Fragment {
 
+    //declaracao das variaveis
     private Adotante adotante;
     private ListView listView;
     private ProcessoAdocaoDAO processoAdocaoDAO;
-    private List<ProcessoAdocao> processoAdocaoList;
+    private List<Adocao_View> processoAdocaoList;
     private AnimalAdocaoListAdapter animalAdocaoListAdapter;
 
     @SuppressLint("LongLogTag")
@@ -48,6 +50,7 @@ public class AdotanteStatus_Fragment extends Fragment {
         processoAdocaoList = processoAdocaoDAO.retornaStatusAdocaoAdotante(adotante.getCpf());
         animalAdocaoListAdapter = new AnimalAdocaoListAdapter(getActivity(), R.layout.list_view_adocoes, processoAdocaoList);
         //ArrayAdapter<ProcessoAdocao> processoAdocaoArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, processoAdocaoList);
+        //exibir a lista adaptada
         listView.setAdapter(animalAdocaoListAdapter);
     }
 }

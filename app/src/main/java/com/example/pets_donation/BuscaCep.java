@@ -14,6 +14,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class BuscaCep {
+
+    //declaracao das variaveis
     private String CEP;
     private String Logradouro;
     private String Complemento;

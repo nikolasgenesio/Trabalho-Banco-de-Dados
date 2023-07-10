@@ -6,11 +6,20 @@ import java.io.Serializable;
 
 public class ProcessoAdocao implements Serializable {
 
+    //dados do processo de adocao
     private Integer ID, IDAnimal;
-    private String CPFAdotante;
+    private String CPFAdotante, CPFSecretario;
     private String qtdePessoas, qtdeAnimais, localAnimais, permanecerAnimais, animaisAtual, animalFalecido, sustentarAnimal, vizinhosAnimal;
     private String passeioAnimal, custosAnimal, alergiaAnimal, respeitoAnimal, criancaAnimal, horasAnimal, viajarAnimal, fugirAnimal, criarAnimal;
-    private String morada, imovel, veterinario, status;
+    private String morada, imovel, veterinario, status, data, questionario;
+
+    public String getQuestionario() {
+        return questionario;
+    }
+
+    public void setQuestionario(String questionario) {
+        this.questionario = questionario;
+    }
 
     public Integer getID() {
         return ID;
@@ -202,6 +211,22 @@ public class ProcessoAdocao implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCPFSecretario() {
+        return CPFSecretario;
+    }
+
+    public void setCPFSecretario(String CPFSecretario) {
+        this.CPFSecretario = CPFSecretario;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     @Override

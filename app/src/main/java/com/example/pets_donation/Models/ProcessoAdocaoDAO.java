@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.example.pets_donation.Adocao_View;
 import com.example.pets_donation.Animal;
 import com.example.pets_donation.Funcionario;
 import com.example.pets_donation.Lib.Conexao_Banco;
@@ -32,219 +33,128 @@ public class ProcessoAdocaoDAO {
         banco = conexaoBanco.getWritableDatabase();
     }
 
+    /**
+     * Funcao para inserir adotante no banco
+     * @param adocao adocao a ser inserida
+     * @return verdadeiro se inseriu e falso, caso contrario
+     */
     public Boolean inserir(ProcessoAdocao adocao) {
         ContentValues values = new ContentValues();
-        values.put("MORADA", adocao.getMorada());
-        values.put("IMOVEL", adocao.getImovel());
-        values.put("QTDE_PESSOAS", adocao.getQtdePessoas());
-        values.put("QTDE_ANIMAIS", adocao.getQtdeAnimais());
-        values.put("LOCAL", adocao.getLocalAnimais());
-        values.put("PERMANENCIA", adocao.getPermanecerAnimais());
-        values.put("ATUAL", adocao.getAnimaisAtual());
-        values.put("FALECIDO", adocao.getAnimalFalecido());
-        values.put("SUSTENTO", adocao.getSustentarAnimal());
-        values.put("VIZINHOS", adocao.getVizinhosAnimal());
-        values.put("PASSEIO", adocao.getPasseioAnimal());
-        values.put("CUSTOS", adocao.getCustosAnimal());
-        values.put("ALERGIA", adocao.getAlergiaAnimal());
-        values.put("RESPEITO", adocao.getRespeitoAnimal());
-        values.put("CRIANCA", adocao.getCriancaAnimal());
-        values.put("HORAS", adocao.getHorasAnimal());
-        values.put("VIAGEM", adocao.getViajarAnimal());
-        values.put("FUGIR", adocao.getFugirAnimal());
-        values.put("CRIAR", adocao.getCriarAnimal());
-        values.put("VETERINARIO", adocao.getVeterinario());
-        values.put("CPF_ADOTANTE", adocao.getCPFAdotante());
-        values.put("ID_ANIMAL", adocao.getIDAnimal());
-        values.put("STATUS", adocao.getStatus());
-        long inserir = banco.insert("processoAdocao", null, values);
+
+        values.put("data", adocao.getData());
+        values.put("resposta", adocao.getStatus());
+
+        values.put("questionario", adocao.getQuestionario());
+
+
+        values.put("CPF_Secretario", adocao.getCPFSecretario());
+        values.put("CPF_Adotante", adocao.getCPFAdotante());
+        values.put("id_animal", adocao.getIDAnimal());
+
+        long inserir = banco.insert("adocao", null, values);
         if (inserir == -1)
             return false;
         else
             return true;
     }
 
-    public List<ProcessoAdocao> retornaStatusAdocaoAdotante(String CPF) {
-        List<ProcessoAdocao> adocaoList = new ArrayList<>();
-        Cursor cursor = banco.query("processoAdocao", new String[]{"ID, MORADA, IMOVEL, QTDE_PESSOAS," +
-                        "QTDE_ANIMAIS, LOCAL, PERMANENCIA, ATUAL, FALECIDO, SUSTENTO, VIZINHOS," +
-                        "PASSEIO, CUSTOS, ALERGIA, RESPEITO, CRIANCA, HORAS, VIAGEM, FUGIR, CRIAR," +
-                        "VETERINARIO, STATUS, CPF_ADOTANTE, ID_ANIMAL"}, "CPF_ADOTANTE like " + "'" + CPF + "'", null,
+    /**
+     * Funcao para retornar o status de uma adocao
+     * @param CPF CPF do adotante
+     * @return lista de processos
+     */
+    public List<Adocao_View> retornaStatusAdocaoAdotante(String CPF) {
+        List<Adocao_View> adocaoList = new ArrayList<>();
+        Cursor cursor = banco.query("adocao", new String[]{"id_adocao, data, resposta, questionario," +
+                        "CPF_Secretario, CPF_Adotante, id_animal"}, "CPF_Adotante like " + "'" + CPF + "'", null,
                 null, null, null);
         //deslocar nas linhas da tabela
         while (cursor.moveToNext()) {
-            ProcessoAdocao adocao = new ProcessoAdocao();
-            adocao.setID(cursor.getInt(0));
-            adocao.setMorada(cursor.getString(1));
-            adocao.setImovel(cursor.getString(2));
-            adocao.setQtdePessoas(cursor.getString(3));
-            adocao.setQtdeAnimais(cursor.getString(4));
-            adocao.setLocalAnimais(cursor.getString(5));
-            adocao.setPermanecerAnimais(cursor.getString(6));
-            adocao.setAnimaisAtual(cursor.getString(7));
-            adocao.setAnimalFalecido(cursor.getString(8));
-            adocao.setSustentarAnimal(cursor.getString(9));
-            adocao.setVizinhosAnimal(cursor.getString(10));
-            adocao.setPasseioAnimal(cursor.getString(11));
-            adocao.setCustosAnimal(cursor.getString(12));
-            adocao.setAlergiaAnimal(cursor.getString(13));
-            adocao.setRespeitoAnimal(cursor.getString(14));
-            adocao.setCriancaAnimal(cursor.getString(15));
-            adocao.setHorasAnimal(cursor.getString(16));
-            adocao.setViajarAnimal(cursor.getString(17));
-            adocao.setFugirAnimal(cursor.getString(18));
-            adocao.setCriarAnimal(cursor.getString(19));
-            adocao.setVeterinario(cursor.getString(20));
-            adocao.setStatus(cursor.getString(21));
-            adocao.setCPFAdotante(cursor.getString(22));
-            adocao.setIDAnimal(cursor.getInt(23));
+            Adocao_View adocao = new Adocao_View();
+            adocao.setId_adocao(cursor.getInt(0));
+            adocao.setData(cursor.getString(1));
+            adocao.setResposta(cursor.getString(2));
+            adocao.setQuestionario(cursor.getString(3));
+            adocao.setCPF_Secretario(cursor.getString(4));
+            adocao.setCPFAdotante(cursor.getString(5));
+            adocao.setId_animal(cursor.getInt(6));
             adocaoList.add(adocao);
         }
         return adocaoList;
     }
 
-    public List<ProcessoAdocao> retornaStatusAdocaoFuncionario() {
-        List<ProcessoAdocao> adocaoList = new ArrayList<>();
-        Cursor cursor = banco.query("processoAdocao", new String[]{"ID, MORADA, IMOVEL, QTDE_PESSOAS," +
-                        "QTDE_ANIMAIS, LOCAL, PERMANENCIA, ATUAL, FALECIDO, SUSTENTO, VIZINHOS," +
-                        "PASSEIO, CUSTOS, ALERGIA, RESPEITO, CRIANCA, HORAS, VIAGEM, FUGIR, CRIAR," +
-                        "VETERINARIO, STATUS, CPF_ADOTANTE, ID_ANIMAL"}, null, null,
+
+    /**
+     * Funcao para retornar o relatorio de adocoes
+     * @return lista de processos de adocao
+     */
+    public List<Adocao_View> retornaRelatorioAdocao() {
+        List<Adocao_View> adocaoList = new ArrayList<>();
+        Cursor cursor = banco.query("adocao", new String[]{"id_adocao, data, resposta, questionario," +
+                        "CPF_Secretario, CPF_Adotante, id_animal"}, null, null,
                 null, null, null);
         //deslocar nas linhas da tabela
         while (cursor.moveToNext()) {
-            if (cursor.getString(21).equals("Em Andamento")) {
-                ProcessoAdocao adocao = new ProcessoAdocao();
-                adocao.setID(cursor.getInt(0));
-                adocao.setMorada(cursor.getString(1));
-                adocao.setImovel(cursor.getString(2));
-                adocao.setQtdePessoas(cursor.getString(3));
-                adocao.setQtdeAnimais(cursor.getString(4));
-                adocao.setLocalAnimais(cursor.getString(5));
-                adocao.setPermanecerAnimais(cursor.getString(6));
-                adocao.setAnimaisAtual(cursor.getString(7));
-                adocao.setAnimalFalecido(cursor.getString(8));
-                adocao.setSustentarAnimal(cursor.getString(9));
-                adocao.setVizinhosAnimal(cursor.getString(10));
-                adocao.setPasseioAnimal(cursor.getString(11));
-                adocao.setCustosAnimal(cursor.getString(12));
-                adocao.setAlergiaAnimal(cursor.getString(13));
-                adocao.setRespeitoAnimal(cursor.getString(14));
-                adocao.setCriancaAnimal(cursor.getString(15));
-                adocao.setHorasAnimal(cursor.getString(16));
-                adocao.setViajarAnimal(cursor.getString(17));
-                adocao.setFugirAnimal(cursor.getString(18));
-                adocao.setCriarAnimal(cursor.getString(19));
-                adocao.setVeterinario(cursor.getString(20));
-                adocao.setStatus(cursor.getString(21));
-                adocao.setCPFAdotante(cursor.getString(22));
-                adocao.setIDAnimal(cursor.getInt(23));
+            Adocao_View adocao = new Adocao_View();
+            adocao.setId_adocao(cursor.getInt(0));
+            adocao.setData(cursor.getString(1));
+            adocao.setResposta(cursor.getString(2));
+            adocao.setQuestionario(cursor.getString(3));
+            adocao.setCPF_Secretario(cursor.getString(4));
+            adocao.setCPFAdotante(cursor.getString(5));
+            adocao.setId_animal(cursor.getInt(6));
+            adocaoList.add(adocao);
+        }
+        return adocaoList;
+    }
+
+    /**
+     * Funcao para retornar o relatorio de adocoes
+     * @return lista de processos de adocao
+     */
+    public List<Adocao_View> retornaAnimaisAdocao() {
+        List<Adocao_View> adocaoList = new ArrayList<>();
+        Cursor cursor = banco.query("adocao", new String[]{"id_adocao, data, resposta, questionario," +
+                        "CPF_Secretario, CPF_Adotante, id_animal"}, null, null,
+                null, null, null);
+        //deslocar nas linhas da tabela
+        while (cursor.moveToNext()) {
+
+            if((cursor.getString(2)).equals("Em Andamento")) {
+                Adocao_View adocao = new Adocao_View();
+                adocao.setId_adocao(cursor.getInt(0));
+                adocao.setData(cursor.getString(1));
+                adocao.setResposta(cursor.getString(2));
+                adocao.setQuestionario(cursor.getString(3));
+                adocao.setCPF_Secretario(cursor.getString(4));
+                adocao.setCPFAdotante(cursor.getString(5));
+                adocao.setId_animal(cursor.getInt(6));
                 adocaoList.add(adocao);
             }
         }
         return adocaoList;
     }
 
-    public List<ProcessoAdocao> retornaRelatorioAdocao() {
-        List<ProcessoAdocao> adocaoList = new ArrayList<>();
-        Cursor cursor = banco.query("processoAdocao", new String[]{"ID, MORADA, IMOVEL, QTDE_PESSOAS," +
-                        "QTDE_ANIMAIS, LOCAL, PERMANENCIA, ATUAL, FALECIDO, SUSTENTO, VIZINHOS," +
-                        "PASSEIO, CUSTOS, ALERGIA, RESPEITO, CRIANCA, HORAS, VIAGEM, FUGIR, CRIAR," +
-                        "VETERINARIO, STATUS, CPF_ADOTANTE, ID_ANIMAL"}, null, null,
-                null, null, null);
-        //deslocar nas linhas da tabela
-        while (cursor.moveToNext()) {
-            ProcessoAdocao adocao = new ProcessoAdocao();
-            adocao.setID(cursor.getInt(0));
-            adocao.setMorada(cursor.getString(1));
-            adocao.setImovel(cursor.getString(2));
-            adocao.setQtdePessoas(cursor.getString(3));
-            adocao.setQtdeAnimais(cursor.getString(4));
-            adocao.setLocalAnimais(cursor.getString(5));
-            adocao.setPermanecerAnimais(cursor.getString(6));
-            adocao.setAnimaisAtual(cursor.getString(7));
-            adocao.setAnimalFalecido(cursor.getString(8));
-            adocao.setSustentarAnimal(cursor.getString(9));
-            adocao.setVizinhosAnimal(cursor.getString(10));
-            adocao.setPasseioAnimal(cursor.getString(11));
-            adocao.setCustosAnimal(cursor.getString(12));
-            adocao.setAlergiaAnimal(cursor.getString(13));
-            adocao.setRespeitoAnimal(cursor.getString(14));
-            adocao.setCriancaAnimal(cursor.getString(15));
-            adocao.setHorasAnimal(cursor.getString(16));
-            adocao.setViajarAnimal(cursor.getString(17));
-            adocao.setFugirAnimal(cursor.getString(18));
-            adocao.setCriarAnimal(cursor.getString(19));
-            adocao.setVeterinario(cursor.getString(20));
-            adocao.setStatus(cursor.getString(21));
-            adocao.setCPFAdotante(cursor.getString(22));
-            adocao.setIDAnimal(cursor.getInt(23));
-            adocaoList.add(adocao);
-        }
-        return adocaoList;
-    }
 
-    public boolean alterar(ProcessoAdocao adocao) {
+    /**
+     * Funcao para alterar processo status do processo de adocao
+     * @param adocao processo de adocao
+     * @return verdadeiro se alterou e falso, caso contrario
+     */
+    public boolean alterarStatus(Adocao_View adocao) {
         ContentValues values = new ContentValues();
-        values.put("MORADA", adocao.getMorada());
-        values.put("IMOVEL", adocao.getImovel());
-        values.put("QTDE_PESSOAS", adocao.getQtdePessoas());
-        values.put("QTDE_ANIMAIS", adocao.getQtdeAnimais());
-        values.put("LOCAL", adocao.getLocalAnimais());
-        values.put("PERMANENCIA", adocao.getPermanecerAnimais());
-        values.put("ATUAL", adocao.getAnimaisAtual());
-        values.put("FALECIDO", adocao.getAnimalFalecido());
-        values.put("SUSTENTO", adocao.getSustentarAnimal());
-        values.put("VIZINHOS", adocao.getVizinhosAnimal());
-        values.put("PASSEIO", adocao.getPasseioAnimal());
-        values.put("CUSTOS", adocao.getCustosAnimal());
-        values.put("ALERGIA", adocao.getAlergiaAnimal());
-        values.put("RESPEITO", adocao.getRespeitoAnimal());
-        values.put("CRIANCA", adocao.getCriancaAnimal());
-        values.put("HORAS", adocao.getHorasAnimal());
-        values.put("VIAGEM", adocao.getViajarAnimal());
-        values.put("FUGIR", adocao.getFugirAnimal());
-        values.put("CRIAR", adocao.getCriarAnimal());
-        values.put("VETERINARIO", adocao.getVeterinario());
-        long inserir = banco.update("processoAdocao", values, "ID = ?", new String[]{adocao.getID().toString()});
+        values.put("resposta", adocao.getResposta());
+        long inserir = banco.update("adocao", values, "id_adocao = ?", new String[]{adocao.getId_adocao().toString()});
         if (inserir == -1)
             return false;
         else
             return true;
     }
 
-    public boolean excluir(ProcessoAdocao adocao) {
-        long deletar = banco.delete("processoAdocao", "ID = ?", new String[]{adocao.getID().toString()});
-        if (deletar == -1)
-            return false;
-        else
-            return true;
-    }
-
-
-    //ADOÇÃO
-    public boolean alterarStatus(ProcessoAdocao adocao) {
-        ContentValues values = new ContentValues();
-        values.put("STATUS", adocao.getStatus());
-        long inserir = banco.update("processoAdocao", values, "ID = ?", new String[]{adocao.getID().toString()});
-        if (inserir == -1)
-            return false;
-        else
-            return true;
-    }
-
-    public Boolean inserirAdocaoDeferida(ProcessoAdocao adocao, Funcionario funcionario) {
-        ContentValues values = new ContentValues();
-        values.put("DATA", retornaDataAtual());
-        values.put("CPF_ADOTANTE", adocao.getCPFAdotante());
-        values.put("ID_ANIMAL", adocao.getIDAnimal());
-        values.put("CPF_FUNCIONARIO", funcionario.getCpf());
-        long inserir = banco.insert("adocaoDeferida", null, values);
-        if (inserir == -1)
-            return false;
-        else
-            return true;
-    }
-
+    /**
+     * Funcao para retornar a data atual
+     * @return data atual
+     */
     public String retornaDataAtual() {
         Date c = Calendar.getInstance().getTime();
         System.out.println("Current time => " + c);
@@ -254,55 +164,29 @@ public class ProcessoAdocaoDAO {
         return formattedDate;
     }
 
-    public Boolean inserirAdocaoIndeferida(ProcessoAdocao adocao, Funcionario funcionario) {
-        ContentValues values = new ContentValues();
-        values.put("DATA", retornaDataAtual());
-        values.put("CPF_ADOTANTE", adocao.getCPFAdotante());
-        values.put("ID_ANIMAL", adocao.getIDAnimal());
-        values.put("CPF_FUNCIONARIO", funcionario.getCpf());
-        long inserir = banco.insert("adocaoIndeferida", null, values);
-        if (inserir == -1)
-            return false;
-        else
-            return true;
-    }
 
 
-    public List<ProcessoAdocao> automatizaSistemaAdocoes(int ID) {
-        List<ProcessoAdocao> adocaoList = new ArrayList<>();
-        Cursor cursor = banco.query("processoAdocao", new String[]{"ID, MORADA, IMOVEL, QTDE_PESSOAS," +
-                        "QTDE_ANIMAIS, LOCAL, PERMANENCIA, ATUAL, FALECIDO, SUSTENTO, VIZINHOS," +
-                        "PASSEIO, CUSTOS, ALERGIA, RESPEITO, CRIANCA, HORAS, VIAGEM, FUGIR, CRIAR," +
-                        "VETERINARIO, STATUS, CPF_ADOTANTE, ID_ANIMAL"}, "ID_ANIMAL like " + "'" + ID + "'", null,
+    /**
+     * Funcao para listar processos de adocao de um certo animal
+     * @param ID ID do animal
+     * @return processos de adocao daquele animal
+     */
+    public List<Adocao_View> automatizaSistemaAdocoes(int ID) {
+        List<Adocao_View> adocaoList = new ArrayList<>();
+        Cursor cursor = banco.query("adocao", new String[]{"id_adocao, data, resposta, questionario," +
+                        "CPF_Secretario, CPF_Adotante, id_animal"}, "id_animal like " + "'" + ID + "'", null,
                 null, null, null);
         //deslocar nas linhas da tabela
         while (cursor.moveToNext()) {
-            if (cursor.getString(21).equals("Em Andamento")) {
-                ProcessoAdocao adocao = new ProcessoAdocao();
-                adocao.setID(cursor.getInt(0));
-                adocao.setMorada(cursor.getString(1));
-                adocao.setImovel(cursor.getString(2));
-                adocao.setQtdePessoas(cursor.getString(3));
-                adocao.setQtdeAnimais(cursor.getString(4));
-                adocao.setLocalAnimais(cursor.getString(5));
-                adocao.setPermanecerAnimais(cursor.getString(6));
-                adocao.setAnimaisAtual(cursor.getString(7));
-                adocao.setAnimalFalecido(cursor.getString(8));
-                adocao.setSustentarAnimal(cursor.getString(9));
-                adocao.setVizinhosAnimal(cursor.getString(10));
-                adocao.setPasseioAnimal(cursor.getString(11));
-                adocao.setCustosAnimal(cursor.getString(12));
-                adocao.setAlergiaAnimal(cursor.getString(13));
-                adocao.setRespeitoAnimal(cursor.getString(14));
-                adocao.setCriancaAnimal(cursor.getString(15));
-                adocao.setHorasAnimal(cursor.getString(16));
-                adocao.setViajarAnimal(cursor.getString(17));
-                adocao.setFugirAnimal(cursor.getString(18));
-                adocao.setCriarAnimal(cursor.getString(19));
-                adocao.setVeterinario(cursor.getString(20));
-                adocao.setStatus(cursor.getString(21));
-                adocao.setCPFAdotante(cursor.getString(22));
-                adocao.setIDAnimal(cursor.getInt(23));
+            if (cursor.getString(2).equals("Em Andamento")) {
+                Adocao_View adocao = new Adocao_View();
+                adocao.setId_adocao(cursor.getInt(0));
+                adocao.setData(cursor.getString(1));
+                adocao.setResposta(cursor.getString(2));
+                adocao.setQuestionario(cursor.getString(3));
+                adocao.setCPF_Secretario(cursor.getString(4));
+                adocao.setCPFAdotante(cursor.getString(5));
+                adocao.setId_animal(cursor.getInt(6));
                 adocaoList.add(adocao);
             }
         }

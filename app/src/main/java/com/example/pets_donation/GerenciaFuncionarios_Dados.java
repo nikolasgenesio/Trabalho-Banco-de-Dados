@@ -110,6 +110,7 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
 
         preencheInformacoes();
 
+        //botao de pesquisa
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +139,7 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
             }
         });
 
+        //botao de alterar
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,14 +147,18 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
             }
         });
 
+        //botao de deletar
         btnDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletar_Funcionario();
+                //deletar_Funcionario();
             }
         });
     }
 
+    /**
+     * Funcao para preencher informacoes
+     */
     public void preencheInformacoes() {
         nome.setText(funcionario.getNome());
         nascimento.setText(funcionario.getDataNascimento());
@@ -172,7 +178,6 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
             celular.setChecked(true);
 
         telefone.setText(funcionario.getTelefone());
-        email.setText(funcionario.getEmail());
 
         String salario1 = String.valueOf(funcionario.getSalario());
         salario.setText(salario1);
@@ -191,6 +196,9 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
         senha.setText(funcionario.getSenha());
     }
 
+    /**
+     * Funcao para alterar funcionario
+     */
     public void alterar_Funcionario() {
         String nome1 = nome.getText().toString();
         if (nome1.matches("")) {
@@ -332,7 +340,6 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
         funcionario.setSexo(sexo);
         funcionario.setTipoTelefone(tipoTelefone);
         funcionario.setTelefone(telefone1);
-        funcionario.setEmail(email1);
 
         //salario
         double salarioDouble = Double.parseDouble(salario1);
@@ -370,28 +377,10 @@ public class GerenciaFuncionarios_Dados extends AppCompatActivity {
         }
     }
 
-    public void deletar_Funcionario() {
-        boolean deletar = funcionarioDAO.excluir(funcionario);
-        if (deletar) {
-            Intent intent = getIntent();
-            if (intent.hasExtra("funcionario")) {
-                this.funcionarioADM = (Funcionario) getIntent().getSerializableExtra("adm");
-                Toast.makeText(getApplicationContext(), "Funcionário excluído", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getApplicationContext(), Listar_Funcionarios.class);
-                intent.putExtra("funcionario", funcionarioADM);
-                startActivity(intent);
-                finish();
-            } else {
-                Toast.makeText(getApplicationContext(), "Excluído", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "Funcionário não excluído", Toast.LENGTH_SHORT).show();
-        }
-    }
 
+    /**
+     * Funcao para limpar endereco
+     */
     public void limparEndereco() {
         estado.setText("");
         cidade.setText("");

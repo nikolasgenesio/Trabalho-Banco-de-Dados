@@ -15,6 +15,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 public class SlideFuncionarioAdapter extends PagerAdapter {
 
+    //declaracao das variaveis
     Context context;
     LayoutInflater layoutInflater;
 

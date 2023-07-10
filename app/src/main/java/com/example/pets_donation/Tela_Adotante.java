@@ -26,6 +26,7 @@ import com.example.pets_donation.databinding.ActivityTelaAdotanteBinding;
 
 public class Tela_Adotante extends AppCompatActivity {
 
+    //declaracao das variaveis
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityTelaAdotanteBinding binding;
     private Adotante adotante;
@@ -41,6 +42,7 @@ public class Tela_Adotante extends AppCompatActivity {
         banco = new Conexao_Banco(this);
         Log.i("Tarefa 1 - status Tela", "NOME: " + adotante.getNome());
 
+        //inicializando variveis
         binding = ActivityTelaAdotanteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarTelaAdotante.toolbar);
@@ -53,6 +55,7 @@ public class Tela_Adotante extends AppCompatActivity {
         imageView = headerView.findViewById(R.id.imageView);
         nomedoAdotante.setText("Seja Bem-Vindo " + adotante.getNome());
 
+        //verifica se existe foto
         Bitmap imagem = banco.retornaFotoAdotante(adotante.getCpf(), adotante.getSenha());
         if (imagem != null) {
             imageView.setImageBitmap(imagem);
@@ -107,6 +110,11 @@ public class Tela_Adotante extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * Opcoes
+     * @param item item
+     * @return
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
